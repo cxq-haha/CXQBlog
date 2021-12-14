@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping("/{id}/{name}")
-    public String index(@PathVariable Integer id,@PathVariable String name) {
+    @RequestMapping("/")
+    public String index() {
 //        String blog = null;
 //        if (blog == null) {
 //            throw new  NotFoundException("博客不存在");
