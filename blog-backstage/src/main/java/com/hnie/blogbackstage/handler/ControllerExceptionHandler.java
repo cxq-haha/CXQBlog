@@ -1,4 +1,4 @@
-package com.hnie.blogbackstage.hander;
+package com.hnie.blogbackstage.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
