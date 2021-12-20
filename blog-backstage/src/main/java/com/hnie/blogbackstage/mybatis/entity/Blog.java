@@ -1,4 +1,4 @@
-package com.hnie.blogbackstage.pojo;
+package com.hnie.blogbackstage.mybatis.entity;
 
 import lombok.*;
 
