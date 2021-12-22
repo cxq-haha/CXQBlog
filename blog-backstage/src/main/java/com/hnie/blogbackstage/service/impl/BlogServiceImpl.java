@@ -1,7 +1,7 @@
 package com.hnie.blogbackstage.service.impl;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
-import com.hnie.blogbackstage.mybatis.mapper.BolgMapper;
+import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
 import com.hnie.blogbackstage.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class BlogServiceImpl implements BlogService {
     @Autowired
-    BolgMapper blogMapper;
+    BlogMapper blogMapper;
 
     @Override
     public void showBlog() {

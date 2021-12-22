@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface BolgMapper {
+public interface BlogMapper {
     //获取所有Blog
     List<Blog> getAllBlog();
     //保存Blog

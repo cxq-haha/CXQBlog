@@ -308,3 +308,45 @@ Caused by: java.lang.IllegalArgumentException: Property 'sqlSessionFactory' or '
 2021-12-20 18:13:26.394  INFO 21708 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-12-20 18:13:26.395  INFO 21708 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2021-12-20 18:13:26.399  INFO 21708 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-12-20 18:20:00.675  INFO 21944 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : Starting BlogMapperTest on CXQ with PID 21944 (started by CXQ in E:\CXQBolg\blog-backstage)
+2021-12-20 18:20:00.677 DEBUG 21944 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-12-20 18:20:00.677  INFO 21944 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : The following profiles are active: dev
+2021-12-20 18:20:01.481  INFO 21944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-12-20 18:20:01.510  INFO 21944 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17ms. Found 0 JPA repository interfaces.
+2021-12-20 18:20:02.332  INFO 21944 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-12-20 18:20:02.417  INFO 21944 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-12-20 18:20:02.680  INFO 21944 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-12-20 18:20:03.082  INFO 21944 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-12-20 18:20:03.464  INFO 21944 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-12-20 18:20:03.504  INFO 21944 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-12-20 18:20:03.848  INFO 21944 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-12-20 18:20:03.859  INFO 21944 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-12-20 18:20:04.650  WARN 21944 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-20 18:20:05.005  INFO 21944 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-12-20 18:20:05.168  INFO 21944 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-12-20 18:20:05.642  INFO 21944 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : Started BlogMapperTest in 5.419 seconds (JVM running for 6.505)
+2021-12-20 18:20:05.827  INFO 21944 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-12-20 18:20:05.828  INFO 21944 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-12-20 18:20:05.830  INFO 21944 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-12-20 18:20:05.841  INFO 21944 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-12-20 18:21:31.284  INFO 17196 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : Starting BlogMapperTest on CXQ with PID 17196 (started by CXQ in E:\CXQBolg\blog-backstage)
+2021-12-20 18:21:31.285 DEBUG 17196 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2021-12-20 18:21:31.285  INFO 17196 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : The following profiles are active: dev
+2021-12-20 18:21:31.946  INFO 17196 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-12-20 18:21:31.967  INFO 17196 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15ms. Found 0 JPA repository interfaces.
+2021-12-20 18:21:32.727  INFO 17196 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-12-20 18:21:32.778  INFO 17196 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-12-20 18:21:32.949  INFO 17196 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-12-20 18:21:33.270  INFO 17196 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-12-20 18:21:33.560  INFO 17196 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-12-20 18:21:33.590  INFO 17196 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-12-20 18:21:33.825  INFO 17196 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-12-20 18:21:33.834  INFO 17196 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-12-20 18:21:34.381  WARN 17196 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-20 18:21:34.676  INFO 17196 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-12-20 18:21:34.797  INFO 17196 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-12-20 18:21:35.169  INFO 17196 --- [main] c.h.blogbackstage.mapper.BlogMapperTest  : Started BlogMapperTest in 4.289 seconds (JVM running for 5.267)
+2021-12-20 18:21:35.318  INFO 17196 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-12-20 18:21:35.319  INFO 17196 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-12-20 18:21:35.321  INFO 17196 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-12-20 18:21:35.327  INFO 17196 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

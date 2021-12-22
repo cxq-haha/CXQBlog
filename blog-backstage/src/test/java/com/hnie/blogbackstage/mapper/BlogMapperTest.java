@@ -1,13 +1,10 @@
 package com.hnie.blogbackstage.mapper;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
-import com.hnie.blogbackstage.service.BlogService;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
-import com.hnie.blogbackstage.mybatis.mapper.BolgMapper;
+import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -18,10 +15,13 @@ import java.util.List;
 @SpringBootTest
 public class BlogMapperTest {
     @Autowired
-    BlogService blogService;
+    BlogMapper blogMapper;
 
     @Test
     public void getAllBlogTest() {
-        blogService.showBlog();
+        List<Blog> allBlog = blogMapper.getAllBlog();
+        for (Blog blog : allBlog) {
+            System.out.println(blog);
+        }
     }
 }
