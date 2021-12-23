@@ -79,6 +79,9 @@ body {
 .m-margin-bottom-small {
     margin-bottom: 0.5em !important;
 }
+.m-margin-top{
+    margin-top: 1em !important;
+}
 
 /************** text ******************/
 .m-text-thin {

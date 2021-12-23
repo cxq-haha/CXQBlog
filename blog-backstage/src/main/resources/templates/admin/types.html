@@ -3,17 +3,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
-    <title>博客管理</title>
+    <title>分类管理</title>
     <!--    设置移动端预览-->
     <meta name="viewport" content="width=device-with,initial-scale=1.0">
     <!--    导入SemanticUI-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!--    引入自定义css-->
-    <link rel="stylesheet" href="../static/css/me.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
 </head>
 <body>
 <!--导航-->
-<nav th:replace="admin/_fragments::menu(1)" class="ui inverted attached segment m-padded-tb-mini">
+<nav th:replace="admin/_fragments::menu(2)" class="ui inverted attached segment m-padded-tb-mini">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">
@@ -25,7 +25,7 @@
             <div class="right menu m-mobile-hide m-item">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
+                        <img src="../../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -52,70 +52,46 @@
 <!--中间部分-->
 <div class="m-container-small m-padded-tb-big m-shadow-small">
     <div class="ui container">
-        <form action="#" method="post" class="ui form segment">
-            <div class="online middle aligned fields">
-                <div class="field">
-                    <input type="text" name="title" placeholder="标题">
-                </div>
-                <div class="field">
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="type"/>
-                        <i class="dropdown icon"></i>
-                        <div class="default text">分类</div>
-                        <div class="menu">
-                            <div class="item" data-value="1">错误日志</div>
-                            <div class="item" data-value="1">开发者手册</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui checkbox">
-                        <input type="checkbox" name="recommend" id="recommend">
-                        <!--for属性实现当点击文字的时候也可以选中，这里的for属性应该与需要绑定的id属性相同-->
-                        <label for="recommend">推荐</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <button class="ui mini teal basic button">
-                        <i class="ui search icon"></i>
-                        搜索
-                    </button>
-                </div>
-            </div>
-        </form>
         <!--        表格-->
         <table class="ui celled table">
             <thead>
             <tr>
                 <th></th>
-                <th>标题</th>
-                <th>内容</th>
-                <th>推荐</th>
-                <th>更新时间</th>
+                <th>名称</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>刻意练习</td>
-                <td>认知升级</td>
-                <td>是</td>
-                <td>2020-10-10</td>
+            <tr align="center" th:each="type,iterStat:${pageInfo.list}">
+                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${type.name}">刻意练习</td>
                 <td>
-                    <a href="#" class="ui mini teal basic button">编辑</a>
-                    <a href="#" class="ui mini red basic button">删除</a>
+                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">编辑</a>
+                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red basic button">删除</a>
                 </td>
             </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="6">
-                        <div class="ui pagination menu">
-                            <a class="mini item">上一页</a>
-                            <a class="mini item">下一页</a>
+                        <div class="ui inverted divided stackable grid">
+                            <div class="three wide column" align="center">
+                                <a class="item" th:href="@{/admin/types(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}" th:unless="${pageInfo.isFirstPage}">上一页</a>
+                            </div>
+
+                            <div class="ten wide column" align="center">
+                                <p>第 <span th:text="${pageInfo.pageNum}">1</span> 页，共 <span th:text="${pageInfo.pages}"></span> 页，有 <span th:text="${pageInfo.total}">1</span> 个分类</p>
+                            </div>
+
+                            <div class="three wide column" align="center">
+                                <a class="item" th:href="@{/admin/types(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}" th:unless="${pageInfo.isLastPage}">下一页</a>
+                            </div>
                         </div>
-                        <a href="#" class="ui mini teal basic right floated button">新增</a>
+                        <div align="center" class="m-margin-top">
+                            <a href="#" th:href="@{/admin/types/input}" >
+                                <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>新增</button>
+                            </a>
+                        </div>
                     </th>
                 </tr>
             </tfoot>
@@ -132,7 +108,7 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
+                        <img src="../../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
                              style="width: 110px">
                     </div>
                 </div>

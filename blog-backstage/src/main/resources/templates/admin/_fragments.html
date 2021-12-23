@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:replace="${title}">详情页面</title>
@@ -9,39 +10,41 @@
     <!--    导入SemanticUI-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!--    代码高亮-->
-    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}"/>
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}"/>
     <!--    动画样式-->
-    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}">
     <!--    引入文本排版样式-->
-    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}">
     <!--    引入自定义css-->
-    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
     <!--    引入目录生成插件样式-->
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
 </head>
 <body>
 
-<!--标题栏-->
+<!--导航-->
 <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">
-                Blog
+                管理后台
             </h2>
-            <a href="#" class="item m-mobile-hide m-item" th:classappend="${n==1} ? 'active'"><i
-                    class=" home icon "></i>首页</a>
-            <a href="#" class="item m-mobile-hide m-item" th:classappend="${n==2} ? 'active'"><i
+            <a href="#" th:href="@{/admin/blogs}" class="item m-mobile-hide m-item" th:classappend="${n==1} ? 'active'"><i
+                    class=" home icon "></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class=" item m-mobile-hide m-item" th:classappend="${n==2} ? 'active'"><i
                     class=" idea icon "></i>分类</a>
-            <a href="#" class="item m-mobile-hide m-item" th:classappend="${n==3} ? 'active'"><i
+            <a href="#" th:href="@{/admin/tags}" class="item m-mobile-hide m-item" th:classappend="${n==3} ? 'active'"><i
                     class=" tags icon "></i>标签</a>
-            <a href="#" class="item m-mobile-hide m-item" th:classappend="${n==4} ? 'active'"><i
-                    class=" clone icon "></i>归档</a>
-            <a href="#" class="item m-mobile-hide m-item" th:classappend="${n==5} ? 'active'"><i
-                    class=" info icon "></i>关于我</a>
-            <div class="right item m-mobile-hide m-item">
-                <div class="ui icon input">
-                    <input type="text" placeholder="搜索...">
-                    <i class="inverted circular search link icon"></i>
+            <div class="right menu m-mobile-hide m-item">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../static/image/headPortrait/1.jpg" th:src="@{/image/headPortrait/1.jpg}" alt="" class="ui avatar image"/>陈学勤
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -60,7 +63,8 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/QRcode.png" th:src="@{/image/QRcode.png}" alt="XiaoLiMa" class="ui rounded image" style="width: 110px">
+                        <img src="../static/image/QRcode.png" th:src="@{/image/QRcode.png}" alt="XiaoLiMa"
+                             class="ui rounded image" style="width: 110px">
                     </div>
                 </div>
             </div>
@@ -96,12 +100,13 @@
 
 <th:block th:fragment="script">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.3/jquery.scrollTo.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-    <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-    <script src="../static/lib/waypoints/jquery.waypoints.js" th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.3/jquery.scrollTo.min.js"></script>
+    <script src="../../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+    <script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <script src="../../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+    <script src="../../static/lib/waypoints/jquery.waypoints.js" th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
+    <script src="../../static/lib/editormd/lib/codemirror/editormd.min.js" th:src="@{/lib/editormd/lib/codemirror/editormd.min.js}"></script>
 </th:block>
 </body>
 

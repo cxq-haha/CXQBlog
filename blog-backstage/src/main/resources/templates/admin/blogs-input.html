@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <title>博客发布</title>
     <!--    设置移动端预览-->
@@ -8,16 +9,16 @@
     <!--    导入SemanticUI-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!--    引入自定义css-->
-    <link rel="stylesheet" href="../static/css/me.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
     <!--    markdown编辑器css-->
-    <link rel="stylesheet" href="../static/lib/editormd/lib/codemirror/examples/css/style.css">
-    <link rel="stylesheet" href="../static/lib/editormd/lib/codemirror/css/editormd.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/examples/css/style.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/css/editormd.css">
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
 
 </head>
 <body>
 <!--导航-->
-<nav class="ui inverted attached segment m-padded-tb-mini">
+<nav th:replace="admin/_fragments::menu(1)" class="ui inverted attached segment m-padded-tb-mini">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">
@@ -29,7 +30,7 @@
             <div class="right menu m-mobile-hide m-item">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
+                        <img src="../../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -47,8 +48,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="active teal item">列表</a>
+            <a href="#" class="active teal item">发布</a>
+            <a href="#" class=" item">列表</a>
         </div>
     </div>
 </div>
@@ -156,7 +157,7 @@
 </div>
 
 <!--底部菜单栏-->
-<footer class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="admin/_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive">
     <div class="ui center aligned container">
         <!--    网格自动将空间分为16列-->
         <div class="ui inverted divided stackable grid">
@@ -164,7 +165,7 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
+                        <img src="../../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
                              style="width: 110px">
                     </div>
                 </div>
@@ -199,10 +200,12 @@
     </div>
 </footer>
 <!--    导入jQuery-->
+<!--/*/<th:block th:replace="admin/_fragments::script">/*/-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script src="../../static/lib/editormd/lib/codemirror/editormd.min.js"></script>
+<!--/*/</th:block>/*/-->
 
-<script src="../static/lib/editormd/lib/codemirror/editormd.min.js"></script>
 
 <script>
     var testEditor;
@@ -212,7 +215,7 @@
             width   : "100%",
             height  : 640,
             syncScrolling : "single",
-            path    : "../static/lib/editormd/lib/codemirror/lib/"
+            path    : "../../static/lib/editormd/lib/codemirror/lib/"
         });
     });
     <!--    点击按钮，如果m-item主键有m-mobile-hide样式就去除，如果没有就添加-->

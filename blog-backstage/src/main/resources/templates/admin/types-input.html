@@ -3,13 +3,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
-    <title>博客管理</title>
+    <title>博客发布</title>
     <!--    设置移动端预览-->
     <meta name="viewport" content="width=device-with,initial-scale=1.0">
     <!--    导入SemanticUI-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!--    引入自定义css-->
-    <link rel="stylesheet" href="../static/css/me.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+    <!--    markdown编辑器css-->
+    <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/examples/css/style.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/css/editormd.css">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+
 </head>
 <body>
 <!--导航-->
@@ -25,13 +30,12 @@
             <div class="right menu m-mobile-hide m-item">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
+                        <img src="../../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
                         <a href="#" class="item">注销</a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -44,83 +48,38 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="active teal item">列表</a>
+            <a href="#" class=" active teal item">发布</a>
+            <a href="#" class=" item">列表</a>
         </div>
     </div>
 </div>
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big m-shadow-small">
+<div class="m-container-small m-padded-tb-big">
     <div class="ui container">
-        <form action="#" method="post" class="ui form segment">
-            <div class="online middle aligned fields">
-                <div class="field">
-                    <input type="text" name="title" placeholder="标题">
-                </div>
-                <div class="field">
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="type"/>
-                        <i class="dropdown icon"></i>
-                        <div class="default text">分类</div>
-                        <div class="menu">
-                            <div class="item" data-value="1">错误日志</div>
-                            <div class="item" data-value="1">开发者手册</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui checkbox">
-                        <input type="checkbox" name="recommend" id="recommend">
-                        <!--for属性实现当点击文字的时候也可以选中，这里的for属性应该与需要绑定的id属性相同-->
-                        <label for="recommend">推荐</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <button class="ui mini teal basic button">
-                        <i class="ui search icon"></i>
-                        搜索
-                    </button>
+        <form action="#" method="post" class="ui form" th:action="@{/admin/types}">
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">名称</label>
+                    <input type="text" name="name" placeholder="分类名称">
                 </div>
             </div>
+            <div class="ui error message"></div>
+            <div class="ui right aligned container">
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui teal button">提交</button>
+            </div>
         </form>
-        <!--        表格-->
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>标题</th>
-                <th>内容</th>
-                <th>推荐</th>
-                <th>更新时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>刻意练习</td>
-                <td>认知升级</td>
-                <td>是</td>
-                <td>2020-10-10</td>
-                <td>
-                    <a href="#" class="ui mini teal basic button">编辑</a>
-                    <a href="#" class="ui mini red basic button">删除</a>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="6">
-                        <div class="ui pagination menu">
-                            <a class="mini item">上一页</a>
-                            <a class="mini item">下一页</a>
-                        </div>
-                        <a href="#" class="ui mini teal basic right floated button">新增</a>
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 
 <!--底部菜单栏-->
@@ -132,7 +91,7 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
+                        <img src="../../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
                              style="width: 110px">
                     </div>
                 </div>
@@ -170,7 +129,10 @@
 <!--/*/<th:block th:replace="admin/_fragments::script">/*/-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script src="../../static/lib/editormd/lib/codemirror/editormd.min.js"></script>
 <!--/*/</th:block>/*/-->
+
+
 <script>
     <!--    点击按钮，如果m-item主键有m-mobile-hide样式就去除，如果没有就添加-->
     $('.menu.toggle').click(function () {
@@ -182,6 +144,19 @@
             on: 'hover'
         })
     ;
+    //    添加表单验证
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'title',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入博客标题'
+                }]
+            }
+        }
+    })
 </script>
+
 </body>
 </html>
