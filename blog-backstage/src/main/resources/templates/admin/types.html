@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
@@ -52,6 +52,11 @@
 <!--中间部分-->
 <div class="m-container-small m-padded-tb-big m-shadow-small">
     <div class="ui container">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">添加成功！</p>
+        </div>
         <!--        表格-->
         <table class="ui celled table">
             <thead>
@@ -66,34 +71,44 @@
                 <td th:text="${iterStat.count}">1</td>
                 <td th:text="${type.name}">刻意练习</td>
                 <td>
-                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">编辑</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red basic button">删除</a>
+                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}"
+                       class="ui mini teal basic button">编辑</a>
+                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"
+                       class="ui mini red basic button">删除</a>
                 </td>
             </tr>
             </tbody>
             <tfoot>
-                <tr>
-                    <th colspan="6">
-                        <div class="ui inverted divided stackable grid">
-                            <div class="three wide column" align="center">
-                                <a class="item" th:href="@{/admin/types(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}" th:unless="${pageInfo.isFirstPage}">上一页</a>
-                            </div>
-
-                            <div class="ten wide column" align="center">
-                                <p>第 <span th:text="${pageInfo.pageNum}">1</span> 页，共 <span th:text="${pageInfo.pages}"></span> 页，有 <span th:text="${pageInfo.total}">1</span> 个分类</p>
-                            </div>
-
-                            <div class="three wide column" align="center">
-                                <a class="item" th:href="@{/admin/types(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}" th:unless="${pageInfo.isLastPage}">下一页</a>
-                            </div>
+            <tr>
+                <th colspan="6">
+                    <div class="ui inverted divided stackable grid">
+                        <div class="three wide column" align="center">
+                            <a class="item"
+                               th:href="@{/admin/types(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}"
+                               th:unless="${pageInfo.isFirstPage}">上一页</a>
                         </div>
-                        <div align="center" class="m-margin-top">
-                            <a href="#" th:href="@{/admin/types/input}" >
-                                <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>新增</button>
-                            </a>
+
+                        <div class="ten wide column" align="center">
+                            <p>第 <span th:text="${pageInfo.pageNum}">1</span> 页，共 <span
+                                    th:text="${pageInfo.pages}"></span> 页，有 <span th:text="${pageInfo.total}">1</span>
+                                个分类</p>
                         </div>
-                    </th>
-                </tr>
+
+                        <div class="three wide column" align="center">
+                            <a class="item"
+                               th:href="@{/admin/types(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}"
+                               th:unless="${pageInfo.isLastPage}">下一页</a>
+                        </div>
+                    </div>
+                    <div align="center" class="m-margin-top">
+                        <a href="#" th:href="@{/admin/types/input}">
+                            <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i
+                                    class="pencil icon"></i>新增
+                            </button>
+                        </a>
+                    </div>
+                </th>
+            </tr>
             </tfoot>
         </table>
     </div>
@@ -148,7 +163,7 @@
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 <!--/*/</th:block>/*/-->
 <script>
-    <!--    点击按钮，如果m-item主键有m-mobile-hide样式就去除，如果没有就添加-->
+    // <!--    点击按钮，如果m-item主键有m-mobile-hide样式就去除，如果没有就添加-->
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     })
@@ -156,8 +171,14 @@
     $('.ui.dropdown')
         .dropdown({
             on: 'hover'
-        })
-    ;
+        });
+    // 添加成功消息提示添加可关闭功能
+    $('.message .close').on('click',function (){
+        $(this)
+        .closest('.message')
+        .transition('fade');
+    })
 </script>
 </body>
+</html>
 </html>

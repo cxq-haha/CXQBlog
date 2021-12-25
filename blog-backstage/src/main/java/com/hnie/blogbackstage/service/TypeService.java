@@ -15,6 +15,9 @@ public interface TypeService {
     //根据Id查询Type
     Type getTypeById(Long id);
 
+    //根据名称查找Type
+    Type getTypeByName(String name);
+
     //查询所有的Type（暂时不进行分页查询）
     List<Type> listType();
 

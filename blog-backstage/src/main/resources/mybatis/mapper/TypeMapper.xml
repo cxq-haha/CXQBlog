@@ -19,6 +19,12 @@
         where `id` = #{id};
     </select>
 
+    <select id="getTypeByName" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
+        select *
+        from `type`
+        where `name` = #{name };
+    </select>
+
     <update id="updateType" parameterType="com.hnie.blogbackstage.mybatis.entity.Type">
         update `type`
         set `name`=#{name}

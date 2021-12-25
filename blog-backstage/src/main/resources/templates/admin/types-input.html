@@ -57,13 +57,14 @@
 <div class="m-container-small m-padded-tb-big">
     <div class="ui container">
         <form action="#" method="post" class="ui form" th:action="@{/admin/types}">
-            <div class="field">
+            <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
                     <input type="text" name="name" placeholder="分类名称">
                 </div>
             </div>
             <div class="ui error message"></div>
+            <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="|提示：${message}">提示：不能添加重复的分类</div>
             <div class="ui right aligned container">
                 <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
                 <button class="ui teal button">提交</button>
@@ -148,10 +149,10 @@
     $('.ui.form').form({
         fields: {
             title: {
-                identifier: 'title',
+                identifier: 'name',
                 rules: [{
                     type: 'empty',
-                    prompt: '标题：请输入博客标题'
+                    prompt: '请输入分类名称'
                 }]
             }
         }

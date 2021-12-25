@@ -23,6 +23,9 @@ public interface TypeMapper {
     //根据Id查询type
     Type getTypeById(@Param("id") Long id);
 
+    //根据名称查询type
+    Type getTypeByName(@Param("name")String name);
+
     //修改一个Type
     int updateType(Type type);
 
