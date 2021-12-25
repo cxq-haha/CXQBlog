@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <!--    markdown编辑器css-->
     <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/examples/css/style.css">
     <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/css/editormd.css">
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
 
 </head>
 <body>
@@ -48,23 +48,26 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class=" active teal item">发布</a>
-            <a href="#" class=" item">列表</a>
+            <a href="#" class="active teal item" th:href="@{/admin/types/input}">发布</a>
+            <a href="#" class="item" th:href="@{/admin/types}">列表</a>
         </div>
     </div>
 </div>
 <!--中间部分-->
 <div class="m-container-small m-padded-tb-big">
     <div class="ui container">
-        <form action="#" method="post" class="ui form" th:action="@{/admin/types}">
+        <form action="#" method="post" class="ui form" th:action="type==null ? @{/admin/types} : @{/admin/types/{id}(id=*{id})} ">
+            <input type="hidden" name="id" th:value="${type!=null?type.getId():null}">
             <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
-                    <input type="text" name="name" placeholder="分类名称">
+                    <input type="text" name="name" placeholder="分类名称" th:value="${type!=null?type.getName():null}">
                 </div>
             </div>
             <div class="ui error message"></div>
-            <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="|提示：${message}">提示：不能添加重复的分类</div>
+            <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="|提示：${message}">
+                提示：不能添加重复的分类
+            </div>
             <div class="ui right aligned container">
                 <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
                 <button class="ui teal button">提交</button>
