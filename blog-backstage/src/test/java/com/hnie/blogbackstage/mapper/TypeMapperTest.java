@@ -51,4 +51,11 @@ public class TypeMapperTest {
             System.out.println(type);
         }
     }
+
+    @Test
+    public void getIdByNameTest() {
+        Long id = typeMapper.getIdByName("数据结构");
+        System.out.println("id=  " + id);
+    }
+
 }

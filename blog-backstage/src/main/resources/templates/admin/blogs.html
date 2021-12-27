@@ -9,7 +9,7 @@
     <!--    导入SemanticUI-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!--    引入自定义css-->
-    <link rel="stylesheet" href="../static/css/me.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
 </head>
 <body>
 <!--导航-->
@@ -25,7 +25,7 @@
             <div class="right menu m-mobile-hide m-item">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
+                        <img src="../../static/image/headPortrait/1.jpg" alt="" class="ui avatar image"/>陈学勤
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -52,7 +52,7 @@
 <!--中间部分-->
 <div class="m-container-small m-padded-tb-big m-shadow-small">
     <div class="ui container">
-        <form action="#" method="post" class="ui form segment">
+        <form action="#" method="post" class="ui secondary form segment">
             <div class="online middle aligned fields">
                 <div class="field">
                     <input type="text" name="title" placeholder="标题">
@@ -63,8 +63,7 @@
                         <i class="dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div class="item" data-value="1">错误日志</div>
-                            <div class="item" data-value="1">开发者手册</div>
+                            <div class="item" th:each="type : ${types}" th:text="${type.name}" data-value="1" th:data-value="${type.id}">错误日志</div>
                         </div>
                     </div>
                 </div>
@@ -84,24 +83,24 @@
             </div>
         </form>
         <!--        表格-->
-        <table class="ui celled table">
+        <table class="ui compact teal celled table">
             <thead>
             <tr>
                 <th></th>
                 <th>标题</th>
-                <th>内容</th>
+                <th>博客类型</th>
                 <th>推荐</th>
                 <th>更新时间</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>刻意练习</td>
-                <td>认知升级</td>
-                <td>是</td>
-                <td>2020-10-10</td>
+            <tr th:each="blogInfo,iterStat : ${pageInfo.list}">
+                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${blogInfo.getTitle()}">SpringMVC加载过程</td>
+                <td th:text="${blogInfo.getType()}">spring</td>
+                <td th:text="${blogInfo.isRecommend()} ? '是':'否'">是</td>
+                <td th:text="${#dates.format(blogInfo.getUpdateTime(),'yyyy-MM-dd HH:mm')}">2020-01-02 05:20</td>
                 <td>
                     <a href="#" class="ui mini teal basic button">编辑</a>
                     <a href="#" class="ui mini red basic button">删除</a>
@@ -132,7 +131,7 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
+                        <img src="../../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
                              style="width: 110px">
                     </div>
                 </div>

@@ -41,4 +41,25 @@ public class Blog {
     private Type type;
     private User user;
     private List<Comment> comments = new ArrayList<>();
+
+
+    public Blog(Long id, String title, String content, String firstPicture, Long view, Long commentCount, boolean appreciation, boolean shareStatement, boolean commentabled, boolean published, boolean recommend, Date createTime, Date updateTime, String description, Long typeId, Long userId, Long tagId) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.firstPicture = firstPicture;
+        this.view = view;
+        this.commentCount = commentCount;
+        this.appreciation = appreciation;
+        this.shareStatement = shareStatement;
+        this.commentabled = commentabled;
+        this.published = published;
+        this.recommend = recommend;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.description = description;
+        this.typeId = typeId;
+        this.userId = userId;
+        this.tagId = tagId;
+    }
 }

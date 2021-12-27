@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnie.blogbackstage.mybatis.mapper.BlogMapper">
+    <select id="getBlogById" resultType="com.hnie.blogbackstage.mybatis.entity.Blog">
+        select *
+        from `blog`
+        where `id` = #{id};
+    </select>
+
+    <select id="getAllBlog" resultType="com.hnie.blogbackstage.mybatis.entity.Blog">
+        select *
+        from `blog`;
+    </select>
+
+    <select id="getBlogByCondition" resultType="com.hnie.blogbackstage.mybatis.entity.Blog">
+        select *
+        from `blog`
+        where 1=1
+        <if test="title!=null and title!=''">
+            and `title`like CONCAT('%',#{title},'%')
+        </if>
+        <if test="typeId!=null">
+            and `typeId`=#{typeId}
+        </if>
+        <choose>
+            <when test="recommend ==true">
+                and `recommend`=true
+            </when>
+            <when test="recommend ==false">
+                and `recommend` in (true,false)
+            </when>
+        </choose>;
+    </select>
+
+    <insert id="addBlog" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
+        insert into `blog`
+        values (#{id}, #{title}, #{content}, #{firstPicture}, #{view}, #{commentCount}, #{appreciation},
+                #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime},
+                #{description}, #{typeId}, #{userId}, #{tagId});
+    </insert>
+
+    <update id="updateBlog" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
+        update `blog`
+        set `id`=#{id},
+            `title`=#{title},
+            `content`="asdfs",
+            `firstPicture`=#{firstPicture},
+            `view`=#{view},
+            `commentCount`=#{commentCount},
+            `appreciation`=#{appreciation},
+            `shareStatement`= #{shareStatement},
+            `commentabled`=#{commentabled},
+            `published`= #{published},
+            `recommend`=#{recommend},
+            `createTime`=#{createTime},
+            `updateTime`=#{updateTime},
+            `description`=#{description},
+            `typeId`= #{typeId},
+            `userId`=#{userId},
+            `tagId`= #{tagId}
+        where `id` = #{id};
+    </update>
+
+    <delete id="deleteBlog">
+        delete
+        from `blog`
+        where `id` = #{id};
+    </delete>
+
+</mapper>

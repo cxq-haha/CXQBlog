@@ -32,6 +32,13 @@
     </update>
 
     <select id="getAllType" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
-        select * from `type`;
+        select *
+        from `type`;
+    </select>
+
+    <select id="getIdByName" resultType="long">
+        select `id`
+        from type
+        where `name` = #{name}
     </select>
 </mapper>

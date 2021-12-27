@@ -32,4 +32,7 @@ public interface TypeMapper {
     //查询所有的Type
     List<Type> getAllType();
 
+    //根据名称查找Id
+    Long getIdByName(@Param("name") String name);
+
 }
