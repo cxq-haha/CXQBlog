@@ -50,10 +50,10 @@
     </div>
 </div>
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big m-shadow-small">
+<div class="m-container-small m-padded-tb-big m-shadow-small flex-grow: 1" >
     <div class="ui container">
         <form action="#" method="post" class="ui secondary form segment">
-            <div class="online middle aligned fields">
+            <div class="online middle aligned fields" style="align-items: center">
                 <div class="field">
                     <input type="text" name="title" placeholder="标题">
                 </div>
@@ -123,7 +123,7 @@
 </div>
 
 <!--底部菜单栏-->
-<footer th:replace="admin/_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="admin/_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive m-footer-context">
     <div class="ui center aligned container">
         <!--    网格自动将空间分为16列-->
         <div class="ui inverted divided stackable grid">
