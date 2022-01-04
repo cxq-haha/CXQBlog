@@ -55,8 +55,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> getBlogByCondition(String title,boolean recommend,Long typeId) {
-        return blogMapper.getBlogByCondition(title, recommend, typeId);
+    public List<Blog> getBlogByCondition(String title,Boolean recommend,String type) {
+        return blogMapper.getBlogByCondition(title, recommend, type);
     }
 
     @Override

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
@@ -44,15 +44,16 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="active teal item">列表</a>
+            <a href="#" th:href="@{/admin/blogs/input}" class="item">发布</a>
+            <a href="#" th:href="@{/admin/blogs}" class="active teal item">列表</a>
         </div>
     </div>
 </div>
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big m-shadow-small flex-grow: 1" >
+<div class="m-container-small m-padded-tb-big m-shadow-small flex-grow: 1">
     <div class="ui container">
-        <form action="#" method="post" class="ui secondary form segment">
+        <div class="ui secondary form segment">
+            <input type="hidden" name="page" >
             <div class="online middle aligned fields" style="align-items: center">
                 <div class="field">
                     <input type="text" name="title" placeholder="标题">
@@ -63,7 +64,9 @@
                         <i class="dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div class="item" th:each="type : ${types}" th:text="${type.name}" data-value="1" th:data-value="${type.id}">错误日志</div>
+                            <div class="item" th:each="type : ${types}" th:text="${type.name}" data-value="1"
+                                 th:data-value="${type.id}">错误日志
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,50 +78,77 @@
                     </div>
                 </div>
                 <div class="field">
-                    <button class="ui mini teal basic button">
+                    <button id="search-btn" class="ui mini teal basic button">
                         <i class="ui search icon"></i>
                         搜索
                     </button>
                 </div>
             </div>
-        </form>
-        <!--        表格-->
-        <table class="ui compact teal celled table">
-            <thead>
-            <tr>
-                <th></th>
-                <th>标题</th>
-                <th>博客类型</th>
-                <th>推荐</th>
-                <th>更新时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="blogInfo,iterStat : ${pageInfo.list}">
-                <td th:text="${iterStat.count}">1</td>
-                <td th:text="${blogInfo.getTitle()}">SpringMVC加载过程</td>
-                <td th:text="${blogInfo.getType()}">spring</td>
-                <td th:text="${blogInfo.isRecommend()} ? '是':'否'">是</td>
-                <td th:text="${#dates.format(blogInfo.getUpdateTime(),'yyyy-MM-dd HH:mm')}">2020-01-02 05:20</td>
-                <td>
-                    <a href="#" class="ui mini teal basic button">编辑</a>
-                    <a href="#" class="ui mini red basic button">删除</a>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
+        </div>
+
+        <div id="table-container">
+            <!--        表格-->
+            <table th:fragment="blogList" class="ui compact teal celled table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>标题</th>
+                    <th>博客类型</th>
+                    <th>推荐</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="blogInfo,iterStat : ${pageInfo.list}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${blogInfo.getTitle()}">SpringMVC加载过程</td>
+                    <td th:text="${blogInfo.getType()}">spring</td>
+                    <td th:text="${blogInfo.isRecommend()} ? '是':'否'">是</td>
+                    <td th:text="${#dates.format(blogInfo.getUpdateTime(),'yyyy-MM-dd HH:mm')}">2020-01-02 05:20</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blogInfo.getId()})}"
+                           class="ui mini teal basic button">编辑</a>
+                        <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blogInfo.getId()})}"
+                           class="ui mini red basic button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
                 <tr>
                     <th colspan="6">
-                        <div class="ui pagination menu">
-                            <a class="mini item">上一页</a>
-                            <a class="mini item">下一页</a>
+                        <div class="ui inverted divided stackable grid">
+                            <div class="three wide column" align="center">
+                                <a class="item"
+                                   th:href="@{/admin/blogs(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}"
+                                   th:unless="${pageInfo.isFirstPage}">上一页</a>
+                            </div>
+
+                            <div class="ten wide column" align="center">
+                                <p>第 <span th:text="${pageInfo.pageNum}">1</span> 页，共 <span
+                                        th:text="${pageInfo.pages}"></span> 页，有 <span th:text="${pageInfo.total}">1</span>
+                                    个分类</p>
+                            </div>
+
+                            <div class="three wide column" align="center">
+                                <a class="item"
+                                   th:href="@{/admin/blogs(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}"
+                                   th:unless="${pageInfo.isLastPage}">下一页</a>
+                            </div>
                         </div>
-                        <a href="#" class="ui mini teal basic right floated button">新增</a>
+                        <div align="center" class="m-margin-top">
+                            <a href="#" th:href="@{/admin/blogs/input}">
+                                <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i
+                                        class="pencil icon"></i>新增
+                                </button>
+                            </a>
+                        </div>
                     </th>
                 </tr>
-            </tfoot>
-        </table>
+                </tfoot>
+            </table>
+        </div>
+
     </div>
 </div>
 
@@ -181,6 +211,19 @@
             on: 'hover'
         })
     ;
+
+    $("#search-btn").click(function () {
+        $("[name='page']").val(0);
+        loaddate();
+    });
+    //ajax请求数据
+    function loaddate() {
+        $("#table-container").load("/admin/blogs/search", {
+            title: $("[name='title']").val(),
+            type: $("[name='type']").val(),
+            recommend: $("[name='recommend']").prop('checked')
+        });
+    }
 </script>
 </body>
 </html>

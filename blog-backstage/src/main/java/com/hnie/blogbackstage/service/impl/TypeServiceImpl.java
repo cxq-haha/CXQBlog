@@ -40,6 +40,11 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
+    public Long getIdByName(String name) {
+        return typeMapper.getIdByName(name);
+    }
+
+    @Override
     public List<Type> listType() {
         return typeMapper.getAllType();
     }

@@ -51,13 +51,10 @@ public class BlogMapperTest {
 
     @Test
     public void getBlogByConditionTest() {
-        List<Blog> res = blogMapper.getBlogByCondition(null, false, null);
-        for (Blog re : res) {
-            System.out.println(re);
-        }
+
 
         //title模糊查询
-        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, null);
+        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, "兴趣爱好");
         for (Blog re : res2) {
             System.out.println(re);
         }

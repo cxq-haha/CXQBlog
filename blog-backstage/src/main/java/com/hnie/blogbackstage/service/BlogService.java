@@ -2,6 +2,7 @@ package com.hnie.blogbackstage.service;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
 import com.hnie.blogbackstage.service.transferEntiry.BlogInfo;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface BlogService {
     List<BlogInfo> transferBlogInfoList(List<Blog> blogs);
 
     //条件查询Blog
-    List<Blog> getBlogByCondition(String title,boolean recommend,Long typeId);
+    List<Blog> getBlogByCondition(String title, Boolean recommend, String type);
 
     //添加一个Blog
     boolean saveBlog(Blog blog);

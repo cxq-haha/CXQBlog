@@ -19,7 +19,7 @@ public interface BlogMapper {
     Blog getBlogById(@Param("id") Long id);
 
     //根据条件查询Blog
-    List<Blog> getBlogByCondition(@Param("title") String title,@Param("recommend") boolean recommend,@Param("typeId") Long typeId);
+    List<Blog> getBlogByCondition(@Param("title") String title,@Param("recommend") Boolean recommend,@Param("type") String type);
 
     //获取所有的Blog
     List<Blog> getAllBlog();
