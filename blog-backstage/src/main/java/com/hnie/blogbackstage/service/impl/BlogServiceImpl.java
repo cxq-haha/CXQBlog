@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,15 +37,20 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Blog getBlogByTitle(String title) {
+        return blogMapper.getBlogByTitle(title);
+    }
+
+    @Override
     public List<BlogInfo> transferBlogInfoList(List<Blog> blogs) {
         List<BlogInfo> blogInfos = new ArrayList<>();
         for (Blog blog : blogs) {
             BlogInfo blogInfo = new BlogInfo();
             blogInfo.setId(blog.getId());
             blogInfo.setTitle(blog.getTitle());
-            Type type = typeMapper.getTypeById(blog.getTypeId());
+            Type type = blog.getType();
             if (type == null) {
-                throw new NotFoundException("not found type of id " + blog.getTypeId());
+                throw new NotFoundException("not found type of id " + blog.getType());
             }
             blogInfo.setType(type.getName());
             blogInfo.setRecommend(blog.isRecommend());
@@ -61,8 +67,13 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public boolean saveBlog(Blog blog) {
+        blog.setCommentCount(0L);
+        blog.setView(0L);
+        blog.setCreateTime(new Date());
+        blog.setUpdateTime(new Date());
         int re = blogMapper.addBlog(blog);
-        if (re > 0) {
+        int ret = blogMapper.addBlogTag(blog);
+        if (re > 0 && ret > 0) {
             return true;
         } else {
             return false;

@@ -16,8 +16,11 @@ public interface BlogService {
     //根据Id获取Blog
     Blog getBlog(Long id);
 
-    //根据条件查询Blog
+    //查询所有的Blog
     List<Blog> getAllBlog();
+
+    //根据名臣查询Blog
+    Blog getBlogByTitle(String title);
 
     //将Blog列表转化成BlogInfo列表
     List<BlogInfo> transferBlogInfoList(List<Blog> blogs);

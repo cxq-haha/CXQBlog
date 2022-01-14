@@ -1,11 +1,14 @@
 package com.hnie.blogbackstage.mapper;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
+import com.hnie.blogbackstage.mybatis.entity.Type;
+import com.hnie.blogbackstage.mybatis.entity.User;
 import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,13 +37,14 @@ public class BlogMapperTest {
 
     @Test
     public void addBlogTest() {
-        Blog blog = new Blog(2L, "博客2", "博客2内容", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), "描述", 1L, 1L, 1L);
+        Blog blog = new Blog(10L, "博客2", "博客2内容", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), new ArrayList<>(), new Type(34L, null), new User(1L, null, null, null, null, null, null, new Date()), new ArrayList<>());
         blogMapper.addBlog(blog);
     }
 
     @Test
     public void updateBlogTest() {
-        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), "描述", 1L, 1L, 1L);
+        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), new ArrayList<>(), new Type(34L, null), new User(1L, null, null, null, null, null, new Date(), new
+                Date()), new ArrayList<>());
         blogMapper.updateBlog(blog);
     }
 
@@ -54,10 +58,19 @@ public class BlogMapperTest {
 
 
         //title模糊查询
-        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, "兴趣爱好");
+        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, "个人兴趣");
         for (Blog re : res2) {
             System.out.println(re);
         }
+    }
+
+    @Test
+    public void getBlogByTitleTest() {
+        Blog blogByName = blogMapper.getBlogByTitle("博客3");
+        if (blogByName != null) {
+            System.out.println(blogByName);
+        }
+
     }
 
 }

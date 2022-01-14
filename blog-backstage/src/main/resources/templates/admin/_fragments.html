@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
     <!--    引入目录生成插件样式-->
     <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <!--    markdown编辑器css-->
+    <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/examples/css/style.css"
+          th:href="@{/lib/editormd/lib/codemirror/examples/css/style.css}">
+    <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/css/editormd.css"
+          th:href="@{/lib/editormd/lib/codemirror/css/editormd.css}">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 
@@ -31,14 +37,17 @@
             </h2>
             <a href="#" th:href="@{/admin/blogs}" class="item m-mobile-hide m-item" th:classappend="${n==1} ? 'active'"><i
                     class=" home icon "></i>博客</a>
-            <a href="#" th:href="@{/admin/types}" class=" item m-mobile-hide m-item" th:classappend="${n==2} ? 'active'"><i
+            <a href="#" th:href="@{/admin/types}" class=" item m-mobile-hide m-item"
+               th:classappend="${n==2} ? 'active'"><i
                     class=" idea icon "></i>分类</a>
-            <a href="#" th:href="@{/admin/tags}" class="item m-mobile-hide m-item" th:classappend="${n==3} ? 'active'"><i
+            <a href="#" th:href="@{/admin/tags}" class="item m-mobile-hide m-item"
+               th:classappend="${n==3} ? 'active'"><i
                     class=" tags icon "></i>标签</a>
             <div class="right menu m-mobile-hide m-item">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../../static/image/headPortrait/1.jpg" th:src="@{/image/headPortrait/1.jpg}" alt="" class="ui avatar image"/>陈学勤
+                        <img src="../../static/image/headPortrait/1.jpg" th:src="@{/image/headPortrait/1.jpg}" alt=""
+                             class="ui avatar image"/>陈学勤
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
@@ -105,8 +114,10 @@
     <script src="../../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
     <script src="../../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-    <script src="../../static/lib/waypoints/jquery.waypoints.js" th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
-    <script src="../../static/lib/editormd/lib/codemirror/editormd.min.js" th:src="@{/lib/editormd/lib/codemirror/editormd.min.js}"></script>
+    <script src="../../static/lib/waypoints/jquery.waypoints.js"
+            th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
+    <script src="../../static/lib/editormd/lib/codemirror/editormd.min.js"
+            th:src="@{/lib/editormd/lib/codemirror/editormd.min.js}"></script>
 </th:block>
 </body>
 

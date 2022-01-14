@@ -1,24 +1,22 @@
 package com.hnie.blogbackstage.controller.admin;
-
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hnie.blogbackstage.mybatis.entity.Blog;
+import com.hnie.blogbackstage.mybatis.entity.Tag;
 import com.hnie.blogbackstage.mybatis.entity.Type;
+import com.hnie.blogbackstage.mybatis.entity.User;
 import com.hnie.blogbackstage.service.BlogService;
+import com.hnie.blogbackstage.service.TagService;
 import com.hnie.blogbackstage.service.TypeService;
 import com.hnie.blogbackstage.service.transferEntiry.BlogInfo;
-import com.sun.net.httpserver.HttpContext;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import lombok.extern.java.Log;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,7 +27,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class BlogController {
-
+    private static final String INPUT = "/admin/blogs-input";
+    private static final String LIST = "/admin/blogs";
+    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
+    private static final String REDIRECT_INPUT = "redirect:/admin/blogs-input";
 
     @Autowired
     BlogService blogService;
@@ -37,10 +38,13 @@ public class BlogController {
     @Autowired
     TypeService typeService;
 
+    @Autowired
+    TagService tagService;
+
     //跳转到博客列表
     @GetMapping("/blogs")
     public String blogs(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        String orderBy = "id asc";
+        String orderBy = "b.id asc";
         PageHelper.startPage(pageNum, 10, orderBy);
         List<Blog> blogs = blogService.getAllBlog();
         List<BlogInfo> blogInfos = blogService.transferBlogInfoList(blogs);
@@ -49,12 +53,16 @@ public class BlogController {
 
         List<Type> types = typeService.listType();
         model.addAttribute("types", types);
-        return "/admin/blogs";
+        return LIST;
     }
 
 
-    public String input() {
-        return "/admin/blogs-input";
+    @GetMapping("/blogs/input")
+    public String input(Model model) {
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
+        model.addAttribute("blog", new Blog());
+        return INPUT;
     }
 
     @PostMapping("/blogs/search")
@@ -71,6 +79,34 @@ public class BlogController {
 
         List<Type> types = typeService.listType();
         model.addAttribute("types", types);
-        return "/admin/blogs :: blogList";
+        return REDIRECT_LIST;
+    }
+
+    @PostMapping("/blogs")
+    public String post(Blog blog, HttpSession session, RedirectAttributes attributes,@RequestParam HashMap<String,String> param) {
+        //重复Blog校验
+        Blog blogByName = blogService.getBlogByTitle(blog.getTitle());
+        if (blogByName != null) {
+            attributes.addFlashAttribute("message", "该博客已经存在，不能添加重复的博客");
+            return REDIRECT_INPUT;
+        }
+        User user = (User) session.getAttribute("user");
+        blog.setUser(user);
+        Type type = typeService.getTypeById(Long.valueOf(param.get("typeId")));
+        blog.setType(type);
+        String tagIdStr = param.get("tagIds");
+        String[] tagIds = tagIdStr.split(",");
+        ArrayList<Tag> tagList = new ArrayList<>();
+        for (String id : tagIds) {
+            tagList.add(tagService.getTagById(Long.valueOf(id)));
+        }
+        blog.setTags(tagList);
+        boolean ret = blogService.saveBlog(blog);
+        if (ret) {
+            attributes.addFlashAttribute("message", "添加成功！");
+        } else {
+            attributes.addFlashAttribute("message", "添加失败！");
+        }
+        return REDIRECT_LIST;
     }
 }

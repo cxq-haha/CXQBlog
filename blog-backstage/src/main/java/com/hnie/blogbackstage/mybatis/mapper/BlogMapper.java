@@ -18,6 +18,8 @@ public interface BlogMapper {
     //根据ID查找Blog
     Blog getBlogById(@Param("id") Long id);
 
+    Blog getBlogByTitle(@Param("title") String title);
+
     //根据条件查询Blog
     List<Blog> getBlogByCondition(@Param("title") String title,@Param("recommend") Boolean recommend,@Param("type") String type);
 
@@ -26,6 +28,9 @@ public interface BlogMapper {
 
     //添加一个Blog
     int addBlog(Blog blog);
+
+    //添加blog_tag表记录
+    int addBlogTag(Blog blog);
 
     //更新一个Blog
     int updateBlog(Blog blog);

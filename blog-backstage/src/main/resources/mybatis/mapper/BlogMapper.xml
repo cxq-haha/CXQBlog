@@ -1,43 +1,93 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hnie.blogbackstage.mybatis.mapper.BlogMapper">
-    <select id="getBlogById" resultType="com.hnie.blogbackstage.mybatis.entity.Blog">
+    <resultMap type="com.hnie.blogbackstage.mybatis.entity.Blog" id="blogMap">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="firstPicture" column="firstPicture"/>
+        <result property="view" column="view"/>
+        <result property="commentCount" column="commentCount"/>
+        <result property="appreciation" column="appreciation"/>
+        <result property="shareStatement" column="shareStatement"/>
+        <result property="commentabled" column="commentabled"/>
+        <result property="published" column="published"/>
+        <result property="recommend" column="recommend"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+        <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+        <association property="user" column="userId" javaType="com.hnie.blogbackstage.mybatis.entity.User">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+            <result property="email" column="email"/>
+            <result property="avatar" column="avatar"/>
+            <result property="type" column="type"/>
+            <result property="createTime" column="createTime"/>
+            <result property="updateTime" column="updateTime"/>
+        </association>
+        <collection property="tags" ofType="com.hnie.blogbackstage.mybatis.entity.Tag">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBlogById" resultMap="blogMap">
         select *
-        from `blog`
-        where `id` = #{id};
+        from `blog` as b
+                 left outer join `blog_tag` as bt on b.id = bt.blogId
+                 left outer join `tag` as ta on ta.id = bt.tagId
+        where b.`id` = #{id};
     </select>
 
-    <select id="getAllBlog" resultType="com.hnie.blogbackstage.mybatis.entity.Blog">
+    <select id="getAllBlog" resultMap="blogMap">
         select *
-        from `blog`;
+        from `blog` as b
+                 left outer join `blog_tag` as bt on b.id = bt.blogId
+                 left outer join `tag` as ta on ta.id = bt.tagId;
     </select>
 
-<!--    连接查询1对1-->
-    <select id="getBlogByCondition" resultType="com.hnie.blogbackstage.mybatis.entity.Blog">
+    <!--    条件查询-->
+    <select id="getBlogByCondition" resultMap="blogMap">
         select *
-        from `blog`,`type`
-        where `blog`.typeId=`type`.id
+        from `blog` as b
+        left outer join `blog_tag` as bt on b.id = bt.blogId
+        left outer join `tag` as t on t.id = bt.tagId
+        inner join `type` as ty on ty.id = b.typeId
+        where b.typeId=ty.id
         <if test="title!=null and title!=''">
-            and `title`like CONCAT('%',#{title},'%')
+            and b.`title`like CONCAT('%',#{title},'%')
         </if>
         <if test="type!=null">
-            and `type`.name=#{type}
+            and ty.`name`=#{type}
         </if>
         <choose>
             <when test="recommend ==true">
-                and `recommend`=true
+                and b.`recommend`=true
             </when>
             <when test="recommend ==false">
-                and `recommend` in (true,false)
+                and b.`recommend` in (true,false)
             </when>
-        </choose>;
+        </choose>
+        ;
     </select>
 
-    <insert id="addBlog" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
+    <insert id="addBlog" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
         insert into `blog`
         values (#{id}, #{title}, #{content}, #{firstPicture}, #{view}, #{commentCount}, #{appreciation},
-                #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime},
-                #{description}, #{typeId}, #{userId}, #{tagId});
+        #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime},
+        #{type.id}, #{user.id});
+    </insert>
+
+    <insert id="addBlogTag" >
+        insert into `blog_tag` (id,blogId,tagId) values
+        <foreach collection="tags" item="tag" index="index" separator=",">
+            (null,#{id},#{tag.id})
+        </foreach>;
     </insert>
 
     <update id="updateBlog" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
@@ -55,10 +105,8 @@
             `recommend`=#{recommend},
             `createTime`=#{createTime},
             `updateTime`=#{updateTime},
-            `description`=#{description},
-            `typeId`= #{typeId},
-            `userId`=#{userId},
-            `tagId`= #{tagId}
+            `typeId`= #{type.id},
+            `userId`=#{user.id}
         where `id` = #{id};
     </update>
 
@@ -67,5 +115,13 @@
         from `blog`
         where `id` = #{id};
     </delete>
+
+    <select id="getBlogByTitle" resultMap="blogMap">
+        select *
+        from `blog` as b
+                 left outer join `blog_tag` as bt on b.id = bt.blogId
+                 left outer join `tag` as t on t.id = bt.tagId
+        where b.`title` = #{title};
+    </select>
 
 </mapper>

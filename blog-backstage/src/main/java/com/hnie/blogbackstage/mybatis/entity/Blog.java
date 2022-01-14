@@ -24,42 +24,15 @@ public class Blog {
     private Long view;              //浏览次数
     private Long commentCount;      //评论数
     private boolean appreciation;   //赞赏是否开启
-    private boolean shareStatement; //版权是否开启
+    private boolean shareStatement; //版权是否开启(转载声明)
     private boolean commentabled;   //评论是否开启
     private boolean published;      //是否发布
     private boolean recommend;      //是否推荐
     private Date createTime;        //创建时间
     private Date updateTime;        //更新时间
-    private String description;     //博客描述
 
-    /*外键*/
-    private Long typeId;            //博客类型id
-    private Long userId;            //用户id
-    private Long tagId;             //标签id
-
-
+    private List<Tag> tags;
     private Type type;
     private User user;
     private List<Comment> comments = new ArrayList<>();
-
-
-    public Blog(Long id, String title, String content, String firstPicture, Long view, Long commentCount, boolean appreciation, boolean shareStatement, boolean commentabled, boolean published, boolean recommend, Date createTime, Date updateTime, String description, Long typeId, Long userId, Long tagId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.firstPicture = firstPicture;
-        this.view = view;
-        this.commentCount = commentCount;
-        this.appreciation = appreciation;
-        this.shareStatement = shareStatement;
-        this.commentabled = commentabled;
-        this.published = published;
-        this.recommend = recommend;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.description = description;
-        this.typeId = typeId;
-        this.userId = userId;
-        this.tagId = tagId;
-    }
 }

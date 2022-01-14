@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/_fragments::head(~{::title})">
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <!--    markdown编辑器css-->
     <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/examples/css/style.css">
     <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/css/editormd.css">
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
 
 </head>
 <body>
@@ -54,9 +54,10 @@
     </div>
 </div>
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big">
+<div class="m-container-mini m-padded-tb-big">
     <div class="ui container">
-        <form action="#" method="post" class="ui form">
+        <form id="blog-form" action="#" method="post" class="ui form" th:action="@{/admin/blogs}">
+            <input type="hidden" name="published">
             <div class="required field">
                 <div class="ui left labeled input">
                     <div class="ui teal basic dropdown label">
@@ -71,7 +72,7 @@
                     <input type="text" placeholder="标题" name="title">
                 </div>
             </div>
-            <div class="field">
+            <div class="required field">
                 <!-- markdown编辑器-->
                 <div id="md-content" style="z-index: 1 !important;">
     <textarea placeholder="博客内容" name="content" style="display: none">
@@ -85,16 +86,17 @@
                 </div>
             </div>
             <div class="two fields">
-                <div class="field">
+                <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui compact teal basic label">分类</label>
                         <div class="ui fluid selection dropdown">
-                            <input type="hidden">
+                            <input type="hidden" name="typeId">
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
-                                <div class="item" data-value="1">错误日志</div>
-                                <div class="item" data-value="2">开发者手册</div>
+                                <div class="item" data-value="1" th:each="type : ${types}" th:text="${type.name}"
+                                     th:data-value="${type.id}">错误日志
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,21 +105,22 @@
                     <div class="ui left labeled input">
                         <label class="ui compact teal basic label">标签</label>
                         <div class="ui fluid multiple search selection dropdown">
-                            <input type="hidden">
+                            <input type="hidden" name="tagIds">
                             <i class="dropdown icon"></i>
                             <div class="default text">标签</div>
                             <div class="menu">
-                                <div class="item" data-value="1">java</div>
-                                <div class="item" data-value="2">javaScript</div>
+                                <div class="item" data-value="1" th:each="tag : ${tags}" th:text="${tag.name}"
+                                     th:data-value="${tag.id}">javaScript
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="field">
+            <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">首图</label>
-                    <input type="text" name="indexPicture" placeholder="首图引用地址">
+                    <input type="text" name="firstPicture" placeholder="首图引用地址">
                 </div>
             </div>
             <div class="inline fields">
@@ -129,14 +132,14 @@
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="shareInfo" name="shareInfo" class="hidden">
-                        <label for="shareInfo">转载声明</label>
+                        <input type="checkbox" id="shareStatement" name="shareStatement" class="hidden">
+                        <label for="shareStatement">转载声明</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="command" name="command" class="hidden">
-                        <label for="command">评论</label>
+                        <input type="checkbox" id="commentabled" name="commentabled" class="hidden">
+                        <label for="commentabled">评论</label>
                     </div>
                 </div>
                 <div class="field">
@@ -149,8 +152,8 @@
             <div class="ui error message"></div>
             <div class="ui right aligned container">
                 <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
-                <button class="ui secondary button">保存</button>
-                <button class="ui teal button">发布</button>
+                <button type="button" id="save-btn" class="ui secondary button">保存</button>
+                <button type="button" id="publish-bth" class="ui teal button">发布</button>
             </div>
         </form>
     </div>
@@ -210,12 +213,13 @@
 <script>
     var testEditor;
 
-    $(function() {
+    $(function () {
         testEditor = editormd("md-content", {
-            width   : "100%",
-            height  : 640,
-            syncScrolling : "single",
-            path    : "../../static/lib/editormd/lib/codemirror/lib/"
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            // path: "../../static/lib/editormd/lib/codemirror/lib/"
+            path: "/lib/editormd/lib/codemirror/lib/"
         });
     });
     <!--    点击按钮，如果m-item主键有m-mobile-hide样式就去除，如果没有就添加-->
@@ -237,8 +241,39 @@
                     type: 'empty',
                     prompt: '标题：请输入博客标题'
                 }]
+            },
+            content: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入博客内容'
+                }]
+            },
+            typeId: {
+                identifier: 'typeId',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入博客分类'
+                }]
+            },
+            firstPicture: {
+                identifier: 'firstPicture',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入博客首图地址'
+                }]
             }
         }
+    })
+    //保存按钮
+    $('#save-btn').click(function () {
+        $('[name="published"]').val(false);
+        $('#blog-form').submit();
+    })
+    //发布按钮
+    $('#publish-bth').click(function () {
+        $('[name="published"]').val(true);
+        $('#blog-form').submit();
     })
 </script>
 
