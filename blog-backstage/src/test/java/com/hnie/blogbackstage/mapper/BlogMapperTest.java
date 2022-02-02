@@ -1,6 +1,7 @@
 package com.hnie.blogbackstage.mapper;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
+import com.hnie.blogbackstage.mybatis.entity.Tag;
 import com.hnie.blogbackstage.mybatis.entity.Type;
 import com.hnie.blogbackstage.mybatis.entity.User;
 import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
@@ -37,13 +38,16 @@ public class BlogMapperTest {
 
     @Test
     public void addBlogTest() {
-        Blog blog = new Blog(10L, "博客2", "博客2内容", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), new ArrayList<>(), new Type(34L, null), new User(1L, null, null, null, null, null, null, new Date()), new ArrayList<>());
+        Blog blog = new Blog(10L, "博客2", "博客2内容",
+                "picture", 5L, 6L, true, true, true,
+                false, false, new Date(), new Date(),"原创", new ArrayList<>(), new Type(34L, null),
+                new User(1L, null, null, null, null, null, null, new Date()), new ArrayList<>());
         blogMapper.addBlog(blog);
     }
 
     @Test
     public void updateBlogTest() {
-        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), new ArrayList<>(), new Type(34L, null), new User(1L, null, null, null, null, null, new Date(), new
+        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(),"原创", new ArrayList<>(), new Type(34L, null), new User(1L, null, null, null, null, null, new Date(), new
                 Date()), new ArrayList<>());
         blogMapper.updateBlog(blog);
     }
@@ -55,10 +59,8 @@ public class BlogMapperTest {
 
     @Test
     public void getBlogByConditionTest() {
-
-
         //title模糊查询
-        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, "个人兴趣");
+        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, 34L);
         for (Blog re : res2) {
             System.out.println(re);
         }

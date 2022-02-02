@@ -26,7 +26,7 @@ public interface BlogService {
     List<BlogInfo> transferBlogInfoList(List<Blog> blogs);
 
     //条件查询Blog
-    List<Blog> getBlogByCondition(String title, Boolean recommend, String type);
+    List<Blog> getBlogByCondition(String title, Boolean recommend, Long typeId);
 
     //添加一个Blog
     boolean saveBlog(Blog blog);

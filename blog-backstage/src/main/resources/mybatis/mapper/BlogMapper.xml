@@ -15,6 +15,7 @@
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="createTime"/>
         <result property="updateTime" column="updateTime"/>
+        <result property="flag" column="flag"/>
         <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
@@ -61,8 +62,8 @@
         <if test="title!=null and title!=''">
             and b.`title`like CONCAT('%',#{title},'%')
         </if>
-        <if test="type!=null">
-            and ty.`name`=#{type}
+        <if test="type!=0">
+            and ty.`id`=#{type}
         </if>
         <choose>
             <when test="recommend ==true">
@@ -77,13 +78,15 @@
 
     <insert id="addBlog" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
             parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
-        insert into `blog`
-        values (#{id}, #{title}, #{content}, #{firstPicture}, #{view}, #{commentCount}, #{appreciation},
-        #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime},
-        #{type.id}, #{user.id});
+        insert into `blog` (`title`, `content`, `firstPicture`, `view`, `commentCount`, `appreciation`,
+                            `shareStatement`, `commentabled`,
+                            `published`, `recommend`, `createTime`, `updateTime`, `flag`, `typeId`, `userId`)
+        values (#{title}, #{content}, #{firstPicture}, #{view}, #{commentCount}, #{appreciation},
+                #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime}, #{flag},
+                #{type.id}, #{user.id});
     </insert>
 
-    <insert id="addBlogTag" >
+    <insert id="addBlogTag">
         insert into `blog_tag` (id,blogId,tagId) values
         <foreach collection="tags" item="tag" index="index" separator=",">
             (null,#{id},#{tag.id})
@@ -92,23 +95,24 @@
 
     <update id="updateBlog" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
         update `blog`
-        set `id`=#{id},
-            `title`=#{title},
-            `content`="asdfs",
+        set `title`=#{title},
+            `content`=#{content},
             `firstPicture`=#{firstPicture},
-            `view`=#{view},
-            `commentCount`=#{commentCount},
             `appreciation`=#{appreciation},
             `shareStatement`= #{shareStatement},
             `commentabled`=#{commentabled},
             `published`= #{published},
             `recommend`=#{recommend},
-            `createTime`=#{createTime},
             `updateTime`=#{updateTime},
-            `typeId`= #{type.id},
-            `userId`=#{user.id}
+            `typeId`= #{type.id}
         where `id` = #{id};
     </update>
+
+    <delete id="deleteBlogTag" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
+        delete
+        from `blog_tag`
+        where `blogId` = #{id};
+    </delete>
 
     <delete id="deleteBlog">
         delete

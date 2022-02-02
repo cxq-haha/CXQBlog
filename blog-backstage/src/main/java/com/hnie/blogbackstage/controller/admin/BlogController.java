@@ -1,6 +1,8 @@
 package com.hnie.blogbackstage.controller.admin;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hnie.blogbackstage.NotFoundException;
 import com.hnie.blogbackstage.mybatis.entity.Blog;
 import com.hnie.blogbackstage.mybatis.entity.Tag;
 import com.hnie.blogbackstage.mybatis.entity.Type;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,7 +59,7 @@ public class BlogController {
         return LIST;
     }
 
-
+    //点击添加按钮跳转到博客新增页面
     @GetMapping("/blogs/input")
     public String input(Model model) {
         model.addAttribute("types", typeService.listType());
@@ -65,25 +68,60 @@ public class BlogController {
         return INPUT;
     }
 
+    //点击修改按钮跳转文章修改页面
+    @GetMapping("/blogs/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        Blog blog = blogService.getBlog(id);
+        model.addAttribute("blog", blog);
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
+        return INPUT;
+    }
+
+    //编辑已有的blog保存跳转到blog列表页面
+    @PostMapping("/blogs/{id}")
+    public String updateBlog(Blog blog,@RequestParam HashMap<String, String> param, RedirectAttributes attributes) {
+        String tagIdStr = param.get("tagIds");
+        String[] tagIds = tagIdStr.split(",");
+        ArrayList<Tag> tagList = new ArrayList<>();
+        for (String id : tagIds) {
+            tagList.add(tagService.getTagById(Long.valueOf(id)));
+        }
+        blog.setTags(tagList);
+        boolean re = blogService.updateBlog(blog);
+        if (re) {
+            return REDIRECT_LIST;
+        } else {
+            throw new NotFoundException("博客修改失败！");
+        }
+    }
+
+    //点击搜索按钮重定向到blog列表页面
     @PostMapping("/blogs/search")
     public String search(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, @RequestParam HashMap<String, String> jsonInfo) {
+        String orderBy = "b.id asc";
+        PageHelper.startPage(pageNum, 10, orderBy);
+
         String title = jsonInfo.get("title");
-        Long type = Long.valueOf( jsonInfo.get("type"));
+        String typeStr = jsonInfo.get("type");
+        Long type = 0L;
+        if (typeStr != "" && typeStr != null) {
+             type = Long.valueOf(jsonInfo.get("type"));
+        }
         Boolean recommend = Boolean.valueOf(jsonInfo.get("recommend"));
-        List<Blog> blogs = blogService.getBlogByCondition(title, recommend, typeService.getTypeById(type).getName());
+        List<Blog> blogs = blogService.getBlogByCondition(title, recommend, type);
         List<BlogInfo> blogInfos = blogService.transferBlogInfoList(blogs);
 
-        String orderBy = "id asc";
         PageInfo<BlogInfo> pageInfo = new PageInfo<>(blogInfos);
         model.addAttribute("pageInfo", pageInfo);
 
         List<Type> types = typeService.listType();
         model.addAttribute("types", types);
-        return REDIRECT_LIST;
+        return "admin/blogs::blogList";
     }
 
     @PostMapping("/blogs")
-    public String post(Blog blog, HttpSession session, RedirectAttributes attributes,@RequestParam HashMap<String,String> param) {
+    public String post(Blog blog, HttpSession session, RedirectAttributes attributes, @RequestParam HashMap<String, String> param) {
         //重复Blog校验
         Blog blogByName = blogService.getBlogByTitle(blog.getTitle());
         if (blogByName != null) {

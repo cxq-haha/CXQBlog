@@ -30,6 +30,7 @@ public class Blog {
     private boolean recommend;      //是否推荐
     private Date createTime;        //创建时间
     private Date updateTime;        //更新时间
+    private String flag;            //原创、转载、翻译
 
     private List<Tag> tags;
     private Type type;

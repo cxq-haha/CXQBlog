@@ -21,7 +21,7 @@ public interface BlogMapper {
     Blog getBlogByTitle(@Param("title") String title);
 
     //根据条件查询Blog
-    List<Blog> getBlogByCondition(@Param("title") String title,@Param("recommend") Boolean recommend,@Param("type") String type);
+    List<Blog> getBlogByCondition(@Param("title") String title,@Param("recommend") Boolean recommend,@Param("type") Long typeId);
 
     //获取所有的Blog
     List<Blog> getAllBlog();
@@ -31,6 +31,9 @@ public interface BlogMapper {
 
     //添加blog_tag表记录
     int addBlogTag(Blog blog);
+
+    //根据blogId删除blog_tag表记录
+    int deleteBlogTag(Blog blog);
 
     //更新一个Blog
     int updateBlog(Blog blog);

@@ -52,7 +52,7 @@ public class BlogServiceImpl implements BlogService {
             if (type == null) {
                 throw new NotFoundException("not found type of id " + blog.getType());
             }
-            blogInfo.setType(type.getName());
+            blogInfo.setFlag(blog.getFlag());
             blogInfo.setRecommend(blog.isRecommend());
             blogInfo.setUpdateTime( blog.getUpdateTime());
             blogInfos.add(blogInfo);
@@ -61,8 +61,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> getBlogByCondition(String title,Boolean recommend,String type) {
-        return blogMapper.getBlogByCondition(title, recommend, type);
+    public List<Blog> getBlogByCondition(String title,Boolean recommend,Long typeId) {
+        return blogMapper.getBlogByCondition(title, recommend, typeId);
     }
 
     @Override
@@ -86,7 +86,12 @@ public class BlogServiceImpl implements BlogService {
         if (blogById == null) {
             throw new NotFoundException("该博客不存在");
         }
+        blog.setUpdateTime(new Date());
+        //更新blog内容
         int re = blogMapper.updateBlog(blog);
+        //更新blog_tag内容
+        blogMapper.deleteBlogTag(blog);
+        blogMapper.addBlogTag(blog);
         if (re > 0) {
             return true;
         } else {

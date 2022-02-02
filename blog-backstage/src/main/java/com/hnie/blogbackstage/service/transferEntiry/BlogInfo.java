@@ -17,8 +17,9 @@ import java.util.Date;
 public class BlogInfo {
     Long id;
     String title;
-    String type;
+    String flag;
     boolean recommend;
+    boolean published;
     Date updateTime;
 }
 
