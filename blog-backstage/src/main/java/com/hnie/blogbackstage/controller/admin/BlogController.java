@@ -78,6 +78,14 @@ public class BlogController {
         return INPUT;
     }
 
+    //删除blog
+    @GetMapping("/blogs/{id}/delete")
+    public String editDelete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        blogService.deleteBlog(id);
+        redirectAttributes.addAttribute("message", "博客删除成功！");
+        return REDIRECT_LIST;
+    }
+
     //编辑已有的blog保存跳转到blog列表页面
     @PostMapping("/blogs/{id}")
     public String updateBlog(Blog blog,@RequestParam HashMap<String, String> param, RedirectAttributes attributes) {
