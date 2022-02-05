@@ -82,7 +82,7 @@ public class BlogController {
     @GetMapping("/blogs/{id}/delete")
     public String editDelete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         blogService.deleteBlog(id);
-        redirectAttributes.addAttribute("message", "博客删除成功！");
+        redirectAttributes.addFlashAttribute("message", "博客删除成功！");
         return REDIRECT_LIST;
     }
 
@@ -93,11 +93,16 @@ public class BlogController {
         String[] tagIds = tagIdStr.split(",");
         ArrayList<Tag> tagList = new ArrayList<>();
         for (String id : tagIds) {
-            tagList.add(tagService.getTagById(Long.valueOf(id)));
+            if (id != null && !id.equals("")) {
+                tagList.add(tagService.getTagById(Long.valueOf(id)));
+            }
         }
         blog.setTags(tagList);
+        Type type = typeService.getTypeById(blog.getType().getId());
+        blog.setType(type);
         boolean re = blogService.updateBlog(blog);
         if (re) {
+            attributes.addFlashAttribute("message", "博客修改成功！");
             return REDIRECT_LIST;
         } else {
             throw new NotFoundException("博客修改失败！");
@@ -138,7 +143,7 @@ public class BlogController {
         }
         User user = (User) session.getAttribute("user");
         blog.setUser(user);
-        Type type = typeService.getTypeById(Long.valueOf(param.get("typeId")));
+        Type type = typeService.getTypeById(blog.getType().getId());
         blog.setType(type);
         String tagIdStr = param.get("tagIds");
         String[] tagIds = tagIdStr.split(",");

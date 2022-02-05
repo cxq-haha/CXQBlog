@@ -16,7 +16,7 @@
         <result property="createTime" column="createTime"/>
         <result property="updateTime" column="updateTime"/>
         <result property="flag" column="flag"/>
-        <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type">
+        <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type" select="com.hnie.blogbackstage.mybatis.mapper.TypeMapper.getTypeById">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
         </association>
@@ -41,6 +41,8 @@
         from `blog` as b
                  left outer join `blog_tag` as bt on b.id = bt.blogId
                  left outer join `tag` as ta on ta.id = bt.tagId
+                 left outer join `user` as us on us.id = b.userId
+                 left outer join `type` as ty on ty.id = b.typeId
         where b.`id` = #{id};
     </select>
 
