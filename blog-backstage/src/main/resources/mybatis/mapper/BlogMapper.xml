@@ -2,42 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hnie.blogbackstage.mybatis.mapper.BlogMapper">
     <resultMap type="com.hnie.blogbackstage.mybatis.entity.Blog" id="blogMap">
-        <id property="id" column="id"/>
-        <result property="title" column="title"/>
-        <result property="content" column="content"/>
-        <result property="firstPicture" column="firstPicture"/>
-        <result property="view" column="view"/>
-        <result property="commentCount" column="commentCount"/>
-        <result property="appreciation" column="appreciation"/>
-        <result property="shareStatement" column="shareStatement"/>
-        <result property="commentabled" column="commentabled"/>
-        <result property="published" column="published"/>
-        <result property="recommend" column="recommend"/>
-        <result property="createTime" column="createTime"/>
-        <result property="updateTime" column="updateTime"/>
-        <result property="flag" column="flag"/>
-        <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type" select="com.hnie.blogbackstage.mybatis.mapper.TypeMapper.getTypeById">
-            <id property="id" column="id"/>
-            <result property="name" column="name"/>
+        <id property="id" column="b_id"/>
+        <result property="title" column="b_title"/>
+        <result property="content" column="b_content"/>
+        <result property="firstPicture" column="b_firstPicture"/>
+        <result property="view" column="b_view"/>
+        <result property="commentCount" column="b_commentCount"/>
+        <result property="appreciation" column="b_appreciation"/>
+        <result property="shareStatement" column="b_shareStatement"/>
+        <result property="commentabled" column="b_commentabled"/>
+        <result property="published" column="b_published"/>
+        <result property="recommend" column="b_recommend"/>
+        <result property="createTime" column="b_createTime"/>
+        <result property="updateTime" column="b_updateTime"/>
+        <result property="flag" column="b_flag"/>
+        <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type">
+            <id property="id" column="ty_id"/>
+            <result property="name" column="ty_name"/>
         </association>
         <association property="user" column="userId" javaType="com.hnie.blogbackstage.mybatis.entity.User">
-            <id property="id" column="id"/>
-            <result property="username" column="username"/>
-            <result property="password" column="password"/>
-            <result property="email" column="email"/>
-            <result property="avatar" column="avatar"/>
-            <result property="type" column="type"/>
-            <result property="createTime" column="createTime"/>
-            <result property="updateTime" column="updateTime"/>
+            <id property="id" column="us_id"/>
+            <result property="username" column="us_username"/>
+            <result property="password" column="us_password"/>
+            <result property="email" column="us_email"/>
+            <result property="avatar" column="us_avatar"/>
+            <result property="type" column="us_type"/>
+            <result property="createTime" column="us_createTime"/>
+            <result property="updateTime" column="us_updateTime"/>
         </association>
         <collection property="tags" ofType="com.hnie.blogbackstage.mybatis.entity.Tag">
-            <id property="id" column="id"/>
-            <result property="name" column="name"/>
+            <id property="id" column="ta_id"/>
+            <result property="name" column="ta_name"/>
         </collection>
     </resultMap>
 
+
     <select id="getBlogById" resultMap="blogMap">
-        select *
+        select b.id             as b_id,
+               b.title          as b_title,
+               b.content        as b_content,
+               b.firstPicture   as b_firstPicture,
+               b.view           as b_view,
+               b.commentCount   as b_commentCount,
+               b.appreciation   as b_appreciation,
+               b.shareStatement as b_shareStatement,
+               b.commentabled   as b_commentabled,
+               b.published      as b_published,
+               b.recommend      as b_recommend,
+               b.createTime     as b_createTime,
+               b.updateTime     as b_updateTime,
+               b.flag           as b_flag,
+               b.typeId         as b_typeId,
+               b.userId         as b_userId,
+               bt.id            as bt_id,
+               bt.blogId        as bt_blogId,
+               bt.tagId         as bt_tagId,
+               ta.id            as ta_id,
+               ta.name          as ta_name,
+               ty.id            as ty_id,
+               ty.name          as ty_name,
+               us.id            as us_id,
+               us.username      as us_username,
+               us.password      as us_password,
+               us.email         as us_email,
+               us.avatar        as us_avatar,
+               us.type          as us_type,
+               us.createTime    as us_createTime,
+               us.updataTime    as us_updateTime
         from `blog` as b
                  left outer join `blog_tag` as bt on b.id = bt.blogId
                  left outer join `tag` as ta on ta.id = bt.tagId
@@ -47,18 +78,72 @@
     </select>
 
     <select id="getAllBlog" resultMap="blogMap">
-        select *
+        select b.id             as b_id,
+               b.title          as b_title,
+               b.content        as b_content,
+               b.firstPicture   as b_firstPicture,
+               b.view           as b_view,
+               b.commentCount   as b_commentCount,
+               b.appreciation   as b_appreciation,
+               b.shareStatement as b_shareStatement,
+               b.commentabled   as b_commentabled,
+               b.published      as b_published,
+               b.recommend      as b_recommend,
+               b.createTime     as b_createTime,
+               b.updateTime     as b_updateTime,
+               b.flag           as b_flag,
+               b.typeId         as b_typeId,
+               b.userId         as b_userId,
+               bt.id            as bt_id,
+               bt.blogId        as bt_blogId,
+               bt.tagId         as bt_tagId,
+               ta.id            as ta_id,
+               ta.name          as ta_name,
+               ty.id            as ty_id,
+               ty.name          as ty_name,
+               us.id            as us_id,
+               us.username      as us_username,
+               us.password      as us_password,
+               us.email         as us_email,
+               us.avatar        as us_avatar,
+               us.type          as us_type,
+               us.createTime    as us_createTime,
+               us.updataTime    as us_updateTime
         from `blog` as b
                  left outer join `blog_tag` as bt on b.id = bt.blogId
-                 left outer join `tag` as ta on ta.id = bt.tagId;
+                 left outer join `tag` as ta on ta.id = bt.tagId
+                 left outer join `user` as us on us.id = b.userId
+                 left outer join `type` as ty on ty.id = b.typeId;
     </select>
 
     <!--    条件查询-->
     <select id="getBlogByCondition" resultMap="blogMap">
-        select *
+        select b.id as b_id,
+        b.title as b_title,
+        b.content as b_content,
+        b.firstPicture as b_firstPicture,
+        b.view as b_view,
+        b.commentCount as b_commentCount,
+        b.appreciation as b_appreciation,
+        b.shareStatement as b_shareStatement,
+        b.commentabled as b_commentabled,
+        b.published as b_published,
+        b.recommend as b_recommend,
+        b.createTime as b_createTime,
+        b.updateTime as b_updateTime,
+        b.flag as b_flag,
+        b.typeId as b_typeId,
+        b.userId as b_userId,
+        bt.id as bt_id,
+        bt.blogId as bt_blogId,
+        bt.tagId as bt_tagId,
+        ta.id as ta_id,
+        ta.name as ta_name,
+        ty.id as ty_id,
+        ty.name as ty_name
         from `blog` as b
         left outer join `blog_tag` as bt on b.id = bt.blogId
-        left outer join `tag` as t on t.id = bt.tagId
+        left outer join `tag` as ta on ta.id = bt.tagId
         inner join `type` as ty on ty.id = b.typeId
         where b.typeId=ty.id
         <if test="title!=null and title!=''">
@@ -123,10 +208,30 @@
     </delete>
 
     <select id="getBlogByTitle" resultMap="blogMap">
-        select *
+        select b.id             as b_id,
+               b.title          as b_title,
+               b.content        as b_content,
+               b.firstPicture   as b_firstPicture,
+               b.view           as b_view,
+               b.commentCount   as b_commentCount,
+               b.appreciation   as b_appreciation,
+               b.shareStatement as b_shareStatement,
+               b.commentabled   as b_commentabled,
+               b.published      as b_published,
+               b.recommend      as b_recommend,
+               b.createTime     as b_createTime,
+               b.updateTime     as b_updateTime,
+               b.flag           as b_flag,
+               b.typeId         as b_typeId,
+               b.userId         as b_userId,
+               bt.id            as bt_id,
+               bt.blogId        as bt_blogId,
+               bt.tagId         as bt_tagId,
+               ta.id            as ta_id,
+               ta.name          as ta_name
         from `blog` as b
                  left outer join `blog_tag` as bt on b.id = bt.blogId
-                 left outer join `tag` as t on t.id = bt.tagId
+                 left outer join `tag` as ta on ta.id = bt.tagId
         where b.`title` = #{title};
     </select>
 

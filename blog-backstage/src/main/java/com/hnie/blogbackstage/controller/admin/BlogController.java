@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: chenxueqin
@@ -49,6 +50,8 @@ public class BlogController {
     public String blogs(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         String orderBy = "b.id asc";
         PageHelper.startPage(pageNum, 10, orderBy);
+        //解决mybatis自动添加count(0)问题 https://blog.csdn.net/jisuanjiguoba/article/details/113995405
+        PageHelper.clearPage();
         List<Blog> blogs = blogService.getAllBlog();
         List<BlogInfo> blogInfos = blogService.transferBlogInfoList(blogs);
         PageInfo<BlogInfo> pageInfo = new PageInfo<>(blogInfos);
@@ -72,9 +75,12 @@ public class BlogController {
     @GetMapping("/blogs/{id}/input")
     public String editInput(@PathVariable Long id, Model model) {
         Blog blog = blogService.getBlog(id);
+        List<Tag> tags = blog.getTags();
+        List<Long> tagIds = tags.stream().map(a -> a.getId()).collect(Collectors.toList());
         model.addAttribute("blog", blog);
         model.addAttribute("types", typeService.listType());
         model.addAttribute("tags", tagService.listTag());
+        model.addAttribute("tagIds", tagIds);
         return INPUT;
     }
 
@@ -114,7 +120,7 @@ public class BlogController {
     public String search(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, @RequestParam HashMap<String, String> jsonInfo) {
         String orderBy = "b.id asc";
         PageHelper.startPage(pageNum, 10, orderBy);
-
+        PageHelper.clearPage();
         String title = jsonInfo.get("title");
         String typeStr = jsonInfo.get("type");
         Long type = 0L;

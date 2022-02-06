@@ -92,9 +92,7 @@
                     <div class="ui left labeled input">
                         <label class="ui compact teal basic label">分类</label>
                         <div class="ui fluid selection dropdown">
-                            <!--新增-->
-<!--                            <input type="hidden" name="type.id" >-->
-                            <!--编辑-->
+                            <!--添加blog时type为null,修改blog时type不为null-->
                             <input type="hidden" name="type.id"  th:value="*{type}==null?null:(*{type.getId()}!=null ? *{type.getId()}:null)">
                             <i class="dropdown icon"></i>
                             <div class="default text" th:text="*{type}==null?null:(*{type.getName()}!=null ? *{type.getName()}:null)">分类</div>
@@ -110,7 +108,7 @@
                     <div class="ui left labeled input">
                         <label class="ui compact teal basic label">标签</label>
                         <div class="ui fluid multiple search selection dropdown">
-                            <input type="hidden" name="tagIds">
+                            <input type="hidden" name="tagIds" th:value="${tagIds}">
                             <i class="dropdown icon"></i>
                             <div class="default text">标签</div>
                             <div class="menu">

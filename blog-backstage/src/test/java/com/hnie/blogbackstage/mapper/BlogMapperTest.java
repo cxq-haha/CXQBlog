@@ -60,7 +60,7 @@ public class BlogMapperTest {
     @Test
     public void getBlogByConditionTest() {
         //title模糊查询
-        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, 34L);
+        List<Blog> res2 = blogMapper.getBlogByCondition("博客", false, 22L);
         for (Blog re : res2) {
             System.out.println(re);
         }
