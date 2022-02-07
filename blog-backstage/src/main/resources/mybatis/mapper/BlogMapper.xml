@@ -130,16 +130,12 @@
         b.flag as b_flag,
         b.typeId as b_typeId,
         b.userId as b_userId,
-        bt.id as bt_id,
-        bt.blogId as bt_blogId,
-        bt.tagId as bt_tagId,
-        ta.id as ta_id,
-        ta.name as ta_name,
         ty.id as ty_id,
         ty.name as ty_name
         from `blog` as b
-        left outer join `blog_tag` as bt on b.id = bt.blogId
-        left outer join `tag` as ta on ta.id = bt.tagId
+        --    left outer join `blog_tag` as bt on b.id = bt.blogId
+        --    left outer join `tag` as ta on ta.id = bt.tagId
+        --    为避免collection与PageHelper造成blog数量不一致问题，不查询blog对应的tags
         inner join `type` as ty on ty.id = b.typeId
         where b.typeId=ty.id
         <if test="title!=null and title!=''">
