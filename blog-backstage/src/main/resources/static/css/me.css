@@ -160,8 +160,8 @@ body {
 
 /************** shadow ******************/
 .m-shadow-small {
-    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
 }
 
 /************** position ******************/
