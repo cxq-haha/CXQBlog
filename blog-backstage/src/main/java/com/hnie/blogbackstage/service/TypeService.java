@@ -28,4 +28,7 @@ public interface TypeService {
 
     //删除Type
     void deleteType(Long id);
+
+    //按博客数量查询前size种类型
+    List<Type> listSizeTop(Integer size);
 }

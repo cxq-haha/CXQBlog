@@ -74,7 +74,7 @@
                  left outer join `tag` as ta on ta.id = bt.tagId
                  left outer join `user` as us on us.id = b.userId
                  left outer join `type` as ty on ty.id = b.typeId
-        where b.`id` = #{id};
+        where b.`id` = #{id}
     </select>
 
     <select id="getAllBlog" resultMap="blogMap">
@@ -94,11 +94,6 @@
                b.flag           as b_flag,
                b.typeId         as b_typeId,
                b.userId         as b_userId,
-               bt.id            as bt_id,
-               bt.blogId        as bt_blogId,
-               bt.tagId         as bt_tagId,
-               ta.id            as ta_id,
-               ta.name          as ta_name,
                ty.id            as ty_id,
                ty.name          as ty_name,
                us.id            as us_id,
@@ -110,10 +105,11 @@
                us.createTime    as us_createTime,
                us.updataTime    as us_updateTime
         from `blog` as b
-                 left outer join `blog_tag` as bt on b.id = bt.blogId
-                 left outer join `tag` as ta on ta.id = bt.tagId
+                 --    left outer join `blog_tag` as bt on b.id = bt.blogId
+                 --    left outer join `tag` as ta on ta.id = bt.tagId
+                 --    为避免collection与PageHelper造成blog数量不一致问题，不查询blog对应的tags
                  left outer join `user` as us on us.id = b.userId
-                 left outer join `type` as ty on ty.id = b.typeId;
+                 left outer join `type` as ty on ty.id = b.typeId
     </select>
 
     <!--    条件查询-->
@@ -160,7 +156,6 @@
                 and b.`recommend` in (true,false)
             </when>
         </choose>
-        ;
     </select>
 
     <insert id="addBlog" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
@@ -232,7 +227,7 @@
         from `blog` as b
                  left outer join `blog_tag` as bt on b.id = bt.blogId
                  left outer join `tag` as ta on ta.id = bt.tagId
-        where b.`title` = #{title};
+        where b.`title` = #{title}
     </select>
 
 </mapper>

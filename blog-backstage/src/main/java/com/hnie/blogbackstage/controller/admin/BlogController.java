@@ -1,5 +1,7 @@
 package com.hnie.blogbackstage.controller.admin;
 
+import com.github.pagehelper.ISelect;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hnie.blogbackstage.NotFoundException;
@@ -7,10 +9,10 @@ import com.hnie.blogbackstage.mybatis.entity.Blog;
 import com.hnie.blogbackstage.mybatis.entity.Tag;
 import com.hnie.blogbackstage.mybatis.entity.Type;
 import com.hnie.blogbackstage.mybatis.entity.User;
+import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
 import com.hnie.blogbackstage.service.BlogService;
 import com.hnie.blogbackstage.service.TagService;
 import com.hnie.blogbackstage.service.TypeService;
-import com.hnie.blogbackstage.service.transferEntiry.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,9 @@ public class BlogController {
     BlogService blogService;
 
     @Autowired
+    BlogMapper blogMapper;
+
+    @Autowired
     TypeService typeService;
 
     @Autowired
@@ -49,12 +54,10 @@ public class BlogController {
     @GetMapping("/blogs")
     public String blogs(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         String orderBy = "b.id asc";
-        PageHelper.startPage(pageNum, 10, orderBy);
-        //解决mybatis自动添加count(0)问题 https://blog.csdn.net/jisuanjiguoba/article/details/113995405
-        PageHelper.clearPage();
+        PageHelper.startPage(pageNum, 10);
         List<Blog> blogs = blogService.getAllBlog();
-        List<BlogInfo> blogInfos = blogService.transferBlogInfoList(blogs);
-        PageInfo<BlogInfo> pageInfo = new PageInfo<>(blogInfos);
+
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
 
         List<Type> types = typeService.listType();
@@ -120,7 +123,6 @@ public class BlogController {
     public String search(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, @RequestParam HashMap<String, String> jsonInfo) {
         String orderBy = "b.id asc";
         PageHelper.startPage(pageNum, 10, orderBy);
-        PageHelper.clearPage();
         String title = jsonInfo.get("title");
         String typeStr = jsonInfo.get("type");
         Long type = 0L;
@@ -129,9 +131,8 @@ public class BlogController {
         }
         Boolean recommend = Boolean.valueOf(jsonInfo.get("recommend"));
         List<Blog> blogs = blogService.getBlogByCondition(title, recommend, type);
-        List<BlogInfo> blogInfos = blogService.transferBlogInfoList(blogs);
 
-        PageInfo<BlogInfo> pageInfo = new PageInfo<>(blogInfos);
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
 
         List<Type> types = typeService.listType();

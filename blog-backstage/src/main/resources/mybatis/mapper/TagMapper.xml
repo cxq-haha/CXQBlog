@@ -35,4 +35,13 @@
         where `id` = #{id};
     </update>
 
+    <select id="getTagsLimit" resultType="com.hnie.blogbackstage.mybatis.entity.Tag">
+        select ta.id, ta.name
+        from `tag` as ta
+                 left outer join `blog_tag` as bt
+                                 on bt.tagId = ta.id
+        group by ta.id
+        order by count(bt.id) limit 0,#{size};
+    </select>
+
 </mapper>

@@ -1,7 +1,6 @@
 package com.hnie.blogbackstage.service;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
-import com.hnie.blogbackstage.service.transferEntiry.BlogInfo;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +20,6 @@ public interface BlogService {
 
     //根据名臣查询Blog
     Blog getBlogByTitle(String title);
-
-    //将Blog列表转化成BlogInfo列表
-    List<BlogInfo> transferBlogInfoList(List<Blog> blogs);
 
     //条件查询Blog
     List<Blog> getBlogByCondition(String title, Boolean recommend, Long typeId);

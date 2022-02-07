@@ -41,4 +41,13 @@
         from type
         where `name` = #{name}
     </select>
+
+    <select id="getTypesLimit" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
+        select `ty`.id, ty.`name`
+        from `blog` as b
+                 left outer join `type` as ty on b.typeId = ty.id
+        group by ty.id
+        order by count(b.id)
+            limit 0,#{size};
+    </select>
 </mapper>

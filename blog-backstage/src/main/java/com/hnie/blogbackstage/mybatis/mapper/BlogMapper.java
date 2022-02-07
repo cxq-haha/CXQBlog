@@ -1,6 +1,8 @@
 package com.hnie.blogbackstage.mybatis.mapper;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
+import com.hnie.blogbackstage.mybatis.entity.Tag;
+import com.hnie.blogbackstage.mybatis.entity.Type;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -40,5 +42,4 @@ public interface BlogMapper {
 
     //删除指定ID的Blog
     int deleteBlog(@Param("id") Long id);
-
 }

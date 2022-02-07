@@ -63,4 +63,9 @@ public class TypeServiceImpl implements TypeService {
     public void deleteType(Long id) {
         typeMapper.deleteTypeById(id);
     }
+
+    @Override
+    public List<Type> listSizeTop(Integer size) {
+        return typeMapper.getTypesLimit(size);
+    }
 }

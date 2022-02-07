@@ -50,4 +50,10 @@ public class TagMapperTest {
         Tag tag = new Tag(2L, "Python");
         tagMapper.updateTag(tag);
     }
+
+    @Test
+    public void getTagsLimitTest() {
+        List<Tag> tagsLimit = tagMapper.getTagsLimit(2);
+        System.out.println(tagsLimit);
+    }
 }

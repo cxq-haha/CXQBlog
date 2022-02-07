@@ -29,4 +29,6 @@ public interface TagService {
 
     //修改Tag
     Boolean updateTag(Tag tag);
+
+    List<Tag> listSizeTop(Integer size);
 }

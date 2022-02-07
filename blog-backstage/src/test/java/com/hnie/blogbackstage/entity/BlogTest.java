@@ -1,7 +1,6 @@
 package com.hnie.blogbackstage.entity;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
-import com.hnie.blogbackstage.service.transferEntiry.BlogInfo;
 import org.junit.jupiter.api.Test;
 
 /**

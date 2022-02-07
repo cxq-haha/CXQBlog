@@ -21,3 +21,6 @@ logging:
     com.hnie: debug
   file:
     name: log/blog.log
+
+
+

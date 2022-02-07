@@ -56,4 +56,9 @@ public class TagServiceImpl implements TagService {
             return true;
         }
     }
+
+    @Override
+    public List<Tag> listSizeTop(Integer size) {
+        return tagMapper.getTagsLimit(size);
+    }
 }

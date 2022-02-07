@@ -109,17 +109,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="blogInfo,iterStat : ${pageInfo.list}">
+                <tr th:each="blog,iterStat : ${pageInfo.list}">
                     <td th:text="${iterStat.count}">1</td>
-                    <td th:text="${blogInfo.getTitle()}">SpringMVC加载过程</td>
-                    <td th:text="${blogInfo.getFlag()}">spring</td>
-                    <td th:text="${blogInfo.isRecommend()} ? '是':'否'">是</td>
-                    <td th:text="${#dates.format(blogInfo.getUpdateTime(),'yyyy-MM-dd HH:mm')}">2020-01-02 05:20</td>
-                    <td th:text="${blogInfo.isPublished()} ? '发布':'草稿'">是</td>
+                    <td th:text="${blog.getTitle()}">SpringMVC加载过程</td>
+                    <td th:text="${blog.getFlag()}">spring</td>
+                    <td th:text="${blog.isRecommend()} ? '是':'否'">是</td>
+                    <td th:text="${#dates.format(blog.getUpdateTime(),'yyyy-MM-dd HH:mm')}">2020-01-02 05:20</td>
+                    <td th:text="${blog.isPublished()} ? '发布':'草稿'">是</td>
                     <td>
-                        <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blogInfo.getId()})}"
+                        <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.getId()})}"
                            class="ui mini teal basic button">编辑</a>
-                        <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blogInfo.getId()})}"
+                        <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.getId()})}"
                            class="ui mini red basic button">删除</a>
                     </td>
                 </tr>
@@ -138,7 +138,7 @@
                                 <p>第 <span th:text="${pageInfo.pageNum}">1</span> 页，共 <span
                                         th:text="${pageInfo.pages}"></span> 页，有 <span
                                         th:text="${pageInfo.total}">1</span>
-                                    个分类</p>
+                                    个博客</p>
                             </div>
 
                             <div class="three wide column" align="center">

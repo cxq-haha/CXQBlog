@@ -58,4 +58,9 @@ public class TypeMapperTest {
         System.out.println("id=  " + id);
     }
 
+    @Test
+    public void getTypesLimitTest() {
+        List<Type> ret = typeMapper.getTypesLimit(6);
+        System.out.println(ret);
+    }
 }

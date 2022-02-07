@@ -35,4 +35,6 @@ public interface TypeMapper {
     //根据名称查找Id
     Long getIdByName(@Param("name") String name);
 
+    //按blog数量从大到小获取前size个类型
+    List<Type> getTypesLimit(@Param("size") Integer size);
 }

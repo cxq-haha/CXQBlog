@@ -83,6 +83,15 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.12</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.commonmark/commonmark -->
+        <!-- markdown解析-->
+        <dependency>
+            <groupId>org.commonmark</groupId>
+            <artifactId>commonmark</artifactId>
+            <version>0.18.1</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

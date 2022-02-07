@@ -2,11 +2,9 @@ package com.hnie.blogbackstage.service.impl;
 
 import com.hnie.blogbackstage.NotFoundException;
 import com.hnie.blogbackstage.mybatis.entity.Blog;
-import com.hnie.blogbackstage.mybatis.entity.Type;
 import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
 import com.hnie.blogbackstage.mybatis.mapper.TypeMapper;
 import com.hnie.blogbackstage.service.BlogService;
-import com.hnie.blogbackstage.service.transferEntiry.BlogInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,25 +37,6 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog getBlogByTitle(String title) {
         return blogMapper.getBlogByTitle(title);
-    }
-
-    @Override
-    public List<BlogInfo> transferBlogInfoList(List<Blog> blogs) {
-        List<BlogInfo> blogInfos = new ArrayList<>();
-        for (Blog blog : blogs) {
-            BlogInfo blogInfo = new BlogInfo();
-            blogInfo.setId(blog.getId());
-            blogInfo.setTitle(blog.getTitle());
-            Type type = blog.getType();
-            if (type == null) {
-                throw new NotFoundException("not found type of id " + blog.getType());
-            }
-            blogInfo.setFlag(blog.getFlag());
-            blogInfo.setRecommend(blog.isRecommend());
-            blogInfo.setUpdateTime( blog.getUpdateTime());
-            blogInfos.add(blogInfo);
-        }
-        return blogInfos;
     }
 
     @Override

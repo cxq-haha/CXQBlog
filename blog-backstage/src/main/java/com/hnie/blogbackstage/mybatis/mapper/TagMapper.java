@@ -31,4 +31,6 @@ public interface TagMapper {
 
     //更新Tag
     int updateTag(Tag tag);
+
+    List<Tag> getTagsLimit(@Param("size") Integer size);
 }
