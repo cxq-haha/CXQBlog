@@ -126,6 +126,9 @@
                     <input type="text" name="firstPicture" placeholder="首图引用地址" th:value="*{firstPicture}">
                 </div>
             </div>
+            <div class="required field">
+                <textarea name="description" th:text="*{description}" placeholder="博客描述..." maxlength="200"></textarea>
+            </div>
             <div class="inline fields">
                 <div class="field">
                     <div class="ui checkbox">
@@ -249,21 +252,28 @@
                 identifier: 'content',
                 rules: [{
                     type: 'empty',
-                    prompt: '标题：请输入博客内容'
+                    prompt: '内容：请输入博客内容'
                 }]
             },
             typeId: {
                 identifier: 'typeId',
                 rules: [{
                     type: 'empty',
-                    prompt: '标题：请输入博客分类'
+                    prompt: '分类：请输入博客分类'
+                }]
+            },
+            description: {
+                identifier: 'description',
+                rules: [{
+                    type: 'empty',
+                    prompt: '描述：请输入博客摘要'
                 }]
             },
             firstPicture: {
                 identifier: 'firstPicture',
                 rules: [{
                     type: 'empty',
-                    prompt: '标题：请输入博客首图地址'
+                    prompt: '首图：请输入博客首图地址'
                 }]
             }
         }

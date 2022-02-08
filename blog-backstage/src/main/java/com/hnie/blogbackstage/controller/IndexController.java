@@ -34,12 +34,9 @@ public class IndexController {
     public String index(Model model, @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         String orderBy = "b.id asc";
         PageHelper.startPage(pageNum, 10, orderBy);
-        //解决mybatis自动添加count(0)问题 https://blog.csdn.net/jisuanjiguoba/article/details/113995405
-        PageHelper.clearPage();
         List<Blog> blogs = blogService.getAllBlog();
         PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
         model.addAttribute("pageInfo", pageInfo);
-        int size = pageInfo.getSize();
 
         List<Type> types = typeService.listSizeTop(6);
         model.addAttribute("types", types);

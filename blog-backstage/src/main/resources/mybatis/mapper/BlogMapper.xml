@@ -16,6 +16,7 @@
         <result property="createTime" column="b_createTime"/>
         <result property="updateTime" column="b_updateTime"/>
         <result property="flag" column="b_flag"/>
+        <result property="description" column="b_description"/>
         <association property="type" column="typeId" javaType="com.hnie.blogbackstage.mybatis.entity.Type">
             <id property="id" column="ty_id"/>
             <result property="name" column="ty_name"/>
@@ -52,6 +53,7 @@
                b.createTime     as b_createTime,
                b.updateTime     as b_updateTime,
                b.flag           as b_flag,
+               b.description    as b_description,
                b.typeId         as b_typeId,
                b.userId         as b_userId,
                bt.id            as bt_id,
@@ -92,6 +94,7 @@
                b.createTime     as b_createTime,
                b.updateTime     as b_updateTime,
                b.flag           as b_flag,
+               b.description    as b_description,
                b.typeId         as b_typeId,
                b.userId         as b_userId,
                ty.id            as ty_id,
@@ -128,14 +131,15 @@
         b.createTime as b_createTime,
         b.updateTime as b_updateTime,
         b.flag as b_flag,
+        b.description as b_description,
         b.typeId as b_typeId,
         b.userId as b_userId,
         ty.id as ty_id,
         ty.name as ty_name
         from `blog` as b
-        --    left outer join `blog_tag` as bt on b.id = bt.blogId
-        --    left outer join `tag` as ta on ta.id = bt.tagId
-        --    为避免collection与PageHelper造成blog数量不一致问题，不查询blog对应的tags
+        -- left outer join `blog_tag` as bt on b.id = bt.blogId
+        -- left outer join `tag` as ta on ta.id = bt.tagId
+        -- 为避免collection与PageHelper造成blog数量不一致问题，不查询blog对应的tags
         inner join `type` as ty on ty.id = b.typeId
         where b.typeId=ty.id
         <if test="title!=null and title!=''">
@@ -158,10 +162,11 @@
             parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
         insert into `blog` (`title`, `content`, `firstPicture`, `view`, `commentCount`, `appreciation`,
                             `shareStatement`, `commentabled`,
-                            `published`, `recommend`, `createTime`, `updateTime`, `flag`, `typeId`, `userId`)
+                            `published`, `recommend`, `createTime`, `updateTime`, `flag`, `description`, `typeId`,
+                            `userId`)
         values (#{title}, #{content}, #{firstPicture}, #{view}, #{commentCount}, #{appreciation},
                 #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime}, #{flag},
-                #{type.id}, #{user.id});
+                #{description}, #{type.id}, #{user.id});
     </insert>
 
     <insert id="addBlogTag">
@@ -213,6 +218,7 @@
                b.createTime     as b_createTime,
                b.updateTime     as b_updateTime,
                b.flag           as b_flag,
+               b.description    as b_description,
                b.typeId         as b_typeId,
                b.userId         as b_userId,
                bt.id            as bt_id,
