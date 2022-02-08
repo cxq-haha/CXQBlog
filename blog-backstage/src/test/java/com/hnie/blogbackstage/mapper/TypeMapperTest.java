@@ -20,7 +20,7 @@ public class TypeMapperTest {
 
     @Test
     public void addTypeTest() {
-        Type typ = new Type(null, "111111");
+        Type typ = new Type(null, "111111", null);
         int re = typeMapper.addType(typ);
         System.out.println("添加结果" + re);
     }
@@ -33,14 +33,14 @@ public class TypeMapperTest {
 
     @Test
     public void selectTypeByIdTest() {
-        Type type = typeMapper.getTypeById(1L);
+        Type type = typeMapper.getTypeById(24L);
         System.out.println("查询到的Type为：" + type);
     }
 
     @Test
     public void updateTypeTest() {
-        Type type = new Type(1L, "算法设计");
-        int re = typeMapper.updateType( type);
+        Type type = new Type(1L, "算法设计", null);
+        int re = typeMapper.updateType(type);
         System.out.println("修改结果为：" + re);
     }
 
@@ -53,8 +53,14 @@ public class TypeMapperTest {
     }
 
     @Test
+    public void getTypeByNameTest() {
+        Type ret = typeMapper.getTypeByName("大数据");
+        System.out.println(ret);
+    }
+
+    @Test
     public void getIdByNameTest() {
-        Long id = typeMapper.getIdByName("数据结构");
+        Long id = typeMapper.getIdByName("大数据");
         System.out.println("id=  " + id);
     }
 

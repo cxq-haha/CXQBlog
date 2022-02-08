@@ -36,7 +36,7 @@ public class TagMapperTest {
 
     @Test
     public void addTagTest() {
-        Tag tag = new Tag(2L, "Java");
+        Tag tag = new Tag(2L, "Java",null);
         tagMapper.addTag(tag);
     }
 
@@ -47,7 +47,7 @@ public class TagMapperTest {
 
     @Test
     public void updateTagTest() {
-        Tag tag = new Tag(2L, "Python");
+        Tag tag = new Tag(2L, "Python",null);
         tagMapper.updateTag(tag);
     }
 

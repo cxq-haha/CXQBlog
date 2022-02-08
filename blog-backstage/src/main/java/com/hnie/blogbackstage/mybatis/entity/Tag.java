@@ -3,6 +3,8 @@ package com.hnie.blogbackstage.mybatis.entity;
 
 import lombok.*;
 
+import java.util.List;
+
 /**
  * @Author: chenxueqin
  * @Date: 2021/12/16 16:49
@@ -14,6 +16,8 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 public class Tag {
-    private Long id;        //id
-    private String name;    //标签名称
+    private Long id;            //id
+    private String name;        //标签名称
+
+    private List<Blog> blogs;   //该标签的所有blog
 }

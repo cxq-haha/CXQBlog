@@ -3,8 +3,8 @@
 <mapper namespace="com.hnie.blogbackstage.mybatis.mapper.TypeMapper">
 
     <insert id="addType" parameterType="com.hnie.blogbackstage.mybatis.entity.Type">
-        insert into `type`
-        values (null, #{name });
+        insert into `type` (`name`)
+        values ( #{name });
     </insert>
 
     <delete id="deleteTypeById">

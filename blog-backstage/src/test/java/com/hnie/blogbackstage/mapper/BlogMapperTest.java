@@ -40,14 +40,14 @@ public class BlogMapperTest {
     public void addBlogTest() {
         Blog blog = new Blog(10L, "博客2", "博客2内容",
                 "picture", 5L, 6L, true, true, true,
-                false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null),
+                false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null,null),
                 new User(1L, null, null, null, null, null, null, new Date()), new ArrayList<>());
         blogMapper.addBlog(blog);
     }
 
     @Test
     public void updateBlogTest() {
-        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null), new User(1L, null, null, null, null, null, new Date(), new
+        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null,null), new User(1L, null, null, null, null, null, new Date(), new
                 Date()), new ArrayList<>());
         blogMapper.updateBlog(blog);
     }
