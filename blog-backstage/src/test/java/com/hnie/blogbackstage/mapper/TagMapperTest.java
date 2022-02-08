@@ -53,7 +53,7 @@ public class TagMapperTest {
 
     @Test
     public void getTagsLimitTest() {
-        List<Tag> tagsLimit = tagMapper.getTagsLimit(2);
+        List<Tag> tagsLimit = tagMapper.getTagsLimit(3);
         System.out.println(tagsLimit);
     }
 }

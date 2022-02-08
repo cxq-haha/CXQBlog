@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hnie.blogbackstage.mybatis.mapper.TagMapper">
+    <resultMap id="tagMap" type="com.hnie.blogbackstage.mybatis.entity.Tag">
+        <id property="id" column="ta_id"/>
+        <result property="name" column="ta_name"/>
+        <result property="blogCount" column="blog_count"/>
+        <collection property="blogs" ofType="com.hnie.blogbackstage.mybatis.entity.Blog">
+            <id property="id" column="b_id"/>
+            <result property="title" column="b_title"/>
+            <result property="content" column="b_content"/>
+            <result property="firstPicture" column="b_firstPicture"/>
+            <result property="view" column="b_view"/>
+            <result property="commentCount" column="b_commentCount"/>
+            <result property="appreciation" column="b_appreciation"/>
+            <result property="shareStatement" column="b_shareStatement"/>
+            <result property="commentabled" column="b_commentabled"/>
+            <result property="published" column="b_published"/>
+            <result property="recommend" column="b_recommend"/>
+            <result property="createTime" column="b_createTime"/>
+            <result property="updateTime" column="b_updateTime"/>
+            <result property="flag" column="b_flag"/>
+            <result property="description" column="b_description"/>
+        </collection>
+    </resultMap>
+
     <select id="getAllTag" resultType="com.hnie.blogbackstage.mybatis.entity.Tag">
         select *
         from `tag`;
@@ -35,13 +58,15 @@
         where `id` = #{id};
     </update>
 
-    <select id="getTagsLimit" resultType="com.hnie.blogbackstage.mybatis.entity.Tag">
-        select ta.id, ta.name
+    <select id="getTagsLimit" resultMap="tagMap">
+        select ta.id as ta_id,
+               ta.name as ta_name,
+               count(bt.id) as blog_count
         from `tag` as ta
                  left outer join `blog_tag` as bt
                                  on bt.tagId = ta.id
         group by ta.id
-        order by count(bt.id) limit 0,#{size};
+        order by blog_count desc  limit 0,#{size}
     </select>
 
 </mapper>

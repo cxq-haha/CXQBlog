@@ -167,24 +167,32 @@
                             </div>
                         </div>
                         <div class="ui teal segment">
-                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">算法
-                                <dev class="detail">5</dev>
+                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag:${tags}">
+                                <span th:text="${tag.name}">算法</span>
+                                <div class="detail" th:text="${tag.blogCount}">23</div>
                             </a>
-                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">算法
-                                <dev class="detail">5</dev>
+                            <!--/*-->
+                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">
+                                <span>算法</span>
+                                <div class="detail">23</div>
                             </a>
-                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">算法
-                                <dev class="detail">5</dev>
+                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">
+                                <span>算法</span>
+                                <div class="detail">23</div>
                             </a>
-                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">算法
-                                <dev class="detail">5</dev>
+                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">
+                                <span>算法</span>
+                                <div class="detail">23</div>
                             </a>
-                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">算法
-                                <dev class="detail">5</dev>
+                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">
+                                <span>算法</span>
+                                <div class="detail">23</div>
                             </a>
-                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">算法
-                                <dev class="detail">5</dev>
+                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny">
+                                <span>算法</span>
+                                <div class="detail">23</div>
                             </a>
+                            <!--*/-->
                         </div>
                     </div>
                 </div>

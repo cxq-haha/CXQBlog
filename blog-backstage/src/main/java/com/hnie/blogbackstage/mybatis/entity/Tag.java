@@ -20,4 +20,12 @@ public class Tag {
     private String name;        //标签名称
 
     private List<Blog> blogs;   //该标签的所有blog
+
+    private Integer blogCount;  //博客数量
+
+    public Tag(Long id, String name, List<Blog> blogs) {
+        this.id = id;
+        this.name = name;
+        this.blogs = blogs;
+    }
 }
