@@ -42,4 +42,6 @@ public interface BlogMapper {
 
     //删除指定ID的Blog
     int deleteBlog(@Param("id") Long id);
+
+    List<Blog> getTagsLimit(@Param("size") Integer size);
 }

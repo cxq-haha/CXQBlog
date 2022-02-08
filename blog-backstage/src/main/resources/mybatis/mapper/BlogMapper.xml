@@ -232,4 +232,42 @@
         where b.`title` = #{title}
     </select>
 
+
+    <select id="getTagsLimit" resultMap="blogMap">
+        select b.id             as b_id,
+               b.title          as b_title,
+               b.content        as b_content,
+               b.firstPicture   as b_firstPicture,
+               b.view           as b_view,
+               b.commentCount   as b_commentCount,
+               b.appreciation   as b_appreciation,
+               b.shareStatement as b_shareStatement,
+               b.commentabled   as b_commentabled,
+               b.published      as b_published,
+               b.recommend      as b_recommend,
+               b.createTime     as b_createTime,
+               b.updateTime     as b_updateTime,
+               b.flag           as b_flag,
+               b.description    as b_description,
+               b.typeId         as b_typeId,
+               b.userId         as b_userId,
+               ty.id            as ty_id,
+               ty.name          as ty_name,
+               us.id            as us_id,
+               us.username      as us_username,
+               us.password      as us_password,
+               us.email         as us_email,
+               us.avatar        as us_avatar,
+               us.type          as us_type,
+               us.createTime    as us_createTime,
+               us.updataTime    as us_updateTime
+        from `blog` as b
+                 --    left outer join `blog_tag` as bt on b.id = bt.blogId
+                 --    left outer join `tag` as ta on ta.id = bt.tagId
+                 --    为避免collection与PageHelper造成blog数量不一致问题，不查询blog对应的tags
+                 left outer join `user` as us on us.id = b.userId
+                 left outer join `type` as ty on ty.id = b.typeId
+        order by b_updateTime limit 0,#{size}
+    </select>
+
 </mapper>

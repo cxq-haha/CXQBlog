@@ -59,7 +59,8 @@
                     <div class="ui padded vertical segment m-padded-tb-big">
                         <div class="ui middle aligned mobile reversed stackable grid" th:each="blog : ${pageInfo.list}">
                             <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#"  th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}">Windows 11 正式版实际使用体验如何？</a></h3>
+                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black"
+                                                         th:text="${blog.title}">Windows 11 正式版实际使用体验如何？</a></h3>
                                 <p th:text="${blog.description}">
                                     win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
                                 <div class="ui stackable grid">
@@ -69,11 +70,12 @@
                                                 <img src="../static/image/muyvhu.jpg" th:src="${blog.user.avatar}"
                                                      alt="#" class="ui avatar image">
                                                 <div class="content">
-                                                    <a href="#" class="header" th:href="${blog.user.username}">XiaoLiMa</a>
+                                                    <a href="#" class="header"
+                                                       th:href="${blog.user.username}">XiaoLiMa</a>
                                                 </div>
                                             </div>
                                             <div class="item" th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">
-                                                <i class="calendar icon" ></i>2021-10-8
+                                                <i class="calendar icon"></i>2021-10-8
                                             </div>
                                             <div class="item" th:text="${blog.view}">
                                                 <i class="eye icon">155</i>
@@ -81,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="right aligned five wide column">
-                                        <a href="#" target="_blank"  th:href="@{/blog/{id}(id=${blog.id})}"
+                                        <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}"
                                            class="ui teal label m-padded-tiny m-text-thin">认知升级</a>
                                     </div>
                                 </div>
@@ -98,15 +100,18 @@
                 <!--                bottom-->
                 <div class="ui bottom attached segment stackable grid">
                     <div class="three wide column" align="center">
-                        <a class="item" th:href="@{/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}" th:unless="${pageInfo.isFirstPage}">上一页</a>
+                        <a class="item" th:href="@{/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}"
+                           th:unless="${pageInfo.isFirstPage}">上一页</a>
                     </div>
 
                     <div class="ten wide column" align="center">
-                        <p> <span th:text="${pageInfo.pageNum}"></span> / <span th:text="${pageInfo.pages}"></span> </p>
+                        <p><span th:text="${pageInfo.pageNum}"></span> / <span th:text="${pageInfo.pages}"></span></p>
                     </div>
 
                     <div class="three wide column" align="center">
-                        <a class="item" th:href="@{/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}" th:unless="${pageInfo.isLastPage}">下一页</a>
+                        <a class="item"
+                           th:href="@{/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}"
+                           th:unless="${pageInfo.isLastPage}">下一页</a>
                     </div>
                 </div>
             </div>
@@ -125,7 +130,8 @@
                         </div>
                         <div class="ui teal segment">
                             <div class="ui fluid vertical menu">
-                                <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${types}">
+                                <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item"
+                                   th:each="type : ${types}">
                                     <span th:text="${type.name}">学习日志</span>
                                     <div class="ui teal basic left pointing label" th:text="${type.blogCount}">8</div>
                                 </a>
@@ -167,7 +173,8 @@
                             </div>
                         </div>
                         <div class="ui teal segment">
-                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag:${tags}">
+                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"
+                               class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag:${tags}">
                                 <span th:text="${tag.name}">算法</span>
                                 <div class="detail" th:text="${tag.blogCount}">23</div>
                             </a>
@@ -201,14 +208,17 @@
                     <div class="ui secondary segment">
                         <i class="bookmark icon"></i>最新推荐
                     </div>
+                    <div class="ui segment" th:each="blog:${newBLogs}">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin"  th:text="${blog.title}">用户故事（User Story）</a>
+                    </div>
+                    <!--/*-->
                     <div class="ui segment"><a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
                     </div>
                     <div class="ui segment"><a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
                     </div>
                     <div class="ui segment"><a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
                     </div>
-                    <div class="ui segment"><a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>
-                    </div>
+                    <!--*/-->
                 </div>
                 <!--                二维码-->
                 <h4 class="ui horizontal divider header m-margin-tb-lage">扫码关注我</h4>

@@ -44,6 +44,9 @@ public class IndexController {
         List<Tag> tags = tagService.listSizeTop(10);
         model.addAttribute("tags", tags);
 
+        List<Blog> newBLogs = blogService.listSizeTop(7);
+        model.addAttribute("newBLogs", newBLogs);
+
         return "index";
     }
 

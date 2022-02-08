@@ -1,8 +1,6 @@
 package com.hnie.blogbackstage.service;
 
 import com.hnie.blogbackstage.mybatis.entity.Blog;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -32,4 +30,7 @@ public interface BlogService {
 
     //删除Blog
     void deleteBlog(Long id);
+
+    //查询最新的size个blog
+    List<Blog> listSizeTop(Integer size);
 }

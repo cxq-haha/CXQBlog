@@ -8,7 +8,6 @@ import com.hnie.blogbackstage.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,5 +81,10 @@ public class BlogServiceImpl implements BlogService {
     public void deleteBlog(Long id) {
         blogMapper.deleteBlogTag(blogMapper.getBlogById(id));
         blogMapper.deleteBlog(id);
+    }
+
+    @Override
+    public List<Blog> listSizeTop(Integer size) {
+        return blogMapper.getTagsLimit(size);
     }
 }
