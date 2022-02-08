@@ -2,9 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hnie.blogbackstage.mybatis.mapper.TypeMapper">
 
+    <resultMap id="typeMap" type="com.hnie.blogbackstage.mybatis.entity.Type">
+        <id property="id" column="ty_id"/>
+        <result property="name" column="ty_name"/>
+        <result property="blogCount" column="blog_count"/>
+        <collection property="blogs" ofType="com.hnie.blogbackstage.mybatis.entity.Blog">
+            <id property="id" column="b_id"/>
+            <result property="title" column="b_title"/>
+            <result property="content" column="b_content"/>
+            <result property="firstPicture" column="b_firstPicture"/>
+            <result property="view" column="b_view"/>
+            <result property="commentCount" column="b_commentCount"/>
+            <result property="appreciation" column="b_appreciation"/>
+            <result property="shareStatement" column="b_shareStatement"/>
+            <result property="commentabled" column="b_commentabled"/>
+            <result property="published" column="b_published"/>
+            <result property="recommend" column="b_recommend"/>
+            <result property="createTime" column="b_createTime"/>
+            <result property="updateTime" column="b_updateTime"/>
+            <result property="flag" column="b_flag"/>
+            <result property="description" column="b_description"/>
+        </collection>
+    </resultMap>
+
     <insert id="addType" parameterType="com.hnie.blogbackstage.mybatis.entity.Type">
         insert into `type` (`name`)
-        values ( #{name });
+        values (#{name });
     </insert>
 
     <delete id="deleteTypeById">
@@ -42,12 +65,31 @@
         where `name` = #{name}
     </select>
 
-    <select id="getTypesLimit" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
-        select `ty`.id, ty.`name`
-        from `blog` as b
-                 left outer join `type` as ty on b.typeId = ty.id
+    <select id="getTypesLimit" resultMap="typeMap">
+        select ty.id            as ty_id,
+               ty.name          as ty_name,
+               b.id             as b_id,
+               b.title          as b_title,
+               b.content        as b_content,
+               b.firstPicture   as b_firstPicture,
+               b.view           as b_view,
+               b.commentCount   as b_commentCount,
+               b.appreciation   as b_appreciation,
+               b.shareStatement as b_shareStatement,
+               b.commentabled   as b_commentabled,
+               b.published      as b_published,
+               b.recommend      as b_recommend,
+               b.createTime     as b_createTime,
+               b.updateTime     as b_updateTime,
+               b.flag           as b_flag,
+               b.description    as b_description,
+               count(b.id)      as blog_count
+        from `type` as ty
+                 left outer join `blog` as b
+                                 on ty.id = b.typeId
         group by ty.id
-        order by count(b.id)
-            limit 0,#{size};
+        order by blog_count desc limit 0,#{size}
     </select>
+
+
 </mapper>

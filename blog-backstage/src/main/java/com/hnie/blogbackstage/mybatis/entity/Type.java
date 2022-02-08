@@ -19,4 +19,12 @@ public class Type {
     private String name;        //分类名称
 
     private List<Blog> blogs;   //该分类下的所有blog
+
+    private Integer blogCount;
+
+    public Type(Long id, String name, List<Blog> blogs) {
+        this.id = id;
+        this.name = name;
+        this.blogs = blogs;
+    }
 }
