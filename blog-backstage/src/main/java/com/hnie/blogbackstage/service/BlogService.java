@@ -33,4 +33,6 @@ public interface BlogService {
 
     //查询最新的size个blog
     List<Blog> listSizeTop(Integer size);
+
+    Blog getBlogAndConvert(Long id);
 }

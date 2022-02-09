@@ -270,4 +270,10 @@
         order by b_updateTime limit 0,#{size}
     </select>
 
+    <update id="updateViews" parameterType="long">
+        update `blog` as b
+        set b.view=b.view + 1
+        where b.id = #{id}
+    </update>
+
 </mapper>

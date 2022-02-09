@@ -75,4 +75,9 @@ public class BlogMapperTest {
 
     }
 
+    @Test
+    public void updateViewTest() {
+        blogMapper.updateViews(27L);
+    }
+
 }

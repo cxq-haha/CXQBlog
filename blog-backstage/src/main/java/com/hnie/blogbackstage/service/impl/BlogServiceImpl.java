@@ -5,6 +5,8 @@ import com.hnie.blogbackstage.mybatis.entity.Blog;
 import com.hnie.blogbackstage.mybatis.mapper.BlogMapper;
 import com.hnie.blogbackstage.mybatis.mapper.TypeMapper;
 import com.hnie.blogbackstage.service.BlogService;
+import com.hnie.blogbackstage.util.MarkDownUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,5 +88,20 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> listSizeTop(Integer size) {
         return blogMapper.getTagsLimit(size);
+    }
+
+    @Override
+    public Blog getBlogAndConvert(Long id) {
+        Blog blog = blogMapper.getBlogById(id);
+        if (blog == null) {
+            throw new NotFoundException("该博客不存在");
+        }
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog,b);
+        String content = b.getContent();
+        b.setContent(MarkDownUtils.markdownToHtmlExtensions(content));
+
+        blogMapper.updateViews(id);
+        return b;
     }
 }

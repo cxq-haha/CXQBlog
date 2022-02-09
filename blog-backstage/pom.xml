@@ -84,12 +84,22 @@
             <version>1.2.12</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.commonmark/commonmark -->
         <!-- markdown解析-->
         <dependency>
-            <groupId>org.commonmark</groupId>
+            <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark</artifactId>
-            <version>0.18.1</version>
+            <version>0.10.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-heading-anchor</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-gfm-tables</artifactId>
+            <version>0.10.0</version>
         </dependency>
 
     </dependencies>

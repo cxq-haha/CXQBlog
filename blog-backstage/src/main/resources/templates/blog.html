@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <title>详情页面</title>
@@ -52,31 +53,32 @@
         <div class="ui top attached segment">
             <div class="ui horizontal link list">
                 <div class="item">
-                    <img src="../static/image/muyvhu.jpg" alt="#" class="ui avatar image rounded">
+                    <img src="../static/image/muyvhu.jpg" th:src="${blog.user.avatar}"  alt="#" class="ui avatar image rounded">
                     <div class="content">
-                        <a href="#" class="header">XiaoLiMa</a>
+                        <a href="#" th:text="${blog.user.username}" class="header">XiaoLiMa</a>
                     </div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i>2021-10-8
+                    <i class="calendar icon"></i>
+                    <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-10-8</span>
                 </div>
                 <div class="item">
-                    <i class="eye icon">155</i>
+                    <i class="eye icon" th:text="${blog.view}">155</i>
                 </div>
             </div>
         </div>
         <div class="ui attached segment">
-            <img src="../static/image/muyvhu.jpg" alt="" class="ui fluid image">
+            <img src="../static/image/muyvhu.jpg" th:src="${blog.firstPicture}" alt="" class="ui fluid image">
         </div>
         <div class="ui attached segment">
             <div class="ui right aligned segment">
-                <div class="ui basic orange label">原创</div>
+                <div class="ui basic orange label" th:text="${blog.flag}">原创</div>
             </div>
-            <h2 class="ui header center aligned">
+            <h2 class="ui header center aligned" th:text="${blog.title}">
                 400味中药药性口诀大全
             </h2>
 
-            <div id="content" class="typo typo-selection m-padded-tb-large m-padded-lr-responsive js-toc-content">
+            <div id="content" th:utext="${blog.content}" class="typo typo-selection m-padded-tb-large m-padded-lr-responsive js-toc-content">
                 <h1>中文网页重设与排版：<i class="serif">Typo.css</i></h1><br/>
 
                 <h2 id="tagline" class="serif">一致化浏览器排版效果，构建最适合中文阅读的网页排版</h2>
@@ -518,7 +520,7 @@
             </div>
             <!--            标签-->
             <div class="m-padded-lr-responsive">
-                <div class="ui basic teal left pointing label">
+                <div class="ui basic teal left pointing label" th:each="tag:${blog.tags}" th:text="${tag.name}">
                     数据结构
                 </div>
             </div>
@@ -548,8 +550,8 @@
             <div class="ui middle aligned grid">
                 <div class="eleven wide column">
                     <ui class="list">
-                        <li>作者：陈学勤</li>
-                        <li>发表时间：2021-10-9 10:22</li>
+                        <li>作者：<span th:text="${blog.user.username}">陈学勤</span></li>
+                        <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd hh:ss')}">2021-10-9 10:22</span></li>
                         <li>版权声明：自由转载-非商用-非衍生-保持署名（创意共享3.0许可证）</li>
                         <li>公众号转载：请在文末添加作者公众号二维码</li>
                     </ui>

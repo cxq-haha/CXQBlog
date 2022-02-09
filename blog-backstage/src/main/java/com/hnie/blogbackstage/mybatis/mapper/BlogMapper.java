@@ -44,4 +44,7 @@ public interface BlogMapper {
     int deleteBlog(@Param("id") Long id);
 
     List<Blog> getTagsLimit(@Param("size") Integer size);
+
+    //更新view
+    void updateViews(Long id);
 }
