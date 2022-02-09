@@ -34,5 +34,10 @@ public interface BlogService {
     //查询最新的size个blog
     List<Blog> listSizeTop(Integer size);
 
+    //将blog的正文转换成html
     Blog getBlogAndConvert(Long id);
+
+    //根绝typeId获取blog
+    List<Blog> getBlogsByTypeId(Long typeId);
+
 }

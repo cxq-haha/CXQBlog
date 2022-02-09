@@ -74,11 +74,13 @@
                                                        th:href="${blog.user.username}">XiaoLiMa</a>
                                                 </div>
                                             </div>
-                                            <div class="item" th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">
-                                                <i class="calendar icon"></i>2021-10-8
+                                            <div class="item">
+                                                <i class="calendar icon"></i>
+                                                <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-10-8</span>
                                             </div>
-                                            <div class="item" th:text="${blog.view}">
-                                                <i class="eye icon">155</i>
+                                            <div class="item" >
+                                                <i class="eye icon"></i>
+                                                <span th:text="${blog.view}">155</span>
                                             </div>
                                         </div>
                                     </div>

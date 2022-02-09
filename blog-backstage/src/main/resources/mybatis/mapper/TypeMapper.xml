@@ -66,29 +66,32 @@
     </select>
 
     <select id="getTypesLimit" resultMap="typeMap">
-        select ty.id            as ty_id,
-               ty.name          as ty_name,
-               b.id             as b_id,
-               b.title          as b_title,
-               b.content        as b_content,
-               b.firstPicture   as b_firstPicture,
-               b.view           as b_view,
-               b.commentCount   as b_commentCount,
-               b.appreciation   as b_appreciation,
-               b.shareStatement as b_shareStatement,
-               b.commentabled   as b_commentabled,
-               b.published      as b_published,
-               b.recommend      as b_recommend,
-               b.createTime     as b_createTime,
-               b.updateTime     as b_updateTime,
-               b.flag           as b_flag,
-               b.description    as b_description,
-               count(b.id)      as blog_count
+        select ty.id as ty_id,
+        ty.name as ty_name,
+        b.id as b_id,
+        b.title as b_title,
+        b.content as b_content,
+        b.firstPicture as b_firstPicture,
+        b.view as b_view,
+        b.commentCount as b_commentCount,
+        b.appreciation as b_appreciation,
+        b.shareStatement as b_shareStatement,
+        b.commentabled as b_commentabled,
+        b.published as b_published,
+        b.recommend as b_recommend,
+        b.createTime as b_createTime,
+        b.updateTime as b_updateTime,
+        b.flag as b_flag,
+        b.description as b_description,
+        count(b.id) as blog_count
         from `type` as ty
-                 left outer join `blog` as b
-                                 on ty.id = b.typeId
+        left outer join `blog` as b
+        on ty.id = b.typeId
         group by ty.id
-        order by blog_count desc limit 0,#{size}
+        order by blog_count desc
+        <if test="size>=0">
+            limit 0,#{size}
+        </if>
     </select>
 
 
