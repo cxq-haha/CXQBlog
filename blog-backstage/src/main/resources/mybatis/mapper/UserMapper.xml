@@ -4,7 +4,7 @@
     <select id="findByUsernameAndPassword" resultType="com.hnie.blogbackstage.mybatis.entity.User">
         select *
         from blog.user
-        where username = #{username} and password=#{password};
+        where username = #{username} and password=#{password}
     </select>
 
 </mapper>

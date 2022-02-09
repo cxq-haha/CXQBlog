@@ -25,7 +25,8 @@ public class TagMapperTest {
     }
     @Test
     public void getTagByIdTest() {
-        tagMapper.getTagById(1L);
+        Tag tagById = tagMapper.getTagById(18L);
+        System.out.println(tagById);
     }
 
     @Test

@@ -49,4 +49,6 @@ public interface BlogMapper {
     void updateViews(Long id);
 
     List<Blog> getBLogsByTypeId(@Param("typeId") Long typeId);
+
+    List<Blog> getBLogsByTagId(@Param("tagId") Long tagId);
 }

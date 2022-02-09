@@ -166,14 +166,14 @@
                             `userId`)
         values (#{title}, #{content}, #{firstPicture}, #{view}, #{commentCount}, #{appreciation},
                 #{shareStatement}, #{commentabled}, #{published}, #{recommend}, #{createTime}, #{updateTime}, #{flag},
-                #{description}, #{type.id}, #{user.id});
+                #{description}, #{type.id}, #{user.id})
     </insert>
 
     <insert id="addBlogTag">
         insert into `blog_tag` (id,blogId,tagId) values
         <foreach collection="tags" item="tag" index="index" separator=",">
             (null,#{id},#{tag.id})
-        </foreach>;
+        </foreach>
     </insert>
 
     <update id="updateBlog" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
@@ -188,19 +188,19 @@
             `recommend`=#{recommend},
             `updateTime`=#{updateTime},
             `typeId`= #{type.id}
-        where `id` = #{id};
+        where `id` = #{id}
     </update>
 
     <delete id="deleteBlogTag" parameterType="com.hnie.blogbackstage.mybatis.entity.Blog">
         delete
         from `blog_tag`
-        where `blogId` = #{id};
+        where `blogId` = #{id}
     </delete>
 
     <delete id="deleteBlog">
         delete
         from `blog`
-        where `id` = #{id};
+        where `id` = #{id}
     </delete>
 
     <select id="getBlogByTitle" resultMap="blogMap">
@@ -311,6 +311,42 @@
                  left outer join `user` as us on us.id = b.userId
                  left outer join `type` as ty on ty.id = b.typeId
         where b.typeId = #{typeId}
+    </select>
+
+    <select id="getBLogsByTagId" resultMap="blogMap">
+        select b.id             as b_id,
+               b.title          as b_title,
+               b.content        as b_content,
+               b.firstPicture   as b_firstPicture,
+               b.view           as b_view,
+               b.commentCount   as b_commentCount,
+               b.appreciation   as b_appreciation,
+               b.shareStatement as b_shareStatement,
+               b.commentabled   as b_commentabled,
+               b.published      as b_published,
+               b.recommend      as b_recommend,
+               b.createTime     as b_createTime,
+               b.updateTime     as b_updateTime,
+               b.flag           as b_flag,
+               b.description    as b_description,
+               b.typeId         as b_typeId,
+               b.userId         as b_userId,
+               ty.id            as ty_id,
+               ty.name          as ty_name,
+               us.id            as us_id,
+               us.username      as us_username,
+               us.password      as us_password,
+               us.email         as us_email,
+               us.avatar        as us_avatar,
+               us.type          as us_type,
+               us.createTime    as us_createTime,
+               us.updataTime    as us_updateTime
+        from `blog` as b
+                 left outer join `blog_tag` as bt on b.id = bt.blogId
+                 left outer join `tag` as ta on ta.id = bt.tagId
+                 left outer join `user` as us on us.id = b.userId
+                 left outer join `type` as ty on ty.id = b.typeId
+        where ta.id = #{tagId}
     </select>
 
 </mapper>

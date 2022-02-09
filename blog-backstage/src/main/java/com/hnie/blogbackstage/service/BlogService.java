@@ -37,7 +37,9 @@ public interface BlogService {
     //将blog的正文转换成html
     Blog getBlogAndConvert(Long id);
 
-    //根绝typeId获取blog
+    //根据typeId获取blog
     List<Blog> getBlogsByTypeId(Long typeId);
 
+    //根据tagId获取blog
+    List<Blog> getBlogsByTagId(Long id);
 }

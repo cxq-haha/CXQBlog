@@ -59,7 +59,8 @@
                     <div class="ui padded vertical segment m-padded-tb-big">
                         <div class="ui middle aligned mobile reversed stackable grid" th:each="blog : ${pageInfo.list}">
                             <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" target="_blank"
+                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black"
+                                                         target="_blank"
                                                          th:text="${blog.title}">Windows 11 正式版实际使用体验如何？</a></h3>
                                 <p th:text="${blog.description}">
                                     win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
@@ -78,7 +79,7 @@
                                                 <i class="calendar icon"></i>
                                                 <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-10-8</span>
                                             </div>
-                                            <div class="item" >
+                                            <div class="item">
                                                 <i class="eye icon"></i>
                                                 <span th:text="${blog.view}">155</span>
                                             </div>
@@ -98,84 +99,10 @@
                             </div>
                         </div>
                         <!--/*-->
-                        <div class="ui middle aligned mobile reversed stackable grid" >
+                        <div class="ui middle aligned mobile reversed stackable grid">
                             <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#"  class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
-                                <p >
-                                    win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
-                                <div class="ui stackable grid">
-                                    <div class="eleven wide column">
-                                        <div class="ui mini horizontal link list">
-                                            <div class="item">
-                                                <img src="../static/image/muyvhu.jpg"
-                                                     alt="#" class="ui avatar image">
-                                                <div class="content">
-                                                    <a href="#" class="header"
-                                                       >XiaoLiMa</a>
-                                                </div>
-                                            </div>
-                                            <div class="item" >
-                                                <i class="calendar icon"></i>2021-10-8
-                                            </div>
-                                            <div class="item" >
-                                                <i class="eye icon">155</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right aligned five wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui teal label m-padded-tiny m-text-thin">认知升级</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank" >
-                                    <img src="../static/image/muyvhu.jpg"alt=""
-                                         class="ui rounded image">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ui middle aligned mobile reversed stackable grid" >
-                            <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#"  class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
-                                <p >
-                                    win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
-                                <div class="ui stackable grid">
-                                    <div class="eleven wide column">
-                                        <div class="ui mini horizontal link list">
-                                            <div class="item">
-                                                <img src="../static/image/muyvhu.jpg"
-                                                     alt="#" class="ui avatar image">
-                                                <div class="content">
-                                                    <a href="#" class="header"
-                                                       >XiaoLiMa</a>
-                                                </div>
-                                            </div>
-                                            <div class="item" >
-                                                <i class="calendar icon"></i>2021-10-8
-                                            </div>
-                                            <div class="item" >
-                                                <i class="eye icon">155</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right aligned five wide column">
-                                        <a href="#" target="_blank"
-                                           class="ui teal label m-padded-tiny m-text-thin">认知升级</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank" >
-                                    <img src="../static/image/muyvhu.jpg"alt=""
-                                         class="ui rounded image">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ui middle aligned mobile reversed stackable grid" >
-                            <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#"  class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
-                                <p >
+                                <h3 class="ui header"><a href="#" class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
+                                <p>
                                     win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
                                 <div class="ui stackable grid">
                                     <div class="eleven wide column">
@@ -188,10 +115,10 @@
                                                     >XiaoLiMa</a>
                                                 </div>
                                             </div>
-                                            <div class="item" >
+                                            <div class="item">
                                                 <i class="calendar icon"></i>2021-10-8
                                             </div>
-                                            <div class="item" >
+                                            <div class="item">
                                                 <i class="eye icon">155</i>
                                             </div>
                                         </div>
@@ -203,16 +130,16 @@
                                 </div>
                             </div>
                             <div class="five wide column">
-                                <a href="#" target="_blank" >
-                                    <img src="../static/image/muyvhu.jpg"alt=""
+                                <a href="#" target="_blank">
+                                    <img src="../static/image/muyvhu.jpg" alt=""
                                          class="ui rounded image">
                                 </a>
                             </div>
                         </div>
-                        <div class="ui middle aligned mobile reversed stackable grid" >
+                        <div class="ui middle aligned mobile reversed stackable grid">
                             <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#"  class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
-                                <p >
+                                <h3 class="ui header"><a href="#" class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
+                                <p>
                                     win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
                                 <div class="ui stackable grid">
                                     <div class="eleven wide column">
@@ -225,10 +152,10 @@
                                                     >XiaoLiMa</a>
                                                 </div>
                                             </div>
-                                            <div class="item" >
+                                            <div class="item">
                                                 <i class="calendar icon"></i>2021-10-8
                                             </div>
-                                            <div class="item" >
+                                            <div class="item">
                                                 <i class="eye icon">155</i>
                                             </div>
                                         </div>
@@ -240,8 +167,82 @@
                                 </div>
                             </div>
                             <div class="five wide column">
-                                <a href="#" target="_blank" >
-                                    <img src="../static/image/muyvhu.jpg"alt=""
+                                <a href="#" target="_blank">
+                                    <img src="../static/image/muyvhu.jpg" alt=""
+                                         class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ui middle aligned mobile reversed stackable grid">
+                            <div class="eleven wide column">
+                                <h3 class="ui header"><a href="#" class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
+                                <p>
+                                    win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="../static/image/muyvhu.jpg"
+                                                     alt="#" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header"
+                                                    >XiaoLiMa</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2021-10-8
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon">155</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal label m-padded-tiny m-text-thin">认知升级</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="../static/image/muyvhu.jpg" alt=""
+                                         class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ui middle aligned mobile reversed stackable grid">
+                            <div class="eleven wide column">
+                                <h3 class="ui header"><a href="#" class="m-black">Windows 11 正式版实际使用体验如何？</a></h3>
+                                <p>
+                                    win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="../static/image/muyvhu.jpg"
+                                                     alt="#" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header"
+                                                    >XiaoLiMa</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2021-10-8
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon">155</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal label m-padded-tiny m-text-thin">认知升级</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="../static/image/muyvhu.jpg" alt=""
                                          class="ui rounded image">
                                 </a>
                             </div>
@@ -325,8 +326,8 @@
                             </div>
                         </div>
                         <div class="ui teal segment">
-                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"
-                               class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag:${tags}">
+                            <a href="#" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag:${tags}"
+                               th:href="@{/tags/{id}(id=${tag.id})}">
                                 <span th:text="${tag.name}">算法</span>
                                 <div class="detail" th:text="${tag.blogCount}">23</div>
                             </a>
@@ -361,7 +362,8 @@
                         <i class="bookmark icon"></i>最新推荐
                     </div>
                     <div class="ui segment" th:each="blog:${newBLogs}">
-                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin"  th:text="${blog.title}">用户故事（User Story）</a>
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin"
+                           th:text="${blog.title}">用户故事（User Story）</a>
                     </div>
                     <!--/*-->
                     <div class="ui segment"><a href="#" target="_blank" class="m-black m-text-thin">用户故事（User Story）</a>

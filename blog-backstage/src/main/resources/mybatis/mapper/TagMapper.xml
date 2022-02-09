@@ -26,47 +26,54 @@
 
     <select id="getAllTag" resultType="com.hnie.blogbackstage.mybatis.entity.Tag">
         select *
-        from `tag`;
-    </select>
-    <select id="getTagById" resultType="com.hnie.blogbackstage.mybatis.entity.Tag">
-        select *
         from `tag`
-        where `id` = #{id};
+    </select>
+    <select id="getTagById" resultMap="tagMap">
+        select ta.id   as       ta_id,
+               ta.name as       ta_name,
+               count(bt.blogId) as blog_count
+        from `tag` as ta
+                 left outer join `blog_tag` as bt
+                                 on bt.tagId = ta.id
+        where ta.`id` = #{id}
     </select>
 
     <select id="getTagByName" resultType="com.hnie.blogbackstage.mybatis.entity.Tag">
         select *
         from `tag`
-        where `name` = #{name };
+        where `name` = #{name }
     </select>
 
     <insert id="addTag" parameterType="com.hnie.blogbackstage.mybatis.entity.Tag">
         insert into `tag`
-        values (null, #{name});
+        values (null, #{name})
     </insert>
 
     <delete id="deleteTag">
         delete
         from `tag`
-        where `id` = #{id};
+        where `id` = #{id}
     </delete>
 
     <update id="updateTag" parameterType="com.hnie.blogbackstage.mybatis.entity.Tag">
         update `tag`
         set `id`=#{id},
             `name`=#{name}
-        where `id` = #{id};
+        where `id` = #{id}
     </update>
 
     <select id="getTagsLimit" resultMap="tagMap">
         select ta.id as ta_id,
-               ta.name as ta_name,
-               count(bt.id) as blog_count
+        ta.name as ta_name,
+        count(bt.id) as blog_count
         from `tag` as ta
-                 left outer join `blog_tag` as bt
-                                 on bt.tagId = ta.id
+        left outer join `blog_tag` as bt
+        on bt.tagId = ta.id
         group by ta.id
-        order by blog_count desc  limit 0,#{size}
+        order by blog_count desc
+        <if test="size>=0">
+            limit 0,#{size}
+        </if>
     </select>
 
 </mapper>

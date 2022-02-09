@@ -33,7 +33,7 @@ public class TypeMapperTest {
 
     @Test
     public void selectTypeByIdTest() {
-        Type type = typeMapper.getTypeById(24L);
+        Type type = typeMapper.getTypeById(33L);
         System.out.println("查询到的Type为：" + type);
     }
 

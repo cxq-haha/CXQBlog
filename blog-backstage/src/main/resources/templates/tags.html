@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <title>标签</title>
@@ -47,107 +48,117 @@
                     <h3 class="ui teal header">博客</h3>
                 </div>
                 <div class="right aligned column">
-                    共<h2 class="ui orange header m-inline-block">4</h2>个
+                    共<h2 class="ui orange header m-inline-block" th:text="${activeTag.blogCount}">4</h2>个
                 </div>
             </div>
         </div>
         <!--        标签列表-->
         <div class="ui attached segment">
+            <a href="#" th:each="tag:${tags}" class="ui teal left pointing large label m-margin-tb-tiny" th:href="@{/tags/{id}(id=${tag.id})}"
+               th:classappend="${tag.id!=activeTag.id} ? 'basic'">
+                <span th:text="${tag.name}">算法</span>
+                <div class="detail" th:text="${tag.blogCount}">5</div>
+            </a>
+            <!--/*-->
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
             <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-            <dev class="detail">5</dev>
-        </a>
-            <a href="#" class="ui teal basic left pointing large label m-margin-tb-tiny">算法
-                <dev class="detail">5</dev>
+                <div class="detail">5</div>
             </a>
+            <!--*/-->
         </div>
         <!--        博客-->
         <div class="ui attached segment">
-            <div class="ui padded vertical segment m-padded-tb-big">
+            <div class="ui padded vertical segment m-padded-tb-big" th:each="blog:${pageInfo.list}">
                 <div class="ui mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="ui header">Windows 11 正式版实际使用体验如何？</h3>
-                        <p>
+                        <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black"
+                                                 target="_blank"
+                                                 th:text="${blog.title}">Windows 11 正式版实际使用体验如何？</a></h3>
+                        <p th:text="${blog.description}">
                             win10的开始菜单可以调整大小，可以调整磁贴的大小和布局，可以分组，可以把磁贴塞到一起形成一个简洁的二级菜单。把应用放到开始菜单还能避免在桌面塞一堆快捷方式。结果win11完全抛弃了这个设定，把开始菜单变成了一个只能放图标的文件夹，不能自定义布局，甚至不能调整大小，应用多了还要翻页去找</p>
-                        <div class="row">
-                            <div class="ui stackable grid">
-                                <div class="eleven wide column">
-                                    <div class="ui mini horizontal link list">
-                                        <div class="item">
-                                            <img src="../static/image/muyvhu.jpg" alt="#" class="ui avatar image">
-                                            <div class="content">
-                                                <a href="#" class="header">XiaoLiMa</a>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i>2021-10-8
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon">155</i>
+                        <div class="ui stackable grid">
+                            <div class="eleven wide column">
+                                <div class="ui mini horizontal link list">
+                                    <div class="item">
+                                        <img src="../static/image/muyvhu.jpg" th:src="${blog.user.avatar}" alt="#"
+                                             class="ui avatar image">
+                                        <div class="content">
+                                            <a href="#" class="header" th:text="${blog.user.username}">XiaoLiMa</a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="right aligned five wide column">
-                                    <a href="#" target="_blank"
-                                       class="ui teal label m-padded-tiny m-text-thin">认知升级</a>
+                                    <div class="item">
+                                        <i class="calendar icon"></i>
+                                        <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-10-8</span>
+                                    </div>
+                                    <div class="item">
+                                        <i class="eye icon"></i>
+                                        <span th:text="${blog.view}">155</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="column">
-                                <a href="#" class="ui basic teal mini left pointing m-padded-tb-mini m-text-thin label">方法论</a>
+                            <div class="right aligned five wide column">
+                                <a href="#" target="_blank"
+                                   class="ui teal label m-padded-tiny m-text-thin"
+                                   th:href="@{/blog/{id}(id=${blog.id})}">认知升级</a>
                             </div>
                         </div>
                     </div>
                     <div class="five wide column">
-                        <a href="#" target="_blank">
-                            <img src="../static/image/muyvhu.jpg" alt="" class="ui rounded image">
+                        <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
+                            <img src="../static/image/muyvhu.jpg" th:src="${blog.firstPicture}" alt=""
+                                 class="ui rounded image">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
         <!--                bottom-->
-        <div class="ui bottom attached segment">
-            <div class="ui middle aligned two column grid">
-                <div class="column">
-                    <a href="#" class="ui teal basic mini button">上一页</a>
-                </div>
-                <div class="right aligned column">
-                    <a href="#" class="ui teal basic mini button">下一页</a>
-                </div>
+        <div class="ui bottom attached segment m-opacity stackable grid">
+            <div class="three wide column" align="center">
+                <a class="item" th:href="@{/types(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}"
+                   th:unless="${pageInfo.isFirstPage}">上一页</a>
+            </div>
+
+            <div class="ten wide column" align="center">
+                <p><span th:text="${pageInfo.pageNum}"></span> / <span th:text="${pageInfo.pages}"></span></p>
+            </div>
+
+            <div class="three wide column" align="center">
+                <a class="item"
+                   th:href="@{/types(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}"
+                   th:unless="${pageInfo.isLastPage}">下一页</a>
             </div>
         </div>
     </div>
@@ -162,7 +173,8 @@
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image" style="width: 110px">
+                        <img src="../static/image/QRcode.png" alt="XiaoLiMa" class="ui rounded image"
+                             style="width: 110px">
                     </div>
                 </div>
             </div>

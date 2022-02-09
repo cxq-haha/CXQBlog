@@ -27,36 +27,41 @@
 
     <insert id="addType" parameterType="com.hnie.blogbackstage.mybatis.entity.Type">
         insert into `type` (`name`)
-        values (#{name });
+        values (#{name })
     </insert>
 
     <delete id="deleteTypeById">
         delete
         from `type`
-        where `id` = #{id};
+        where `id` = #{id}
     </delete>
 
-    <select id="getTypeById" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
-        select *
-        from `type`
-        where `id` = #{id};
+    <select id="getTypeById" resultMap="typeMap">
+        select ty.id       as ty_id,
+               ty.name     as ty_name,
+               count(b.id) as blog_count
+        from `type` as ty
+                 left outer join `blog` as b
+                                 on b.`typeId` = ty.`id`
+        where ty.`id` = #{id}
+        group by ty.id
     </select>
 
     <select id="getTypeByName" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
         select *
         from `type`
-        where `name` = #{name };
+        where `name` = #{name }
     </select>
 
     <update id="updateType" parameterType="com.hnie.blogbackstage.mybatis.entity.Type">
         update `type`
         set `name`=#{name}
-        where `id` = #{id};
+        where `id` = #{id}
     </update>
 
     <select id="getAllType" resultType="com.hnie.blogbackstage.mybatis.entity.Type">
         select *
-        from `type`;
+        from `type`
     </select>
 
     <select id="getIdByName" resultType="long">
