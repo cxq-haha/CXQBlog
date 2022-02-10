@@ -1,8 +1,11 @@
 package com.hnie.blogbackstage.mybatis.entity;
 
 import lombok.*;
+import org.apache.catalina.LifecycleState;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: chenxueqin
@@ -19,11 +22,13 @@ public class Comment {
     private String content;             //评论内容
     private Date createTime;            //创建时间
     private boolean adminComment;       //是否是管理员评论
+    private String avatar;              //头像
+    private String email;               //邮箱
+    private String nickname;            //昵称
 
     /*外键*/
-    private Long uerId;                 //评论者Id
-    private Long blogId;                //博客id
-    private Long parentCommentId;       //父级评论id
+    private Blog blog;
+    private List<Comment> replyComments;//回复的评论（子评论）
+    private Comment parentComment;
 
-//    private DetailedBlog blog;
 }

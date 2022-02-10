@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnie.blogbackstage.mybatis.mapper.CommentMapper">
+    <resultMap id="commentMap" type="comment">
+        <id property="id" column="co_id"/>
+        <result property="content" column="co_content"/>
+        <result property="createTime" column="co_createTime"/>
+        <result property="adminComment" column="co_adminComment"/>
+        <result property="avatar" column="co_avatar"/>
+        <result property="email" column="co_email"/>
+        <result property="nickname" column="co_nickname"/>
+        <association property="blog" javaType="blog">
+            <id property="id" column="b_id"/>
+        </association>
+        <collection property="replyComments" ofType="comment">
+            <id property="id" column="cco_id"/>
+            <result property="content" column="cco_content"/>
+            <result property="createTime" column="cco_createTime"/>
+            <result property="adminComment" column="cco_adminComment"/>
+            <result property="avatar" column="cco_avatar"/>
+            <result property="email" column="cco_email"/>
+            <result property="nickname" column="cco_nickname"/>
+            <association property="blog" javaType="blog">
+                <id property="id" column="b_id"/>
+            </association>
+            <association property="parentComment" javaType="comment">
+                <id property="id" column="pco_id"/>
+                <result property="content" column="pco_content"/>
+                <result property="createTime" column="pco_createTime"/>
+                <result property="adminComment" column="pco_adminComment"/>
+                <result property="avatar" column="pco_avatar"/>
+                <result property="email" column="pco_email"/>
+                <result property="nickname" column="pco_nickname"/>
+                <association property="blog" javaType="blog">
+                    <id property="id" column="b_id"/>
+                </association>
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="getCommentsByBlogId" resultMap="commentMap">
+        select co.id               as co_id,
+               co.content          as co_content,
+               co.createTime       as co_createTime,
+               co.adminComment     as co_adminComment,
+               co.avatar           as co_avatar,
+               co.email            as co_email,
+               co.nickname         as co_nickname,
+               cco.id              as cco_id,
+               cco.content         as cco_content,
+               cco.parentCommentId as cco_parentCommentId,
+               cco.createTime      as cco_createTime,
+               cco.adminComment    as cco_adminComment,
+               cco.avatar          as cco_avatar,
+               cco.email           as cco_email,
+               cco.nickname        as cco_nickname,
+               pco.id              as pco_id,
+               pco.content         as pco_content,
+               pco.createTime      as pco_createTime,
+               pco.adminComment    as pco_adminComment,
+               pco.avatar          as pco_avatar,
+               pco.email           as pco_email,
+               pco.nickname        as pco_nickname,
+               b.id                as b_id
+        from comment co
+                 left outer join comment cco on co.id = cco.parentCommentId
+                 left outer join comment pco on cco.parentCommentId = pco.id
+                 left outer join blog b on b.id = co.blogId
+        where co.blogId = #{blogId}
+        and co.parentCommentId is null
+    </select>
+
+    <resultMap id="childCommentMap" type="comment">
+        <id property="id" column="cco_id"/>
+        <result property="content" column="cco_content"/>
+    </resultMap>
+
+    <select id="getChildCommentsById" resultMap="childCommentMap">
+        select cco.id      as cco_id,
+               cco.content as cco_content
+        from comment co
+                 left outer join comment cco on co.id = cco.parentCommentId
+        where co.id = #{id}
+    </select>
+</mapper>
