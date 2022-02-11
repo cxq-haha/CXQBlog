@@ -10,8 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author: chenxueqin
@@ -113,5 +112,33 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> getBlogsByTagId(Long id) {
         return blogMapper.getBLogsByTagId(id);
+    }
+
+    @Override
+    public Map<String, List<Blog>> archivesBlog() {
+        List<Blog> blog = blogMapper.getAllBlog();
+
+        HashMap<String, List<Blog>> blogArchivesMap = new HashMap<>();
+        for (Blog b : blog) {
+            Date date = b.getCreateTime();
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+            calendar.setTime(date);
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            System.out.println(year + "年" + month + "月");
+            String key = "" + year + "-" + month;
+            List<Blog> blogs = blogArchivesMap.get(key);
+            if (blogs == null) {
+                blogs = new ArrayList<>();
+                blogArchivesMap.put(key, blogs);
+            }
+            blogs.add(b);
+        }
+        return blogArchivesMap;
+    }
+
+    @Override
+    public Integer blogCount() {
+        return blogMapper.getAllBlog().size();
     }
 }

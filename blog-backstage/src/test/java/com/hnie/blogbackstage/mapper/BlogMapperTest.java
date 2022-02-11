@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @Author: chenxueqin
@@ -31,8 +31,22 @@ public class BlogMapperTest {
     @Test
     public void getAllBlogTest() {
         List<Blog> blog = blogMapper.getAllBlog();
-        for (Blog blog1 : blog) {
-            System.out.println(blog1);
+
+        HashMap<String, List<Blog>> blogArchivesMap = new HashMap<>();
+        for (Blog b : blog) {
+            Date date = b.getCreateTime();
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+            calendar.setTime(date);
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            System.out.println(year + "年" + month + "月");
+            String key = "" + year + "-" + month;
+            List<Blog> blogs = blogArchivesMap.get(key);
+            if (blogs == null) {
+                blogs = new ArrayList<>();
+                blogArchivesMap.put(key, blogs);
+            }
+            blogs.add(b);
         }
     }
 
@@ -40,14 +54,14 @@ public class BlogMapperTest {
     public void addBlogTest() {
         Blog blog = new Blog(10L, "博客2", "博客2内容",
                 "picture", 5L, 6L, true, true, true,
-                false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null,null),
+                false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null, null),
                 new User(1L, null, null, null, null, null, null, new Date()), new ArrayList<>());
         blogMapper.addBlog(blog);
     }
 
     @Test
     public void updateBlogTest() {
-        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null,null), new User(1L, null, null, null, null, null, new Date(), new
+        Blog blog = new Blog(2L, "博客3", "kjhkjhklkjhjkl", "picture", 5L, 6L, true, true, true, false, false, new Date(), new Date(), "原创", "description...", new ArrayList<>(), new Type(34L, null, null), new User(1L, null, null, null, null, null, new Date(), new
                 Date()), new ArrayList<>());
         blogMapper.updateBlog(blog);
     }

@@ -3,6 +3,7 @@ package com.hnie.blogbackstage.service;
 import com.hnie.blogbackstage.mybatis.entity.Blog;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: chenxueqin
@@ -42,4 +43,10 @@ public interface BlogService {
 
     //根据tagId获取blog
     List<Blog> getBlogsByTagId(Long id);
+
+    //blog归档
+    Map<String, List<Blog>> archivesBlog();
+
+    //获取Blog总数
+    Integer blogCount();
 }

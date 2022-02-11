@@ -140,6 +140,10 @@ body {
     margin-bottom: 2em !important;
 }
 
+.m-margin-r {
+    margin-right: 1em;
+}
+
 /************** display ******************/
 
 .m-inline-block {
