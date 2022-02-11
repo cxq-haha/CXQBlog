@@ -21,4 +21,12 @@ public interface CommentMapper {
     //根据评论Id查找子评论
     List<Comment> getChildCommentsById(@Param("id") Long id);
 
+    //添加comment
+    void addComment(Comment comment);
+
+    //根据Id获取父评论Id
+    Long getParentCommentId(@Param("childId") Long childId);
+
+    //根据id查找nickname
+    String getNicknameById(@Param("id") Long id);
 }

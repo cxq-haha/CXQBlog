@@ -9,9 +9,6 @@
         <result property="avatar" column="co_avatar"/>
         <result property="email" column="co_email"/>
         <result property="nickname" column="co_nickname"/>
-        <association property="blog" javaType="blog">
-            <id property="id" column="b_id"/>
-        </association>
         <collection property="replyComments" ofType="comment">
             <id property="id" column="cco_id"/>
             <result property="content" column="cco_content"/>
@@ -20,9 +17,7 @@
             <result property="avatar" column="cco_avatar"/>
             <result property="email" column="cco_email"/>
             <result property="nickname" column="cco_nickname"/>
-            <association property="blog" javaType="blog">
-                <id property="id" column="b_id"/>
-            </association>
+            <result property="parentNickname" column="cco_parentNickname"/>
             <association property="parentComment" javaType="comment">
                 <id property="id" column="pco_id"/>
                 <result property="content" column="pco_content"/>
@@ -31,9 +26,6 @@
                 <result property="avatar" column="pco_avatar"/>
                 <result property="email" column="pco_email"/>
                 <result property="nickname" column="pco_nickname"/>
-                <association property="blog" javaType="blog">
-                    <id property="id" column="b_id"/>
-                </association>
             </association>
         </collection>
     </resultMap>
@@ -54,20 +46,20 @@
                cco.avatar          as cco_avatar,
                cco.email           as cco_email,
                cco.nickname        as cco_nickname,
+               cco.parentNickName  as cco_parentNickname,
                pco.id              as pco_id,
                pco.content         as pco_content,
                pco.createTime      as pco_createTime,
                pco.adminComment    as pco_adminComment,
                pco.avatar          as pco_avatar,
                pco.email           as pco_email,
-               pco.nickname        as pco_nickname,
-               b.id                as b_id
+               pco.nickname        as pco_nickname
         from comment co
                  left outer join comment cco on co.id = cco.parentCommentId
                  left outer join comment pco on cco.parentCommentId = pco.id
-                 left outer join blog b on b.id = co.blogId
         where co.blogId = #{blogId}
-        and co.parentCommentId is null
+          and co.parentCommentId is null
+        order by co_createTime desc , cco_createTime desc
     </select>
 
     <resultMap id="childCommentMap" type="comment">
@@ -81,5 +73,24 @@
         from comment co
                  left outer join comment cco on co.id = cco.parentCommentId
         where co.id = #{id}
+    </select>
+
+    <insert id="addComment" parameterType="comment">
+        insert into comment (content, createTime, adminComment, avatar, email, nickname, blogId, parentCommentId,
+                             parentNickname)
+        values (#{content}, #{createTime}, #{adminComment}, #{avatar}, #{email}, #{nickname}, #{blog.id},
+                #{parentComment.id}, #{parentNickname})
+    </insert>
+
+    <select id="getParentCommentId" resultType="long">
+        select parentCommentId
+        from comment
+        where comment.id = #{childId}
+    </select>
+
+    <select id="getNicknameById" resultType="string">
+        select nickname
+        from comment
+        where comment.id = #{id};
     </select>
 </mapper>

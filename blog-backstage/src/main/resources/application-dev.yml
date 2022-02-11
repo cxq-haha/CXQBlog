@@ -22,5 +22,9 @@ logging:
   file:
     name: log/blog.log
 
+myblog:
+  comment:
+    avatar: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNLOaKxZHNx5eVbVjIAnft5fHEmI_KjofnQ&usqp=CAU
+
 
 

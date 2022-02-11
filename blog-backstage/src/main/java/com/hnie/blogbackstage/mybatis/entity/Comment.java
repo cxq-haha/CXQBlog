@@ -25,6 +25,7 @@ public class Comment {
     private String avatar;              //头像
     private String email;               //邮箱
     private String nickname;            //昵称
+    private String parentNickname;      //被回复评论昵称
 
     /*外键*/
     private Blog blog;
