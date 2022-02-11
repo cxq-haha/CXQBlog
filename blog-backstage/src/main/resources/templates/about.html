@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments::head(~{::title})">
     <meta charset="UTF-8">
     <title>关于我</title>
@@ -12,7 +13,7 @@
 </head>
 <body>
 <!--标题栏-->
-<nav th:replace="_fragments::menu(5)" th:replace="_fragments::head(~{::title})" class="ui inverted attached segment m-padded-tb-mini">
+<nav th:replace="_fragments::menu(5)" class="ui inverted attached segment m-padded-tb-mini">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">
@@ -38,13 +39,18 @@
 </nav>
 
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big">
+<br>
+<br>
+<br>
+<br>
+<div class="m-container m-padded-tb-big">
     <div class="ui container">
         <div class="ui stackable grid">
             <!--            left-->
             <div class="eleven wide column">
                 <div class="ui segment">
-                    <img src="../static/image/3.jpg" alt="" class="ui rounded image" style="width: 1000px">
+                    <img src="https://img.syt5.com/2020/0904/20200904085741407.jpg.1680.0.jpg"
+                         th:src="@{https://img.syt5.com/2020/0904/20200904085741407.jpg.1680.0.jpg}" alt="" class="ui rounded image" >
                 </div>
             </div>
             <!--            right-->
@@ -53,8 +59,9 @@
                     <div class="ui header">关于我</div>
                 </div>
                 <div class="ui attached segment">
-                    <p>陈学勤，一个编程爱好者，喜欢计算机，喜欢写代码</p>
-                    <p>愿意分享自己的生活日常</p>
+                    <p>陈学勤，一个编程爱好者，喜欢体育锻炼，对生活充满了热情</p>
+                    <p>愿意分享我的生活和日常</p>
+                    <p style="font-size: x-large;font-family: '楷体'">作为劳动者，就应该像牛一样劳动，像土地一样奉献！</p>
                 </div>
                 <div class="ui attached segment">
                     <div class="ui basic orange label m-margin-tb-tiny">
@@ -81,7 +88,7 @@
                         MySql
                     </div>
                     <div class="ui teal basic label m-margin-tb-tiny">
-                        历史
+                        文学
                     </div>
                 </div>
                 <div class="ui bottom attached segment">
@@ -95,13 +102,18 @@
                         <i class="qq icon"></i>
                     </a>
                     <div id="wechat-qr" class="ui  flowing popup transition hidden">
-                        <img src="../static/image/QRcode.png" class="ui rounded image" style="width: 110px"/>
+                        <img src="../static/image/QRcode.png" th:src="@{/image/QRcode.png}" class="ui rounded image" style="width: 110px"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+
 
 <!--底部菜单栏-->
 <footer th:replace="_fragments::footer" class="ui inverted vertical segment m-padded-tb-massive">
