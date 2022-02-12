@@ -1838,3 +1838,63 @@ Consider defining a bean of type 'com.hnie.blogbackstage.service.BlogService' in
 2022-02-12 16:24:37.498  INFO 22356 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
 2022-02-12 16:24:37.554  INFO 22356 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2022-02-12 16:24:38.134  INFO 22356 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-12 16:27:20.422  INFO 15412 --- [restartedMain] c.h.b.BlogBackstageApplication           : Starting BlogBackstageApplication on DESKTOP-QN733TV with PID 15412 (E:\CXQBolg\blog-backstage\target\classes started by CXQ in E:\CXQBolg\blog-backstage)
+2022-02-12 16:27:20.424 DEBUG 15412 --- [restartedMain] c.h.b.BlogBackstageApplication           : Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2022-02-12 16:27:20.424  INFO 15412 --- [restartedMain] c.h.b.BlogBackstageApplication           : The following profiles are active: dev
+2022-02-12 16:27:20.464  INFO 15412 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-12 16:27:20.464  INFO 15412 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-12 16:27:21.245  INFO 15412 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-12 16:27:21.250  INFO 15412 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-12 16:27:21.250  INFO 15412 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-02-12 16:27:21.291  INFO 15412 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-12 16:27:21.291  INFO 15412 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 827 ms
+2022-02-12 16:27:21.718  INFO 15412 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-02-12 16:27:21.778  INFO 15412 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-02-12 16:27:21.987  INFO 15412 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-02-12 16:27:22.012  INFO 15412 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-12 16:27:22.021  INFO 15412 --- [restartedMain] c.h.b.BlogBackstageApplication           : Started BlogBackstageApplication in 1.861 seconds (JVM running for 2.33)
+2022-02-12 16:27:35.835  INFO 15412 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-12 16:27:35.835  INFO 15412 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-12 16:27:35.848  INFO 15412 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2022-02-12 16:27:35.909  INFO 15412 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-12 16:27:36.431  INFO 15412 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-12 18:28:20.243  INFO 30536 --- [restartedMain] c.h.b.BlogBackstageApplication           : Starting BlogBackstageApplication on DESKTOP-QN733TV with PID 30536 (E:\CXQBolg\blog-backstage\target\classes started by CXQ in E:\CXQBolg\blog-backstage)
+2022-02-12 18:28:20.244 DEBUG 30536 --- [restartedMain] c.h.b.BlogBackstageApplication           : Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2022-02-12 18:28:20.245  INFO 30536 --- [restartedMain] c.h.b.BlogBackstageApplication           : The following profiles are active: dev
+2022-02-12 18:28:20.280  INFO 30536 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-12 18:28:20.281  INFO 30536 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-12 18:28:21.058  INFO 30536 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-12 18:28:21.064  INFO 30536 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-12 18:28:21.064  INFO 30536 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-02-12 18:28:21.106  INFO 30536 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-12 18:28:21.106  INFO 30536 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 825 ms
+2022-02-12 18:28:21.522  INFO 30536 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-02-12 18:28:21.584  INFO 30536 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-02-12 18:28:21.798  INFO 30536 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-02-12 18:28:21.823  INFO 30536 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-12 18:28:21.831  INFO 30536 --- [restartedMain] c.h.b.BlogBackstageApplication           : Started BlogBackstageApplication in 1.866 seconds (JVM running for 2.375)
+2022-02-12 18:28:23.840  INFO 30536 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-12 18:28:23.840  INFO 30536 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-12 18:28:23.846  INFO 30536 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2022-02-12 18:28:23.874  INFO 30536 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-12 18:28:24.160  INFO 30536 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-12 19:00:10.698  INFO 11944 --- [restartedMain] c.h.b.BlogBackstageApplication           : Starting BlogBackstageApplication on DESKTOP-QN733TV with PID 11944 (E:\CXQBolg\blog-backstage\target\classes started by CXQ in E:\CXQBolg\blog-backstage)
+2022-02-12 19:00:10.700 DEBUG 11944 --- [restartedMain] c.h.b.BlogBackstageApplication           : Running with Spring Boot v2.3.7.RELEASE, Spring v5.2.12.RELEASE
+2022-02-12 19:00:10.700  INFO 11944 --- [restartedMain] c.h.b.BlogBackstageApplication           : The following profiles are active: dev
+2022-02-12 19:00:10.737  INFO 11944 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-12 19:00:10.737  INFO 11944 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-12 19:00:11.562  INFO 11944 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-02-12 19:00:11.568  INFO 11944 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-12 19:00:11.568  INFO 11944 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2022-02-12 19:00:11.612  INFO 11944 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-12 19:00:11.612  INFO 11944 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 875 ms
+2022-02-12 19:00:12.064  INFO 11944 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-02-12 19:00:12.141  INFO 11944 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-02-12 19:00:12.356  INFO 11944 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-02-12 19:00:12.381  INFO 11944 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-02-12 19:00:12.389  INFO 11944 --- [restartedMain] c.h.b.BlogBackstageApplication           : Started BlogBackstageApplication in 1.975 seconds (JVM running for 2.512)
+2022-02-12 19:00:15.087  INFO 11944 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-12 19:00:15.088  INFO 11944 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-02-12 19:00:15.099  INFO 11944 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2022-02-12 19:00:15.129  INFO 11944 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-12 19:00:15.481  INFO 11944 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

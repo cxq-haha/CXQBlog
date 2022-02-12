@@ -33,10 +33,10 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/admin")
 public class BlogController {
-    private static final String INPUT = "/admin/blogs-input";
-    private static final String LIST = "/admin/blogs";
-    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
-    private static final String REDIRECT_INPUT = "redirect:/admin/blogs-input";
+    private static final String INPUT = "admin/blogs-input";
+    private static final String LIST = "admin/blogs";
+    private static final String REDIRECT_LIST = "redirect:admin/blogs";
+    private static final String REDIRECT_INPUT = "redirect:admin/blogs-input";
 
     @Autowired
     BlogService blogService;

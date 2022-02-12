@@ -30,13 +30,13 @@ public class TypeController {
         List<Type> types = typeService.listType();
         PageInfo<Type> pageInfo = new PageInfo<>(types);
         model.addAttribute("pageInfo", pageInfo);
-        return "/admin/types";
+        return "admin/types";
     }
 
     //添加分类页面
     @GetMapping("/types/input")
     public String input() {
-        return "/admin/types-input";
+        return "admin/types-input";
     }
 
     //添加分类后跳转到分类页面
@@ -46,7 +46,7 @@ public class TypeController {
         Type typeByName = typeService.getTypeByName(type.getName());
         if (typeByName != null) {
             attributes.addFlashAttribute("message", "该分类已经存在，不能添加重复的分类!");
-            return "redirect:/admin/types/input";
+            return "redirect:admin/types/input";
         }
         Boolean re = typeService.saveType(type);
         if (re) {//保存成功
@@ -54,7 +54,7 @@ public class TypeController {
         } else {//保存失败
             attributes.addFlashAttribute("message", "添加失败!");
         }
-        return "redirect:/admin/types";
+        return "redirect:admin/types";
     }
 
     //修改分类后跳转到分类页面
@@ -65,7 +65,7 @@ public class TypeController {
         if (typeByName != null) {
             attributes.addFlashAttribute("message", "该分类已经存在，不能设置重复的分类!");
             attributes.addFlashAttribute("type", type);
-            return "redirect:/admin/types/input";
+            return "redirect:admin/types/input";
         }
         Boolean re = typeService.updateType(type);
         if (re) {//保存成功
@@ -73,14 +73,14 @@ public class TypeController {
         } else {//保存失败
             attributes.addFlashAttribute("message", "修改失败!");
         }
-        return "redirect:/admin/types";
+        return "redirect:admin/types";
     }
 
     //修改类型
     @GetMapping("/types/{id}/input")
     public String editType(@PathVariable Long id, Model model) {
         model.addAttribute("type", typeService.getTypeById(id));
-        return "/admin/types-input";
+        return "admin/types-input";
     }
 
     //删除类型
@@ -88,6 +88,6 @@ public class TypeController {
     public String deleteType(@PathVariable Long id, RedirectAttributes attributes) {
         typeService.deleteType(id);
         attributes.addFlashAttribute("message", "删除成功!");
-        return "redirect:/admin/types";
+        return "redirect:admin/types";
     }
 }

@@ -32,13 +32,13 @@ public class TagController {
         List<Tag> tags = tagService.listTag();
         PageInfo<Tag> pageInfo = new PageInfo<>(tags);
         model.addAttribute("pageInfo", pageInfo);
-        return "/admin/tags";
+        return "admin/tags";
     }
 
     //添加标签页面
     @GetMapping("/tags/input")
     public String input() {
-        return "/admin/tags-input";
+        return "admin/tags-input";
     }
 
     //添加标签后跳转到标签页面
@@ -48,7 +48,7 @@ public class TagController {
         Tag tagByName = tagService.getTagByName(tag.getName());
         if (tagByName != null) {
             attributes.addFlashAttribute("message", "该标签已经存在，不能添加重复的标签!");
-            return "redirect:/admin/tags/input";
+            return "redirect:admin/tags/input";
         }
         Boolean re = tagService.saveTag(tag);
         if (re) {//保存成功
@@ -56,7 +56,7 @@ public class TagController {
         } else {//保存失败
             attributes.addFlashAttribute("message", "添加失败!");
         }
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
     //修改标签后跳转到标签页面
@@ -67,7 +67,7 @@ public class TagController {
         if (tagByName != null) {
             attributes.addFlashAttribute("message", "该标签已经存在，不能设置重复的标签!");
             attributes.addFlashAttribute("tag", tag);
-            return "redirect:/admin/tags/input";
+            return "redirect:admin/tags/input";
         }
         Boolean re = tagService.updateTag(tag);
         if (re) {//保存成功
@@ -75,14 +75,14 @@ public class TagController {
         } else {//保存失败
             attributes.addFlashAttribute("message", "修改失败!");
         }
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
     //修改类型
     @GetMapping("/tags/{id}/input")
     public String editTag(@PathVariable Long id, Model model) {
         model.addAttribute("tag", tagService.getTagById(id));
-        return "/admin/tags-input";
+        return "admin/tags-input";
     }
 
     //删除类型
@@ -90,7 +90,7 @@ public class TagController {
     public String deleteTag(@PathVariable Long id, RedirectAttributes attributes) {
         tagService.deleteTag(id);
         attributes.addFlashAttribute("message", "删除成功!");
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
 }
