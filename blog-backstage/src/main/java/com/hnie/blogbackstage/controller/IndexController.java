@@ -12,10 +12,7 @@ import com.hnie.blogbackstage.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +45,17 @@ public class IndexController {
         model.addAttribute("newBLogs", newBLogs);
 
         return "index";
+    }
+
+    @PostMapping("/search")
+    public String search(Model model,@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,@RequestParam("query") String query) {
+        String orderBy = "b.id asc";
+        PageHelper.startPage(pageNum, 10, orderBy);
+        List<Blog> blogs = blogService.searchBlogsByTitle(query);
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("query", query);
+        return "search";
     }
 
     @GetMapping("/blog")

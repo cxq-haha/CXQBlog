@@ -51,4 +51,6 @@ public interface BlogMapper {
     List<Blog> getBLogsByTypeId(@Param("typeId") Long typeId);
 
     List<Blog> getBLogsByTagId(@Param("tagId") Long tagId);
+
+    List<Blog> getBlogsLikeTitle(@Param("key") String key);
 }

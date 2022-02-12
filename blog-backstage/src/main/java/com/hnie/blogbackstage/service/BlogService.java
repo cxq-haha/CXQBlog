@@ -49,4 +49,6 @@ public interface BlogService {
 
     //获取Blog总数
     Integer blogCount();
+
+    List<Blog> searchBlogsByTitle(String key);
 }

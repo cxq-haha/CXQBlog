@@ -94,4 +94,11 @@ public class BlogMapperTest {
         blogMapper.updateViews(27L);
     }
 
+    @Test
+    public void getBlogsLikeTitleTest() {
+        List<Blog> linux = blogMapper.getBlogsLikeTitle("Linux");
+        System.out.println(linux);
+
+    }
+
 }

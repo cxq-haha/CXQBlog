@@ -141,4 +141,9 @@ public class BlogServiceImpl implements BlogService {
     public Integer blogCount() {
         return blogMapper.getAllBlog().size();
     }
+
+    @Override
+    public List<Blog> searchBlogsByTitle(String key) {
+        return blogMapper.getBlogsLikeTitle(key);
+    }
 }

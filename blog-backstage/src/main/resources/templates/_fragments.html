@@ -41,10 +41,12 @@
             <a href="#" th:href="@{/about}" class="item m-mobile-hide m-item" th:classappend="${n==5} ? 'active'"><i
                     class=" info icon "></i>关于我</a>
             <div class="right item m-mobile-hide m-item">
-                <div class="ui icon input">
-                    <input type="text" placeholder="搜索...">
-                    <i class="inverted circular search link icon"></i>
-                </div>
+                <form action="#" name="search" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="搜索..." name="query" th:value="${query}">
+                        <i class="inverted circular search link icon" onclick="document.forms['search'].submit()"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
