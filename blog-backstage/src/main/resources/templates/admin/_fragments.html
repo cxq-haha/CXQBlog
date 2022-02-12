@@ -4,6 +4,7 @@
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:replace="${title}">详情页面</title>
+    <link rel="icon" th:href="@{https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVscDL0R6THJdTxwIIUCDUVPAbGFfWhomzrw&usqp=CAU}" sizes="16x16">
     <!--    设置移动端预览-->
     <!--    <meta name="viewport" content="width=device-with,initial-scale=1.0">-->
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
@@ -24,7 +25,7 @@
           th:href="@{/lib/editormd/lib/codemirror/examples/css/style.css}">
     <link rel="stylesheet" href="../../static/lib/editormd/lib/codemirror/css/editormd.css"
           th:href="@{/lib/editormd/lib/codemirror/css/editormd.css}">
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
+<!--    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>-->
 </head>
 <body>
 
@@ -65,40 +66,37 @@
 
 <!--底部菜单栏-->
 <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
-    <div class="ui center aligned container">
+    <div class="ui center aligned container" id="footer-container">
         <!--    网格自动将空间分为16列-->
         <div class="ui inverted divided stackable grid">
             <!--            二维码-->
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../../static/image/QRcode.png" th:src="@{/image/QRcode.png}" alt="XiaoLiMa"
-                             class="ui rounded image" style="width: 110px">
+                        <img src="../static/image/QRcode.png" th:src="@{${qRcodePath}}" alt="XiaoLiMa" class="ui rounded image" style="width: 110px">
                     </div>
                 </div>
             </div>
             <!--            最新博客-->
             <div class="three wide column">
-                <h4 class="ui inverted header"> 最新博客</h4>
-                <div class="inverted link list m-opacity-tiny">
-                    <a href="#" class="item">用户故事（User Story）</a><br/>
-                    <a href="#" class="item">用户故事（User Story）</a><br/>
-                    <a href="#" class="item">用户故事（User Story）</a>
-                </div>
+                <h4 class="ui inverted header"> 运营时间</h4>
+                <h3 class="ui teal header item" id="run_time">
+                    5天2时34分
+                </h3>
             </div>
             <!--            联系我-->
             <div class="three wide column">
                 <h4 class="ui inverted header"> 联系我</h4>
                 <div class="inverted link list m-opacity-tiny">
-                    <a href="#" class="item">Email：1878202705@qq.com</a><br/>
-                    <a href="#" class="item">QQ：1979553877</a>
+                    <a href="#" class="item" >Email：<span th:text="${conEmail}">1878202705@qq.com</span></a><br/>
+                    <a href="#" class="item" >QQ：<span th:text="${conQQ}">1979553877</span></a>
                 </div>
             </div>
             <!--            xxx-->
             <div class="seven wide column">
-                <h4 class="ui inverted header"> 最新博客</h4>
-                <p class="m-opacity-tiny">
-                    这是的个人博客，会分享关于编程、写作、思考相关的任何内容，希望可以给来到这里的人有所帮助
+                <h4 class="ui inverted header"> 座右铭</h4>
+                <p class="m-opacity-tiny" th:text="${motto}">
+                    面对过去，不要迷离；面对未来，不必彷徨；活在今天，你只要把自己完全“展示”给别人看。
                 </p>
             </div>
         </div>
@@ -118,6 +116,49 @@
             th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
     <script src="../../static/lib/editormd/lib/codemirror/editormd.min.js"
             th:src="@{/lib/editormd/lib/codemirror/editormd.min.js}"></script>
+    <script>
+        // 运行时间统计
+        function secondToDate(second) {
+            if (!second) {
+                return 0;
+            }
+            var time = new Array(0, 0, 0, 0, 0);
+            // if (second >= 365 * 24 * 3600) {
+            //     time[0] = parseInt(second / (365 * 24 * 3600));
+            //     second %= 365 * 24 * 3600;
+            // }
+            if (second >= 24 * 3600) {
+                time[1] = parseInt(second / (24 * 3600));
+                second %= 24 * 3600;
+            }
+            if (second >= 3600) {
+                time[2] = parseInt(second / 3600);
+                second %= 3600;
+            }
+            if (second >= 60) {
+                time[3] = parseInt(second / 60);
+                second %= 60;
+            }
+            if (second > 0) {
+                time[4] = second;
+            }
+            return time;
+        }
+        function setTime() {
+            /*此处为网站的创建时间*/
+            var create_time = Math.round(new Date("2022-02-12").getTime() / 1000);
+            var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+            currentTime = secondToDate((timestamp - create_time));
+            currentTimeHtml = /*currentTime[0] + '年' +*/ currentTime[1] + '天'
+                + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+                + '秒';
+            document.getElementById("run_time").innerHTML = currentTimeHtml;
+        }
+        setInterval(setTime, 1000);
+    </script>
+    <script>
+        $('#footer-container').load("[[@{/fragments/footer}]]");
+    </script>
 </th:block>
 </body>
 

@@ -9,3 +9,8 @@ spring:
 myblog:
   comment:
     avatar: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNLOaKxZHNx5eVbVjIAnft5fHEmI_KjofnQ&usqp=CAU
+  footer:
+    qRcodePath: /image/QRcode.png
+    conEmail: 134534535@QQ.com
+    conQQ: 1979553877
+    motto: 身为劳动者，就应该像牛一样劳动，像泥土一样奉献！
