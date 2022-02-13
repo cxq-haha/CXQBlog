@@ -527,7 +527,7 @@
                 </div>
             </div>
             <!--            赞赏功能-->
-            <div class="ui center aligned basic segment">
+            <div class="ui center aligned basic segment" th:if="${blog.appreciation}">
                 <button id="payButton" class="ui orange basic circular button">
                     赞赏
                 </button>
@@ -550,7 +550,7 @@
             </div>
         </div>
         <!--        博客信息-->
-        <div class="ui attached positive message">
+        <div class="ui attached positive message" th:if="${blog.shareStatement}">
             <div class="ui middle aligned grid">
                 <div class="eleven wide column">
                     <ui class="list">

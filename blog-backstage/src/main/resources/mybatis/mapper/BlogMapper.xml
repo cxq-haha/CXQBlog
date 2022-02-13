@@ -170,9 +170,9 @@
     </insert>
 
     <insert id="addBlogTag">
-        insert into `blog_tag` (id,blogId,tagId) values
+        insert into `blog_tag` (blogId,tagId) values
         <foreach collection="tags" item="tag" index="index" separator=",">
-            (null,#{id},#{tag.id})
+            (#{id},#{tag.id})
         </foreach>
     </insert>
 
@@ -187,7 +187,8 @@
             `published`= #{published},
             `recommend`=#{recommend},
             `updateTime`=#{updateTime},
-            `typeId`= #{type.id}
+            `typeId`= #{type.id},
+            `flag`= #{flag}
         where `id` = #{id}
     </update>
 

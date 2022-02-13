@@ -36,14 +36,14 @@ public class LoginController {
             return "admin/index";
         } else {
             attributes.addFlashAttribute("message", "用户名和密码错误");
-            return "redirect:admin";//重定向到登陆页面
+            return "redirect:/admin";//重定向到登陆页面
         }
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
-        return "redirect:admin";
+        return "redirect:/admin";
     }
 }
 
