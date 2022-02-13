@@ -3,12 +3,11 @@ body {
     /*display: flex;*/
     /*flex-direction: column;*/
     background-image: url("../image/adminbk4.jpg") !important;
+    background-size: cover !important;
+    -webkit-background-size: cover !important; /* 兼容Webkit内核浏览器如Chrome和Safari */
+    -o-background-size: cover !important; /* 兼容Opera */
+    background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-    background-size: 100% !important;
-    no-repeat: center top !important;
-    font: 14px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif !important;
-    height: 100% !important;
-    width: 100% !important;
 }
 /*中间内容*/
 /*.m-center-context{*/

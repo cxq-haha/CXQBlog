@@ -131,3 +131,9 @@ Caused by: org.apache.ibatis.reflection.ReflectionException: There is no getter 
 2022-02-13 20:28:42.641  INFO 43980 --- [restartedMain] c.h.b.BlogBackstageApplication           : Started BlogBackstageApplication in 1.877 seconds (JVM running for 2.539)
 2022-02-13 20:29:00.880  WARN 43980 --- [http-nio-80-exec-9] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
 2022-02-13 20:29:07.669  WARN 43980 --- [http-nio-80-exec-6] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2022-02-13 20:58:28.813  INFO 36292 --- [restartedMain] c.h.b.BlogBackstageApplication           : Starting BlogBackstageApplication on DESKTOP-QN733TV with PID 36292 (E:\CXQBolg\blog-backstage\target\classes started by CXQ in E:\CXQBolg\blog-backstage)
+2022-02-13 20:58:28.815  INFO 36292 --- [restartedMain] c.h.b.BlogBackstageApplication           : The following profiles are active: pro
+2022-02-13 20:58:30.449  INFO 36292 --- [restartedMain] c.h.b.BlogBackstageApplication           : Started BlogBackstageApplication in 1.938 seconds (JVM running for 2.449)
+2022-02-13 21:00:59.377  INFO 36276 --- [restartedMain] c.h.b.BlogBackstageApplication           : Starting BlogBackstageApplication on DESKTOP-QN733TV with PID 36276 (E:\CXQBolg\blog-backstage\target\classes started by CXQ in E:\CXQBolg\blog-backstage)
+2022-02-13 21:00:59.379  INFO 36276 --- [restartedMain] c.h.b.BlogBackstageApplication           : The following profiles are active: pro
+2022-02-13 21:01:00.997  INFO 36276 --- [restartedMain] c.h.b.BlogBackstageApplication           : Started BlogBackstageApplication in 1.886 seconds (JVM running for 2.495)
