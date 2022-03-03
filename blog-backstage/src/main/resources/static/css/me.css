@@ -1,14 +1,15 @@
 /************** body ******************/
-body {
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    background-image: url("../image/adminbk4.jpg") !important;
-    background-size: cover !important;
-    -webkit-background-size: cover !important; /* 兼容Webkit内核浏览器如Chrome和Safari */
-    -o-background-size: cover !important; /* 兼容Opera */
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-}
+/*body {*/
+/*    !*display: flex;*!*/
+/*    !*flex-direction: column;*!*/
+/*    !*background-image: url("../image/adminbk4.jpg") !important;*!*/
+/*    !*background-size: cover !important;*!*/
+/*    !*-webkit-background-size: cover !important; !* 兼容Webkit内核浏览器如Chrome和Safari *!*!*/
+/*    !*-o-background-size: cover !important; !* 兼容Opera *!*!*/
+/*    !*background-repeat: no-repeat !important;*!*/
+/*    !*background-attachment: fixed !important;*!*/
+/*    background-color: #222222;*/
+/*}*/
 /*中间内容*/
 /*.m-center-context{*/
 /*    flex-grow: 1*/
@@ -17,6 +18,15 @@ body {
 /*.m-footer-context {*/
 /*flex-shrink: 0;*/
 /*}*/
+
+#particles-js {
+    display: block;
+    position: relative;
+    zindex: 1;
+    position: fixed;
+    top: 0;
+}
+
 
 /************** padding ******************/
 .m-padded-lr {

@@ -10,8 +10,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <!--    引入自定义css-->
     <link rel="stylesheet" href="../static/css/me.css">
+    <!--    背景样式-->
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
+
+<!--背景板-->
+<div id="particles-js"></div>
+
 <!--标题栏-->
 <nav th:replace="_fragments::menu(2)" class="ui inverted attached segment m-padded-tb-mini">
     <div class="ui container">
@@ -39,7 +45,7 @@
 </nav>
 
 <!--中间部分-->
-<div class="m-container-small m-padded-tb-big m-shadow-small">
+<div class="m-container m-padded-tb-big">
     <div class="ui container">
         <!--    head-->
         <div class="ui top attached segment">
@@ -232,10 +238,13 @@
         <p class="m-text-spaced"> @2020-2021</p>
     </div>
 </footer>
+
 <!--    导入jQuery-->
 <!--/*/<th:block th:replace="_fragments::script">/*/-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script src="../static/js/particles.min.js"></script>
+<script src="../static/js/app.js"></script>
 <!--/*/</th:block>/*/-->
 <script>
     <!--    点击按钮，如果m-item主键有m-mobile-hide样式就去除，如果没有就添加-->
