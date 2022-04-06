@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://39.108.192.65:3306/blog?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: 888888
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -8,6 +8,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 #下面这些内容是为了让MyBatis映射
 mybatis:
@@ -25,6 +29,4 @@ logging:
 myblog:
   comment:
     avatar: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNLOaKxZHNx5eVbVjIAnft5fHEmI_KjofnQ&usqp=CAU
-
-
 
