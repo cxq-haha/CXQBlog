@@ -1,4 +1,3 @@
-
 /* global jQuery FormData FileReader */
 (function ($) {
     $.fn.uploader = function (options, testMode) {
@@ -51,7 +50,7 @@
             // set up event handling
             bindUIEvents();
 
-            function setupDOM (dom) {
+            function setupDOM(dom) {
                 dom.contentsContainer
                     .append(dom.instructions)
                     .append(dom.selectButton);
@@ -64,7 +63,7 @@
                     .after(dom.furtherInstructions);
             }
 
-            function bindUIEvents () {
+            function bindUIEvents() {
                 // handle drag and drop
                 options.dropZone.on('dragover dragleave', function (e) {
                     e.preventDefault();
@@ -74,9 +73,13 @@
                 options.dropZone.on('drop', selectFilesHandler);
 
                 // hack for being able selecting the same file name twice
-                dom.selectButton.on('click', function () { this.value = null; });
+                dom.selectButton.on('click', function () {
+                    this.value = null;
+                });
                 dom.selectButton.on('change', selectFilesHandler);
-                dom.secondarySelectButton.on('click', function () { this.value = null; });
+                dom.secondarySelectButton.on('click', function () {
+                    this.value = null;
+                });
                 dom.secondarySelectButton.on('change', selectFilesHandler);
 
                 // handle the submit click
@@ -89,20 +92,20 @@
                 if (options.testMode) {
                     options.dropZone.on('uploaderTestEvent', function (e) {
                         switch (e.functionName) {
-                        case 'selectFilesHandler':
-                            selectFilesHandler(e);
-                            break;
-                        case 'uploadSubmitHandler':
-                            uploadSubmitHandler(e);
-                            break;
-                        default:
-                            break;
+                            case 'selectFilesHandler':
+                                selectFilesHandler(e);
+                                break;
+                            case 'uploadSubmitHandler':
+                                uploadSubmitHandler(e);
+                                break;
+                            default:
+                                break;
                         }
                     });
                 }
             }
 
-            function addItem (file) {
+            function addItem(file) {
                 var fileName = cleanName(file.name);
                 var fileSize = file.size;
                 var id = state.listIndex;
@@ -152,7 +155,7 @@
                 dom.fileList.append(listItem);
             }
 
-            function getExtension (path) {
+            function getExtension(path) {
                 var basename = path.split(/[\\/]/).pop();
                 var pos = basename.lastIndexOf('.');
 
@@ -162,7 +165,7 @@
                 return basename.slice(pos + 1);
             }
 
-            function formatBytes (bytes, decimals) {
+            function formatBytes(bytes, decimals) {
                 if (bytes === 0) return '0 Bytes';
                 var k = 1024;
                 var dm = decimals + 1 || 3;
@@ -171,16 +174,16 @@
                 return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
             }
 
-            function cleanName (name) {
+            function cleanName(name) {
                 name = name.replace(/\s+/gi, '-'); // Replace white space with dash
                 return name.replace(/[^a-zA-Z0-9.\-]/gi, ''); // Strip any special characters
             }
 
-            function uploadSubmitHandler () {
+            function uploadSubmitHandler() {
                 if (state.fileBatch.length !== 0) {
                     var data = new FormData();
                     for (var i = 0; i < state.fileBatch.length; i++) {
-                        data.append('files['+i+']', state.fileBatch[i].file, state.fileBatch[i].fileName);
+                        data.append('files[' + i + ']', state.fileBatch[i].file, state.fileBatch[i].fileName);
                     }
                     console.log(data);
                     for (let key of data.keys()) {
@@ -200,7 +203,7 @@
                 }
             }
 
-            function selectFilesHandler (e) {
+            function selectFilesHandler(e) {
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -216,7 +219,7 @@
                 renderControls();
             }
 
-            function renderControls () {
+            function renderControls() {
                 if (dom.fileList.children().size() !== 0) {
                     dom.submitButton.removeClass('uploader__hide');
                     dom.furtherInstructions.removeClass('uploader__hide');
@@ -228,7 +231,7 @@
                 }
             }
 
-            function removeItemHandler (e) {
+            function removeItemHandler(e) {
                 e.preventDefault();
 
                 if (!state.isUploading) {
@@ -240,7 +243,7 @@
                 renderControls();
             }
 
-            function removeItem (id) {
+            function removeItem(id) {
                 // remove from the batch
                 for (var i = 0; i < state.fileBatch.length; i++) {
                     if (state.fileBatch[i].id === parseInt(id)) {

@@ -1,19 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jquery多文件上传插件</title>
+    <title>照片管理</title>
 
-    <link href="../../static/css/fileUpload/styles.imageuploader.css" th:href="@{/css/fileUpload/styles.imageuploader.css}" rel="stylesheet" type="text/css">
+    <!--    设置移动端预览-->
+    <!--    <meta name="viewport" content="width=device-with,initial-scale=1.0">-->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+    <!--    导入SemanticUI-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <!--    fa-xxx图标-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!--    引入自定义css-->
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+    <!--照片管理样式-->
+    <link href="../../static/css/fileUpload/styles.imageuploader.css"
+          th:href="@{/css/fileUpload/styles.imageuploader.css}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
+
+<!--导航-->
+<nav th:replace="admin/_fragments::menu(4)" class="ui inverted attached segment m-padded-tb-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">
+                管理后台
+            </h2>
+            <a href="#" th:href="@{/admin/blogs}" class="item m-mobile-hide m-item" th:classappend="${n==1} ? 'active'"><i
+                    class=" home icon "></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class=" item m-mobile-hide m-item"
+               th:classappend="${n==2} ? 'active'"><i
+                    class=" idea icon "></i>分类</a>
+            <a href="#" th:href="@{/admin/tags}" class="item m-mobile-hide m-item"
+               th:classappend="${n==3} ? 'active'"><i
+                    class=" tags icon "></i>标签</a>
+            <a href="#" th:href="@{/admin/images}" class="item m-mobile-hide m-item"
+               th:classappend="${n==4} ? 'active'"><i
+                    class=" image icon "></i>照片</a>
+            <div class="right menu m-mobile-hide m-item">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/image/headPortrait/1.jpg" th:src="@{/image/headPortrait/1.jpg}" alt=""
+                             class="ui avatar image"/>陈学勤
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui black icon button m-right-top m-mobile-show menu toggle">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
 <div class="jq22-container">
     <section role="main" class="l-main" style="margin-top:50px;margin-bottom:50px;">
         <header class="site-header">
-            <h1 class="site-title l-site-title" style="font-size:1.2em;">jquery多文件上传插件效果演示</h1>
+            <h1 class="site-title l-site-title" style="font-size:1.2em">图片上传</h1>
         </header>
         <div class="uploader__box js-uploader__box l-center-box">
             <form action="#" method="POST">
@@ -28,19 +79,22 @@
 </div>
 
 <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-<script src="../../static/js/fileUpload/jquery.imageuploader.js" th:src="@{/js/fileUpload/jquery.imageuploader.js}"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<script src="../../static/js/fileUpload/jquery.imageuploader.js"
+        th:src="@{/js/fileUpload/jquery.imageuploader.js}"></script>
 <script type="text/javascript">
-    (function(){
+    (function () {
         var options = {};
         $('.js-uploader__box').uploader({
-            'selectButtonCopy':'请选择或拖拽文件',
-            'instructionsCopy':'你可以选择或拖拽多个文件',
-            'submitButtonCopy':'上传选择的文件',
-            'furtherInstructionsCopy':'你可以选择或拖拽更多的文件',
-            'secondarySelectButtonCopy':'选择更多的文件',
-            'ajaxUrl':'/imgupload'
+            'selectButtonCopy': '选择文件',
+            'instructionsCopy': '可以选择或者拖拽文件进行上传',
+            'submitButtonCopy': '上传选择的文件',
+            'furtherInstructionsCopy': '你可以选择或拖拽更多文件',
+            'secondarySelectButtonCopy': '选择更多的文件',
+            'ajaxUrl': '/admin/saveImages'
         });
     }());
 </script>
 </body>
+</html>
 </html>

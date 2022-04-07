@@ -12,6 +12,9 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/blog_images
 
 #下面这些内容是为了让MyBatis映射
 mybatis:
@@ -26,7 +29,11 @@ logging:
   file:
     name: log/blog.log
 
+
+
 myblog:
   comment:
     avatar: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzNLOaKxZHNx5eVbVjIAnft5fHEmI_KjofnQ&usqp=CAU
-
+  file-repository:
+    host: localhost                   #MongoDB主机地址
+    port: 8080                        #MongoDB主机Tomcat端口号
