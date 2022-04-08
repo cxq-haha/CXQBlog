@@ -20,12 +20,12 @@
 
     // SVG shapes used on the buttons
     var leftArrow = '<svg width="44" height="60">' +
-            '<polyline points="30 10 10 30 30 50" stroke="rgba(255,255,255,0.5)" stroke-width="4"' +
-              'stroke-linecap="butt" fill="none" stroke-linejoin="round"/>' +
-            '</svg>',
+        '<polyline points="30 10 10 30 30 50" stroke="rgba(255,255,255,0.5)" stroke-width="4"' +
+        'stroke-linecap="butt" fill="none" stroke-linejoin="round"/>' +
+        '</svg>',
         rightArrow = '<svg width="44" height="60">' +
             '<polyline points="14 10 34 30 14 50" stroke="rgba(255,255,255,0.5)" stroke-width="4"' +
-              'stroke-linecap="butt" fill="none" stroke-linejoin="round"/>' +
+            'stroke-linecap="butt" fill="none" stroke-linejoin="round"/>' +
             '</svg>',
         closeX = '<svg width="30" height="30">' +
             '<g stroke="rgb(160,160,160)" stroke-width="4">' +
@@ -69,25 +69,25 @@
     var imagesElements = [];
     // The last focused element before opening the overlay
     var documentLastFocus = null;
-    var overlayClickHandler = function(event) {
+    var overlayClickHandler = function (event) {
         // Close the overlay when user clicks directly on the background
         if (event.target.id.indexOf('baguette-img') !== -1) {
             hideOverlay();
         }
     };
-    var previousButtonClickHandler = function(event) {
+    var previousButtonClickHandler = function (event) {
         event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true; // jshint ignore:line
         showPreviousImage();
     };
-    var nextButtonClickHandler = function(event) {
+    var nextButtonClickHandler = function (event) {
         event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true; // jshint ignore:line
         showNextImage();
     };
-    var closeButtonClickHandler = function(event) {
+    var closeButtonClickHandler = function (event) {
         event.stopPropagation ? event.stopPropagation() : event.cancelBubble = true; // jshint ignore:line
         hideOverlay();
     };
-    var touchstartHandler = function(event) {
+    var touchstartHandler = function (event) {
         touch.count++;
         if (touch.count > 1) {
             touch.multitouch = true;
@@ -96,7 +96,7 @@
         touch.startX = event.changedTouches[0].pageX;
         touch.startY = event.changedTouches[0].pageY;
     };
-    var touchmoveHandler = function(event) {
+    var touchmoveHandler = function (event) {
         // If action was already triggered or multitouch return
         if (touchFlag || touch.multitouch) {
             return;
@@ -110,12 +110,12 @@
         } else if (touchEvent.pageX - touch.startX < -40) {
             touchFlag = true;
             showNextImage();
-        // Move 100 pixels up to close the overlay
+            // Move 100 pixels up to close the overlay
         } else if (touch.startY - touchEvent.pageY > 100) {
             hideOverlay();
         }
     };
-    var touchendHandler = function() {
+    var touchendHandler = function () {
         touch.count--;
         if (touch.count <= 0) {
             touch.multitouch = false;
@@ -123,7 +123,7 @@
         touchFlag = false;
     };
 
-    var trapFocusInsideOverlay = function(event) {
+    var trapFocusInsideOverlay = function (event) {
         if (overlay.style.display === 'block' && (overlay.contains && !overlay.contains(event.target))) {
             event.stopPropagation();
             initFocus();
@@ -134,7 +134,7 @@
     // http://stackoverflow.com/a/14827443/1077846
     /* jshint ignore:start */
     if (![].forEach) {
-        Array.prototype.forEach = function(callback, thisArg) {
+        Array.prototype.forEach = function (callback, thisArg) {
             for (var i = 0; i < this.length; i++) {
                 callback.call(thisArg, this[i], i, this);
             }
@@ -144,7 +144,7 @@
     // filter polyfill for IE8
     // https://gist.github.com/eliperelman/1031656
     if (![].filter) {
-        Array.prototype.filter = function(a, b, c, d, e) {
+        Array.prototype.filter = function (a, b, c, d, e) {
             c = this;
             d = [];
             for (e = 0; e < c.length; e++)
@@ -173,8 +173,7 @@
             nodeList: galleryNodeList
         };
         data[selector] = selectorData;
-
-        [].forEach.call(galleryNodeList, function(galleryElement) {
+        [].forEach.call(galleryNodeList, function (galleryElement) {
             if (userOptions && userOptions.filter) {
                 regex = userOptions.filter;
             }
@@ -188,16 +187,18 @@
             }
 
             // Filter 'a' elements from those not linking to images
-            tagsNodeList = [].filter.call(tagsNodeList, function(element) {
+            tagsNodeList = [].filter.call(tagsNodeList, function (element) {
                 return regex.test(element.href);
             });
+
             if (tagsNodeList.length === 0) {
                 return;
             }
 
             var gallery = [];
-            [].forEach.call(tagsNodeList, function(imageElement, imageIndex) {
-                var imageElementClickHandler = function(event) {
+            var i = 0;
+            [].forEach.call(tagsNodeList, function (imageElement, imageIndex) {
+                var imageElementClickHandler = function (event) {
                     event.preventDefault ? event.preventDefault() : event.returnValue = false; // jshint ignore:line
                     prepareOverlay(gallery, userOptions);
                     showOverlay(imageIndex);
@@ -226,8 +227,8 @@
             return;
         }
         var galleries = data[selector].galleries;
-        [].forEach.call(galleries, function(gallery) {
-            [].forEach.call(gallery, function(imageItem) {
+        [].forEach.call(galleries, function (gallery) {
+            [].forEach.call(gallery, function (imageItem) {
                 unbind(imageItem.imageElement, 'click', imageItem.eventHandler);
             });
 
@@ -287,15 +288,15 @@
 
     function keyDownHandler(event) {
         switch (event.keyCode) {
-        case 37: // Left arrow
-            showPreviousImage();
-            break;
-        case 39: // Right arrow
-            showNextImage();
-            break;
-        case 27: // Esc
-            hideOverlay();
-            break;
+            case 37: // Left arrow
+                showPreviousImage();
+                break;
+            case 39: // Right arrow
+                showNextImage();
+                break;
+            case 27: // Esc
+                hideOverlay();
+                break;
         }
     }
 
@@ -397,7 +398,7 @@
             startX: null,
             startY: null
         };
-        loadImage(currentIndex, function() {
+        loadImage(currentIndex, function () {
             preloadNext(currentIndex);
             preloadPrev(currentIndex);
         });
@@ -408,7 +409,7 @@
             enterFullScreen();
         }
         // Fade in overlay
-        setTimeout(function() {
+        setTimeout(function () {
             overlay.className = 'visible';
             if (options.afterShow) {
                 options.afterShow();
@@ -461,7 +462,7 @@
         unbind(document, 'keydown', keyDownHandler);
         // Fade out and hide the overlay
         overlay.className = '';
-        setTimeout(function() {
+        setTimeout(function () {
             overlay.style.display = 'none';
             // exitFullscreen();
             if (options.afterHide) {
@@ -493,8 +494,8 @@
         var imageElement = galleryItem.imageElement;
         var thumbnailElement = imageElement.getElementsByTagName('img')[0];
         var imageCaption = typeof options.captions === 'function' ?
-                            options.captions.call(currentGallery, imageElement) :
-                            imageElement.getAttribute('data-caption') || imageElement.title;
+            options.captions.call(currentGallery, imageElement) :
+            imageElement.getAttribute('data-caption') || imageElement.title;
         var imageSrc = getImageSrc(imageElement);
 
         // Prepare figure element
@@ -515,7 +516,7 @@
 
         // Prepare gallery img element
         var image = create('img');
-        image.onload = function() {
+        image.onload = function () {
             // Remove loader element
             var spinner = document.querySelector('#baguette-img-' + index + ' .baguetteBox-spinner');
             figure.removeChild(spinner);
@@ -550,7 +551,7 @@
                 }
             }
             // Sort resolutions ascending
-            var keys = Object.keys(srcs).sort(function(a, b) {
+            var keys = Object.keys(srcs).sort(function (a, b) {
                 return parseInt(a, 10) < parseInt(b, 10) ? -1 : 1;
             });
             // Get real screen resolution
@@ -576,7 +577,7 @@
             returnValue = true;
         } else if (options.animation) {
             slider.className = 'bounce-from-right';
-            setTimeout(function() {
+            setTimeout(function () {
                 slider.className = '';
             }, 400);
             returnValue = false;
@@ -598,7 +599,7 @@
             returnValue = true;
         } else if (options.animation) {
             slider.className = 'bounce-from-left';
-            setTimeout(function() {
+            setTimeout(function () {
                 slider.className = '';
             }, 400);
             returnValue = false;
@@ -613,7 +614,7 @@
         var offset = -currentIndex * 100 + '%';
         if (options.animation === 'fadeIn') {
             slider.style.opacity = 0;
-            setTimeout(function() {
+            setTimeout(function () {
                 /* jshint -W030 */
                 supports.transforms ?
                     slider.style.transform = slider.style.webkitTransform = 'translate3d(' + offset + ',0,0)'
@@ -645,7 +646,7 @@
         if (index - currentIndex >= options.preload) {
             return;
         }
-        loadImage(index + 1, function() {
+        loadImage(index + 1, function () {
             preloadNext(index + 1);
         });
     }
@@ -654,7 +655,7 @@
         if (currentIndex - index >= options.preload) {
             return;
         }
-        loadImage(index - 1, function() {
+        loadImage(index - 1, function () {
             preloadPrev(index - 1);
         });
     }
@@ -664,7 +665,7 @@
             element.addEventListener(event, callback, useCapture);
         } else {
             // IE8 fallback
-            element.attachEvent('on' + event, function(event) {
+            element.attachEvent('on' + event, function (event) {
                 // `event` and `event.target` are not provided in IE8
                 event = event || window.event;
                 event.target = event.target || event.srcElement;

@@ -15,7 +15,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/admin/*")//拦截admin开头的所有访问路径
                 .excludePathPatterns("/admin")//释放/admin的拦截
-                .excludePathPatterns("/admin/login");//释放/admin/login的拦截
+                .excludePathPatterns("/admin/login")//释放/admin/login的拦截
+                .excludePathPatterns("/admin/images/*");// todo ajax重定向拦截问题
         super.addInterceptors(registry);
     }
 }
