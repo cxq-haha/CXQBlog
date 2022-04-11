@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,10 +27,12 @@ import java.util.Map;
 
 
 @Controller
+//@RestController
 @RequestMapping("/admin")
 public class FileController {
     @GetMapping("/images")
-    public String images() {
+    public String images(String message, Model model) {
+        model.addAttribute("message", message);
         return "admin/photos";
     }
 
@@ -48,7 +51,8 @@ public class FileController {
     private String port;
 
     @PostMapping("/saveImages")
-    public void save(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
+    @ResponseBody
+    public String save(HttpServletRequest request, HttpServletResponse response) throws IOException {
         MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = mRequest.getFileMap();
         Collection<MultipartFile> values = fileMap.values();
@@ -72,7 +76,6 @@ public class FileController {
             System.out.println("save image to mongoDB : " + url);
             urls.add(url);
         }
-        model.addAttribute("message", "上传成功");
 
         //解决ajax重定向问题
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
@@ -84,6 +87,9 @@ public class FileController {
         } else {
             response.sendRedirect("/admin/images");
         }
+
+        return "success";
+
     }
 
 

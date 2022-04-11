@@ -201,15 +201,20 @@
                         cache: false,
                         contentType: false,
                         processData: false,
-                        complete: function unction(jqxhr) {
-                            if ("REDIRECT" == jqxhr.getResponseHeader("REDIRECT")) { //若HEADER中含有REDIRECT说明后端想重定向，
-                                alert("REDIRECT");
-                                var win = window;
-                                while (win != win.top) {
-                                    win = win.top;
-                                }
-                                win.location.href = jqxhr.getResponseHeader("CONTENTPATH");//将后端重定向的地址取出来,使用win.location.href去实现重定向的要求
-                            }
+                        // complete: function unction(jqxhr) {
+                        //     if ("REDIRECT" == jqxhr.getResponseHeader("REDIRECT")) { //若HEADER中含有REDIRECT说明后端想重定向，
+                        //         alert("REDIRECT");
+                        //         var win = window;
+                        //         while (win != win.top) {
+                        //             win = win.top;
+                        //         }
+                        //         win.location.href = jqxhr.getResponseHeader("CONTENTPATH");//将后端重定向的地址取出来,使用win.location.href去实现重定向的要求
+                        //     }
+                        // }
+                        // ,
+                        success: function (ret) {
+                            console.log(ret);
+                            window.location.href = "http://localhost:8080/admin/images?message='上传成功'";
                         }
                     });
                 }
